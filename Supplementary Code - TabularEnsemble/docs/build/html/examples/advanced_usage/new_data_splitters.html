@@ -1,0 +1,690 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>New data splitters &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/advanced_usage/new_data_splitters';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="New data derivers" href="new_data_derivers.html" />
+    <link rel="prev" title="Build your own model upon others" href="build_model_upon_others.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="customized_model_base.html">Customized model base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customized_model_base_advanced.html">Advanced customized model base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set_optimizers_lrschedulers.html">Change optimizers and lr shedulers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_model_upon_others.html">Build your own model upon others</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">New data splitters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_derivers.html">New data derivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_imputers.html">New data imputers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_processors.html">New data processors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image_classification.html">Multimodal data: Image classification as an example</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../advanced_usage.html" class="nav-link">Advanced Usage</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">New data splitters</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="New-data-splitters">
+<h1>New data splitters<a class="headerlink" href="#New-data-splitters" title="Link to this heading">#</a></h1>
+<p>Randomly splitting the dataset into training/validation/testing sets means that these subsets are from the same distribution, which can be hard to meet in the real world. As discussed by Kadambi Achuta et al. (Nature Machine Intelligence (2023): 1-9), “Although theoretical machine learning research aims to guarantee neural network performance by bounding error (referred to as generalization bounds), such bounds are only valid under assumptions that cannot be validated in reality, for instance
+that <strong>the finite training data and yet-unseen test data be drawn from the same unknown distribution</strong>.”</p>
+<p>Under some circumstances, we want to evaluate the generalization ability of models and take generalization as the criterion of model selection. This requires the functionality that makes the three subsets different. If we assume that we can not acquire samples from the real scenario and learn from them, the validation set and the training set are from the same distribution, but the testing set is from a different and more realistic distribution. If we instead assume that a small dataset can be
+acquired from the real scenario, the validation and training sets can be more similar to the testing set.</p>
+<p>In this tutorial, we will show how to split the dataset into subsets with different distributions.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.data.datasplitter</span> <span class="kn">import</span> <span class="n">AbstractSplitter</span>
+<span class="kn">from</span> <span class="nn">tabensemb.utils</span> <span class="kn">import</span> <span class="n">PickleAbleGenerator</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">_split</span></code> method is about to be implemented. Specifically, the training and validation set will have lower target values than the testing set as a showcase of implementing new data splitters. The training and validation sets are randomly split. The ratio of training/validation/testing sets is according to <code class="docutils literal notranslate"><span class="pre">self.train_val_test</span></code> which is actually the <code class="docutils literal notranslate"><span class="pre">split_ratio</span></code> set in the configuration. Finally, it is better to shuffle the indices. The returned values should be 1d <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>s.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TargetSplitter</span><span class="p">(</span><span class="n">AbstractSplitter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">cont_feature_names</span><span class="p">,</span> <span class="n">cat_feature_names</span><span class="p">,</span> <span class="n">label_name</span><span class="p">):</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">label_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">test_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">target</span> <span class="o">&gt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_val_test</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">train_val_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">test_indices</span><span class="p">)</span>
+        <span class="n">train_indices</span><span class="p">,</span> <span class="n">val_indices</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">train_val_indices</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">train_val_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_val_test</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]),</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">train_indices</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">val_indices</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">test_indices</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_indices</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">val_indices</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test_indices</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Implementing k-fold splitting is optional. Here, only the training and validation sets are k-folded while the testing set is always the same. Before implementing k-fold, the <code class="docutils literal notranslate"><span class="pre">support_cv</span></code> property should be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@property</span>
+<span class="k">def</span> <span class="nf">support_cv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">_next_cv</span></code> should be implemented for k-fold splitting. When it is called for the first time, the testing set <code class="docutils literal notranslate"><span class="pre">self.test_indices</span></code> and the combination of the training and validation sets <code class="docutils literal notranslate"><span class="pre">self.train_val_indices</span></code> are determined. A generator of k-fold splitting (<code class="docutils literal notranslate"><span class="pre">sklearn.model_selection.KFold</span></code>) is initialized. Because a generator can not be pickled, it is first transformed into a pickle-able <code class="docutils literal notranslate"><span class="pre">PickleAbleGenerator</span></code> instance. <code class="docutils literal notranslate"><span class="pre">KFold().split(self.train_val_indices)</span></code> yields two arrays
+representing the indices of <code class="docutils literal notranslate"><span class="pre">self.train_val_indices</span></code> for training and validation sets respectively. In the tutorial, for simplification, we are not getting this method prepared for unexpected cases. See the source code of <code class="docutils literal notranslate"><span class="pre">tabensemb.data.RandomSplitter._next_cv</span></code> and <code class="docutils literal notranslate"><span class="pre">tabensemb.data.AbstractSplitter._sklearn_k_fold</span></code> for a better implementation.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TargetSplitter</span><span class="p">(</span><span class="n">AbstractSplitter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">cont_feature_names</span><span class="p">,</span> <span class="n">cat_feature_names</span><span class="p">,</span> <span class="n">label_name</span><span class="p">):</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">label_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">test_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">target</span> <span class="o">&gt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_val_test</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">train_val_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">test_indices</span><span class="p">)</span>
+        <span class="n">train_indices</span><span class="p">,</span> <span class="n">val_indices</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">train_val_indices</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">train_val_test</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_val_test</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]),</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">train_indices</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">val_indices</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">test_indices</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_indices</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">val_indices</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test_indices</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">support_cv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">_next_cv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">cont_feature_names</span><span class="p">,</span> <span class="n">cat_feature_names</span><span class="p">,</span> <span class="n">label_name</span><span class="p">,</span> <span class="n">cv</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_generator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">train_indices</span><span class="p">,</span> <span class="n">val_indices</span><span class="p">,</span> <span class="n">test_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cont_feature_names</span><span class="p">,</span> <span class="n">cat_feature_names</span><span class="p">,</span> <span class="n">label_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">test_indices</span> <span class="o">=</span> <span class="n">test_indices</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">train_val_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_indices</span><span class="p">,</span> <span class="n">val_indices</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cv_generator</span> <span class="o">=</span> <span class="n">PickleAbleGenerator</span><span class="p">(</span>
+                <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_val_indices</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="n">train_indices_idx</span><span class="p">,</span> <span class="n">val_indices_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_generator</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+        <span class="n">train_indices</span><span class="p">,</span> <span class="n">val_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_val_indices</span><span class="p">[</span><span class="n">train_indices_idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_val_indices</span><span class="p">[</span><span class="n">val_indices_idx</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">train_indices</span><span class="p">,</span> <span class="n">val_indices</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_indices</span>
+</pre></div>
+</div>
+</div>
+<p>The implemented splitter should be registered as follows to be recognized by <code class="docutils literal notranslate"><span class="pre">DataModule.set_data_splitter</span></code> automatically.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.data.datasplitter</span> <span class="kn">import</span> <span class="n">splitter_mapping</span>
+<span class="n">splitter_mapping</span><span class="p">[</span><span class="s2">&quot;TargetSplitter&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TargetSplitter</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.trainer</span> <span class="kn">import</span> <span class="n">Trainer</span>
+<span class="kn">import</span> <span class="nn">tabensemb</span>
+
+<span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;../../../../&quot;</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_output_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;output&quot;</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_config_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;configs&quot;</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_data_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;data&quot;</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">set_data_splitter</span><span class="p">(</span><span class="s2">&quot;TargetSplitter&quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The project will be saved to ../../../../output/sample/2023-09-18-18-15-08-0_sample
+Dataset size: 153 51 52
+Data saved to ../../../../output/sample/2023-09-18-18-15-08-0_sample (data.csv and tabular_data.csv).
+</pre></div></div>
+</div>
+<p>As expected, we can see the target values are much higher in the testing set than those in the training set or the validation set.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">trainer</span><span class="o">.</span><span class="n">train_indices</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">label_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">trainer</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">trainer</span><span class="o">.</span><span class="n">val_indices</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">label_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">trainer</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">trainer</span><span class="o">.</span><span class="n">test_indices</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">label_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(-71.48163032821536, -77.62461093871299, 236.44992911967717)
+</pre></div></div>
+</div>
+<p>4-fold cross-validation is performed for the training and validation sets</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">first_fold_train</span><span class="p">,</span> <span class="n">first_fold_val</span><span class="p">,</span> <span class="n">first_fold_test</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">datasplitter</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">df</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">cat_feature_names</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">label_name</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">second_fold_train</span><span class="p">,</span> <span class="n">second_fold_val</span><span class="p">,</span> <span class="n">second_fold_test</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">datasplitter</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">df</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">cat_feature_names</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">label_name</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">first_fold_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">first_fold_val</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">first_fold_test</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">second_fold_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">second_fold_val</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">second_fold_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(163, 41, 52, 163, 41, 52)
+</pre></div></div>
+</div>
+<p>The testing set stays unchanged across different folds.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="nb">all</span><span class="p">([</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">first_fold_test</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">second_fold_test</span><span class="p">))])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+True
+</pre></div></div>
+</div>
+<p>According to the definition of k-fold, an entirely different part of the samples is selected as the validation set in different folds.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="nb">all</span><span class="p">([</span><span class="n">x</span> <span class="ow">in</span> <span class="n">first_fold_train</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">second_fold_val</span><span class="p">]),</span> <span class="nb">all</span><span class="p">([</span><span class="n">x</span> <span class="ow">in</span> <span class="n">second_fold_train</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">first_fold_val</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(True, True)
+</pre></div></div>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="build_model_upon_others.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Build your own model upon others</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="new_data_derivers.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">New data derivers</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ANONYMOUS/tabular_ensemble/edit/main/docs/source/examples/advanced_usage/new_data_splitters.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/examples/advanced_usage/new_data_splitters.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

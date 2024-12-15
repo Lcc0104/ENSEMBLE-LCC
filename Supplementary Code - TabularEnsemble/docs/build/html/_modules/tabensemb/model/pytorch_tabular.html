@@ -1,0 +1,989 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tabensemb.model.pytorch_tabular &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/tabensemb/model/pytorch_tabular';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">tabensemb.model.pytorch_tabular</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for tabensemb.model.pytorch_tabular</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">tabensemb.utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">tabensemb.model</span> <span class="kn">import</span> <span class="n">AbstractModel</span>
+<span class="kn">from</span> <span class="nn">skopt.space</span> <span class="kn">import</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Real</span><span class="p">,</span> <span class="n">Categorical</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">pytorch_lightning</span> <span class="kn">import</span> <span class="n">Callback</span>
+<span class="kn">import</span> <span class="nn">pytorch_lightning</span> <span class="k">as</span> <span class="nn">pl</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">PytorchLightningLossCallback</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">AbstractWrapper</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">packaging</span> <span class="kn">import</span> <span class="n">version</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+
+
+<div class="viewcode-block" id="PytorchTabular">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabular.html#tabensemb.model.PytorchTabular">[docs]</a>
+<span class="k">class</span> <span class="nc">PytorchTabular</span><span class="p">(</span><span class="n">AbstractModel</span><span class="p">):</span>
+<div class="viewcode-block" id="PytorchTabular._get_program_name">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabular._get_program_name.html#tabensemb.model.PytorchTabular._get_program_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_program_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;PytorchTabular&quot;</span></div>
+
+
+<div class="viewcode-block" id="PytorchTabular._new_model">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabular._new_model.html#tabensemb.model.PytorchTabular._new_model">[docs]</a>
+    <span class="k">def</span> <span class="nf">_new_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Wandb&quot;</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">._pytorch_tabular.mute_track</span> <span class="kn">import</span> <span class="n">mute_track</span>
+
+        <span class="n">mute_track</span><span class="p">()</span>
+
+        <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partialmethod</span>
+        <span class="kn">import</span> <span class="nn">pytorch_tabular</span>
+        <span class="kn">from</span> <span class="nn">pytorch_tabular.config</span> <span class="kn">import</span> <span class="n">ExperimentRunManager</span>
+
+        <span class="n">erm_original_init</span> <span class="o">=</span> <span class="n">ExperimentRunManager</span><span class="o">.</span><span class="fm">__init__</span>
+        <span class="n">ExperimentRunManager</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="n">partialmethod</span><span class="p">(</span>
+            <span class="n">ExperimentRunManager</span><span class="o">.</span><span class="fm">__init__</span><span class="p">,</span>
+            <span class="n">exp_version_manager</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;exp_version_manager.yml&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">pytorch_tabular</span> <span class="kn">import</span> <span class="n">TabularModel</span>
+        <span class="kn">from</span> <span class="nn">pytorch_tabular.models</span> <span class="kn">import</span> <span class="p">(</span>
+            <span class="n">CategoryEmbeddingModelConfig</span><span class="p">,</span>
+            <span class="n">NodeConfig</span><span class="p">,</span>
+            <span class="n">TabNetModelConfig</span><span class="p">,</span>
+            <span class="n">TabTransformerConfig</span><span class="p">,</span>
+            <span class="n">AutoIntConfig</span><span class="p">,</span>
+            <span class="n">FTTransformerConfig</span><span class="p">,</span>
+            <span class="n">GatedAdditiveTreeEnsembleConfig</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">pytorch_tabular.config</span> <span class="kn">import</span> <span class="n">DataConfig</span><span class="p">,</span> <span class="n">OptimizerConfig</span><span class="p">,</span> <span class="n">TrainerConfig</span>
+
+        <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">task</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span>
+        <span class="k">if</span> <span class="n">task</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;multiclass&quot;</span><span class="p">]:</span>
+            <span class="n">task</span> <span class="o">=</span> <span class="s2">&quot;classification&quot;</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">loss</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;cross_entropy&quot;</span><span class="p">:</span> <span class="s2">&quot;CrossEntropyLoss&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mse&quot;</span><span class="p">:</span> <span class="s2">&quot;MSELoss&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mae&quot;</span><span class="p">:</span> <span class="s2">&quot;L1Loss&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="n">loss</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">loss</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span>
+
+        <span class="n">data_config</span> <span class="o">=</span> <span class="n">DataConfig</span><span class="p">(</span>
+            <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">label_name</span><span class="p">,</span>
+            <span class="n">continuous_cols</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">,</span>
+            <span class="n">categorical_cols</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">cat_feature_names</span><span class="p">,</span>
+            <span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;ckpts&quot;</span><span class="p">)):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;ckpts&quot;</span><span class="p">))</span>
+        <span class="n">trainer_config</span> <span class="o">=</span> <span class="n">TrainerConfig</span><span class="p">(</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;batch_size&quot;</span><span class="p">]),</span>
+            <span class="n">progress_bar</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+            <span class="n">early_stopping</span><span class="o">=</span><span class="s2">&quot;valid_loss&quot;</span><span class="p">,</span>
+            <span class="n">early_stopping_patience</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">static_params</span><span class="p">[</span><span class="s2">&quot;patience&quot;</span><span class="p">],</span>
+            <span class="n">checkpoints</span><span class="o">=</span><span class="s2">&quot;valid_loss&quot;</span><span class="p">,</span>
+            <span class="n">checkpoints_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;ckpts&quot;</span><span class="p">),</span>
+            <span class="n">checkpoints_save_top_k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">checkpoints_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">load_best</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">==</span> <span class="s2">&quot;cpu&quot;</span> <span class="k">else</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="p">(</span>
+            <span class="n">opt_name</span><span class="p">,</span>
+            <span class="n">opt_params</span><span class="p">,</span>
+            <span class="n">lrs_name</span><span class="p">,</span>
+            <span class="n">lrs_params</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_optimizer_lr_scheduler_params</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;lr&quot;</span> <span class="ow">in</span> <span class="n">opt_params</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="c1"># pytorch_tabular deals with the learning rate individually.</span>
+            <span class="k">del</span> <span class="n">opt_params</span><span class="p">[</span><span class="s2">&quot;lr&quot;</span><span class="p">]</span>
+        <span class="n">optimizer_config</span> <span class="o">=</span> <span class="n">OptimizerConfig</span><span class="p">(</span>
+            <span class="n">optimizer</span><span class="o">=</span><span class="n">opt_name</span><span class="p">,</span>
+            <span class="n">optimizer_params</span><span class="o">=</span><span class="n">opt_params</span><span class="p">,</span>
+            <span class="n">lr_scheduler</span><span class="o">=</span><span class="n">lrs_name</span><span class="p">,</span>
+            <span class="n">lr_scheduler_params</span><span class="o">=</span><span class="n">lrs_params</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">model_configs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Category Embedding&quot;</span><span class="p">:</span> <span class="n">CategoryEmbeddingModelConfig</span><span class="p">,</span>
+            <span class="s2">&quot;NODE&quot;</span><span class="p">:</span> <span class="n">NodeConfig</span><span class="p">,</span>
+            <span class="s2">&quot;TabNet&quot;</span><span class="p">:</span> <span class="n">TabNetModelConfig</span><span class="p">,</span>
+            <span class="s2">&quot;TabTransformer&quot;</span><span class="p">:</span> <span class="n">TabTransformerConfig</span><span class="p">,</span>
+            <span class="s2">&quot;AutoInt&quot;</span><span class="p">:</span> <span class="n">AutoIntConfig</span><span class="p">,</span>
+            <span class="s2">&quot;FTTransformer&quot;</span><span class="p">:</span> <span class="n">FTTransformerConfig</span><span class="p">,</span>
+            <span class="s2">&quot;GATE&quot;</span><span class="p">:</span> <span class="n">GatedAdditiveTreeEnsembleConfig</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">special_configs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;NODE&quot;</span><span class="p">:</span> <span class="p">(</span>
+                <span class="p">{</span><span class="s2">&quot;embed_categorical&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+                <span class="k">if</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">pytorch_tabular</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;1.1.0&quot;</span><span class="p">)</span>
+                <span class="k">else</span> <span class="p">{}</span>
+            <span class="p">),</span>
+        <span class="p">}</span>
+        <span class="n">legal_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="n">value</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;lr&quot;</span><span class="p">,</span> <span class="s2">&quot;batch_size&quot;</span><span class="p">,</span> <span class="s2">&quot;original_batch_size&quot;</span><span class="p">]</span>
+            <span class="ow">and</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">opt_params</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="ow">and</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lrs_params</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="s2">&quot;lr&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">legal_kwargs</span><span class="p">[</span><span class="s2">&quot;learning_rate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;lr&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">legal_kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">legal_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="ow">in</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">]:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">legal_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">legal_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">pass</span>
+        <span class="k">with</span> <span class="n">HiddenPrints</span><span class="p">():</span>
+            <span class="n">model_config</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">model_configs</span><span class="p">[</span><span class="n">model_name</span><span class="p">](</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span> <span class="o">**</span><span class="n">legal_kwargs</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">model_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">special_configs</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                <span class="k">else</span> <span class="n">model_configs</span><span class="p">[</span><span class="n">model_name</span><span class="p">](</span>
+                    <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span> <span class="o">**</span><span class="n">special_configs</span><span class="p">[</span><span class="n">model_name</span><span class="p">],</span> <span class="o">**</span><span class="n">legal_kwargs</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">tabular_model</span> <span class="o">=</span> <span class="n">TabularModel</span><span class="p">(</span>
+                <span class="n">data_config</span><span class="o">=</span><span class="n">data_config</span><span class="p">,</span>
+                <span class="n">model_config</span><span class="o">=</span><span class="n">model_config</span><span class="p">,</span>
+                <span class="n">optimizer_config</span><span class="o">=</span><span class="n">optimizer_config</span><span class="p">,</span>
+                <span class="n">trainer_config</span><span class="o">=</span><span class="n">trainer_config</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">tabular_model</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">tabular_model</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;progress_bar_refresh_rate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">ExperimentRunManager</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="n">erm_original_init</span>
+        <span class="k">return</span> <span class="n">tabular_model</span></div>
+
+
+<div class="viewcode-block" id="PytorchTabular._train_data_preprocess">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabular._train_data_preprocess.html#tabensemb.model.PytorchTabular._train_data_preprocess">[docs]</a>
+    <span class="k">def</span> <span class="nf">_train_data_preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span>
+        <span class="n">all_feature_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">all_feature_names</span>
+        <span class="n">X_train</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">categories_inverse_transform</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">X_train</span><span class="p">)[</span><span class="n">all_feature_names</span><span class="p">]</span>
+        <span class="n">X_val</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">categories_inverse_transform</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">X_val</span><span class="p">)[</span><span class="n">all_feature_names</span><span class="p">]</span>
+        <span class="n">X_test</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">categories_inverse_transform</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">X_test</span><span class="p">)[</span><span class="n">all_feature_names</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;X_train&quot;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">,</span>
+            <span class="s2">&quot;y_train&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span>
+            <span class="s2">&quot;X_val&quot;</span><span class="p">:</span> <span class="n">X_val</span><span class="p">,</span>
+            <span class="s2">&quot;y_val&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">y_val</span><span class="p">,</span>
+            <span class="s2">&quot;X_test&quot;</span><span class="p">:</span> <span class="n">X_test</span><span class="p">,</span>
+            <span class="s2">&quot;y_test&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">y_test</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="PytorchTabular._data_preprocess">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabular._data_preprocess.html#tabensemb.model.PytorchTabular._data_preprocess">[docs]</a>
+    <span class="k">def</span> <span class="nf">_data_preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">derived_data</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="n">all_feature_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">all_feature_names</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">categories_inverse_transform</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">())[</span>
+            <span class="n">all_feature_names</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="PytorchTabular._train_single_model">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabular._train_single_model.html#tabensemb.model.PytorchTabular._train_single_model">[docs]</a>
+    <span class="k">def</span> <span class="nf">_train_single_model</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="p">,</span>
+        <span class="n">epoch</span><span class="p">,</span>
+        <span class="n">X_train</span><span class="p">,</span>
+        <span class="n">y_train</span><span class="p">,</span>
+        <span class="n">X_val</span><span class="p">,</span>
+        <span class="n">y_val</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">,</span>
+        <span class="n">warm_start</span><span class="p">,</span>
+        <span class="n">in_bayes_opt</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">tc</span> <span class="o">=</span> <span class="n">TqdmController</span><span class="p">()</span>
+        <span class="n">tc</span><span class="o">.</span><span class="n">disable_tqdm</span><span class="p">()</span>
+        <span class="n">label_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">label_name</span>
+        <span class="n">train_data</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">train_data</span><span class="p">[</span><span class="n">label_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_train</span>
+        <span class="n">val_data</span> <span class="o">=</span> <span class="n">X_val</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">val_data</span><span class="p">[</span><span class="n">label_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_val</span>
+        <span class="n">pl_loss_callback</span> <span class="o">=</span> <span class="n">PytorchLightningLossCallback</span><span class="p">(</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="n">total_epoch</span><span class="o">=</span><span class="n">epoch</span>
+        <span class="p">)</span>
+        <span class="k">with</span> <span class="n">HiddenPrints</span><span class="p">(</span>
+            <span class="n">disable_std</span><span class="o">=</span><span class="ow">not</span> <span class="n">verbose</span><span class="p">,</span>
+            <span class="n">disable_logging</span><span class="o">=</span><span class="ow">not</span> <span class="n">verbose</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+                <span class="kn">from</span> <span class="nn">pytorch_lightning.utilities.rank_zero</span> <span class="kn">import</span> <span class="p">(</span>
+                    <span class="n">LightningDeprecationWarning</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">LightningDeprecationWarning</span><span class="p">)</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">)</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+                    <span class="n">train</span><span class="o">=</span><span class="n">train_data</span><span class="p">,</span>
+                    <span class="n">validation</span><span class="o">=</span><span class="n">val_data</span><span class="p">,</span>
+                    <span class="n">max_epochs</span><span class="o">=</span><span class="n">epoch</span><span class="p">,</span>
+                    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span>
+                        <span class="n">PytorchTabularVerboseLossCallback</span><span class="p">(),</span>
+                        <span class="n">pl_loss_callback</span><span class="p">,</span>
+                    <span class="p">],</span>
+                <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_losses</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pl_loss_callback</span><span class="o">.</span><span class="n">train_ls</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val_losses</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pl_loss_callback</span><span class="o">.</span><span class="n">val_ls</span>
+
+        <span class="kn">from</span> <span class="nn">pytorch_lightning.callbacks</span> <span class="kn">import</span> <span class="n">ModelCheckpoint</span>
+
+        <span class="n">ckpt_callback</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">callbacks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="n">ModelCheckpoint</span><span class="p">):</span>
+                <span class="n">ckpt_callback</span> <span class="o">=</span> <span class="n">callback</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">ckpt_callback</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">restored_epochs</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+                <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;epoch=([0-9]*)-&quot;</span><span class="p">,</span> <span class="n">ckpt_callback</span><span class="o">.</span><span class="n">kth_best_model_path</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;ckpts&quot;</span><span class="p">)):</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;ckpts&quot;</span><span class="p">))</span>
+        <span class="n">tc</span><span class="o">.</span><span class="n">enable_tqdm</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PytorchTabular._pred_single_model">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabular._pred_single_model.html#tabensemb.model.PytorchTabular._pred_single_model">[docs]</a>
+    <span class="k">def</span> <span class="nf">_pred_single_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">._pytorch_tabular.mute_track</span> <span class="kn">import</span> <span class="n">mute_track</span>
+
+        <span class="n">mute_track</span><span class="p">()</span>
+        <span class="n">targets</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">target</span>
+        <span class="k">with</span> <span class="n">HiddenPrints</span><span class="p">():</span>
+            <span class="c1"># Two annoying warnings that cannot be suppressed:</span>
+            <span class="c1"># 1. DeprecationWarning: Default for ``include_input_features`` will change from True to False in the next</span>
+            <span class="c1"># release. Please set it explicitly.</span>
+            <span class="c1"># 2. DeprecationWarning: &quot;The ``out_ff_layers``, ``out_ff_activation``, ``out_ff_dropoout``, and</span>
+            <span class="c1"># ``out_ff_initialization`` arguments are deprecated and will be removed next release. Please use head and</span>
+            <span class="c1"># head_config as an alternative.</span>
+            <span class="n">original_batch_size</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">batch_size</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span>
+                <span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="s2">&quot;pytorch_tabular&quot;</span>
+            <span class="p">)</span>
+            <span class="n">all_res</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">include_input_features</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">original_batch_size</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;regression&quot;</span><span class="p">:</span>
+                <span class="n">preds</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_res</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">_prediction&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">targets</span>
+                <span class="p">]</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_res</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;1_probability&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">n_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_res</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_res</span><span class="p">)[:,</span> <span class="p">:</span><span class="n">n_classes</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="PytorchTabular._get_model_names">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabular._get_model_names.html#tabensemb.model.PytorchTabular._get_model_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_model_names</span><span class="p">():</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s2">&quot;Category Embedding&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;NODE&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;TabNet&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;TabTransformer&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;AutoInt&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FTTransformer&quot;</span><span class="p">,</span>
+            <span class="c1"># &quot;GATE&quot;, Low efficiency</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="PytorchTabular._space">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabular._space.html#tabensemb.model.PytorchTabular._space">[docs]</a>
+    <span class="k">def</span> <span class="nf">_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Spaces are selected around default parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">space_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Category Embedding&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.5</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;embedding_dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.5</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;NODE&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;depth&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>  <span class="c1"># 6</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;embedding_dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.0</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.0</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;num_trees&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;TabNet&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_d&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>  <span class="c1"># 8</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_a&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>  <span class="c1"># 8</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_steps&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>  <span class="c1"># 3</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;gamma&quot;</span><span class="p">),</span>  <span class="c1"># 1.3</span>
+                <span class="n">Integer</span><span class="p">(</span>
+                    <span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_independent&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span>
+                <span class="p">),</span>  <span class="c1"># 2</span>
+                <span class="n">Integer</span><span class="p">(</span>
+                    <span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_shared&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span>
+                <span class="p">),</span>  <span class="c1"># 2</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;TabTransformer&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_embed_dim&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;embedding_dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.1</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ff_dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.1</span>
+                <span class="n">Categorical</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;num_heads&quot;</span><span class="p">),</span>  <span class="c1"># 8</span>
+                <span class="n">Integer</span><span class="p">(</span>
+                    <span class="n">low</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                    <span class="n">high</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                    <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;num_attn_blocks&quot;</span><span class="p">,</span>
+                    <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+                <span class="p">),</span>  <span class="c1"># 6</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;attn_dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.1</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;add_norm_dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.1</span>
+                <span class="n">Integer</span><span class="p">(</span>
+                    <span class="n">low</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">high</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+                    <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ff_hidden_multiplier&quot;</span><span class="p">,</span>
+                    <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+                <span class="p">),</span>  <span class="c1"># 4</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;AutoInt&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;attn_dropouts&quot;</span><span class="p">),</span>  <span class="c1"># 0.0</span>
+                <span class="c1"># Categorical([16, 32, 64, 128], name=&#39;attn_embed_dim&#39;),  # 32</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.0</span>
+                <span class="n">Categorical</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;embedding_dim&quot;</span><span class="p">),</span>  <span class="c1"># 16</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;embedding_dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.0</span>
+                <span class="n">Integer</span><span class="p">(</span>
+                    <span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                    <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;num_attn_blocks&quot;</span><span class="p">,</span>
+                    <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+                <span class="p">),</span>  <span class="c1"># 3</span>
+                <span class="n">Categorical</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;num_heads&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;FTTransformer&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_embed_dim&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;embedding_dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.1</span>
+                <span class="n">Categorical</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;num_heads&quot;</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span>
+                    <span class="n">low</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                    <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;num_attn_blocks&quot;</span><span class="p">,</span>
+                    <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+                <span class="p">),</span>  <span class="c1"># 6</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;attn_dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.1</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;add_norm_dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.1</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ff_dropout&quot;</span><span class="p">),</span>  <span class="c1"># 0.1</span>
+                <span class="n">Integer</span><span class="p">(</span>
+                    <span class="n">low</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">high</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+                    <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ff_hidden_multiplier&quot;</span><span class="p">,</span>
+                    <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+                <span class="p">),</span>  <span class="c1"># 4</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;GATE&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;gflu_stages&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;gflu_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;tree_depth&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;num_trees&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;tree_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span>
+                    <span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                    <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;tree_wise_attention_dropout&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;embedding_dropout&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">space_dict</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="PytorchTabular._initial_values">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabular._initial_values.html#tabensemb.model.PytorchTabular._initial_values">[docs]</a>
+    <span class="k">def</span> <span class="nf">_initial_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="n">params_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Category Embedding&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;dropout&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s2">&quot;embedding_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;NODE&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="s2">&quot;embedding_dropout&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s2">&quot;input_dropout&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s2">&quot;num_trees&quot;</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;TabNet&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;n_d&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                <span class="s2">&quot;n_a&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                <span class="s2">&quot;n_steps&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="mf">1.3</span><span class="p">,</span>
+                <span class="s2">&quot;n_independent&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="s2">&quot;n_shared&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;TabTransformer&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;input_embed_dim&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+                <span class="s2">&quot;embedding_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;ff_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;num_heads&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                <span class="s2">&quot;num_attn_blocks&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+                <span class="s2">&quot;attn_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;add_norm_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;ff_hidden_multiplier&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;AutoInt&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;attn_dropouts&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s2">&quot;dropout&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s2">&quot;embedding_dim&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+                <span class="s2">&quot;embedding_dropout&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s2">&quot;num_attn_blocks&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="s2">&quot;num_heads&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;FTTransformer&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;input_embed_dim&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+                <span class="s2">&quot;embedding_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;num_heads&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                <span class="s2">&quot;num_attn_blocks&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="s2">&quot;attn_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;add_norm_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;ff_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;ff_hidden_multiplier&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;GATE&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;gflu_stages&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+                <span class="s2">&quot;gflu_dropout&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="c1"># ``tree_depth`` influences the memory usage a lot. ``tree_depth``==10 with other default settings consumes</span>
+                <span class="c1"># about 4 GiBs of ram.</span>
+                <span class="c1"># When &quot;tree_depth&quot; larger than 4, and num_trees larger than 20 (approximately), performance on GPU</span>
+                <span class="c1"># decreases dramatically.</span>
+                <span class="s2">&quot;tree_depth&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="s2">&quot;num_trees&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+                <span class="s2">&quot;tree_dropout&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s2">&quot;tree_wise_attention_dropout&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s2">&quot;embedding_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">params_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">params_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">chosen_params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">params_dict</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span></div>
+</div>
+
+
+
+<span class="k">def</span> <span class="nf">pytorch_tabular_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backbone_features</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_hidden_representation&quot;</span><span class="p">,</span> <span class="n">backbone_features</span><span class="p">)</span>
+    <span class="n">y_hat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">backbone_features</span><span class="p">)</span>
+    <span class="n">y_hat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_output_sigmoid_scaling</span><span class="p">(</span><span class="n">y_hat</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pack_output</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">backbone_features</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="PytorchTabularWrapper">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabularWrapper.html#tabensemb.model.PytorchTabularWrapper">[docs]</a>
+<span class="k">class</span> <span class="nc">PytorchTabularWrapper</span><span class="p">(</span><span class="n">AbstractWrapper</span><span class="p">):</span>
+<div class="viewcode-block" id="PytorchTabularWrapper.__init__">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabularWrapper.html#tabensemb.model.PytorchTabularWrapper.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">PytorchTabular</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PytorchTabularWrapper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;TabNet&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wrapping TabNet is not supported.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PytorchTabularWrapper.wrap_forward">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabularWrapper.wrap_forward.html#tabensemb.model.PytorchTabularWrapper.wrap_forward">[docs]</a>
+    <span class="k">def</span> <span class="nf">wrap_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">pytorch_tabular.models.base_model</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+
+        <span class="n">component</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrapped_model</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">]</span><span class="o">.</span><span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">original_forward</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">compute_head</span>
+        <span class="n">component</span><span class="o">.</span><span class="n">compute_head</span> <span class="o">=</span> <span class="n">pytorch_tabular_forward</span><span class="o">.</span><span class="fm">__get__</span><span class="p">(</span><span class="n">component</span><span class="p">,</span> <span class="n">BaseModel</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PytorchTabularWrapper.reset_forward">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.PytorchTabularWrapper.reset_forward.html#tabensemb.model.PytorchTabularWrapper.reset_forward">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_forward</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">component</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrapped_model</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">]</span><span class="o">.</span><span class="n">model</span>
+            <span class="n">component</span><span class="o">.</span><span class="n">compute_head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_forward</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">hidden_rep_dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">pytorch_tabular.models.common.heads</span> <span class="kn">import</span> <span class="n">LinearHead</span><span class="p">,</span> <span class="n">MixtureDensityHead</span>
+
+        <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrapped_model</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">]</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">head</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">head</span><span class="p">)</span> <span class="o">==</span> <span class="n">LinearHead</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">head</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">in_features</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">head</span><span class="p">)</span> <span class="o">==</span> <span class="n">MixtureDensityHead</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">head</span><span class="o">.</span><span class="n">pi</span><span class="o">.</span><span class="n">in_features</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Only LinearHead and MixtureDensityHead is supported to extract a hidden_rep_dim, but &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">head</span><span class="p">)</span><span class="si">}</span><span class="s2"> instead. It might be a customized one.&quot;</span>
+            <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">hidden_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wrapped_model</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">]</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;_hidden_representation&quot;</span>
+        <span class="p">)</span></div>
+
+
+
+<span class="k">class</span> <span class="nc">PytorchTabularVerboseLossCallback</span><span class="p">(</span><span class="n">Callback</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_train_batch_end</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">trainer</span><span class="p">:</span> <span class="s2">&quot;pl.Trainer&quot;</span><span class="p">,</span>
+        <span class="n">pl_module</span><span class="p">:</span> <span class="n">pl</span><span class="o">.</span><span class="n">LightningModule</span><span class="p">,</span>
+        <span class="n">outputs</span><span class="p">,</span>
+        <span class="n">batch</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+        <span class="n">batch_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pl_module</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="s2">&quot;train_loss_verbose&quot;</span><span class="p">,</span>
+            <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">],</span>
+            <span class="n">on_step</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">on_epoch</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_validation_end</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">trainer</span><span class="p">:</span> <span class="s2">&quot;pl.Trainer&quot;</span><span class="p">,</span> <span class="n">pl_module</span><span class="p">:</span> <span class="s2">&quot;pl.LightningModule&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">trainer</span><span class="o">.</span><span class="n">callback_metrics</span><span class="p">[</span><span class="s2">&quot;valid_loss_verbose&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">callback_metrics</span><span class="p">[</span>
+            <span class="s2">&quot;valid_loss&quot;</span>
+        <span class="p">]</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,925 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Bayesian hyperparameter optimization &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/get_started/bayes';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Cross-validation" href="cross_validation.html" />
+    <link rel="prev" title="Using data functionalities" href="use_data_functionalities.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run_sample.html">Basics of running benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_dataset.html">Dataset and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inference.html">Inference on an upcoming dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_data_functionalities.html">Using data functionalities</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bayesian hyperparameter optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross_validation.html">Cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../get_started.html" class="nav-link">Get Started</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Bayesian hyperparameter optimization</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Bayesian-hyperparameter-optimization">
+<h1>Bayesian hyperparameter optimization<a class="headerlink" href="#Bayesian-hyperparameter-optimization" title="Link to this heading">#</a></h1>
+<p>Hyperparameters are crucial for machine learning models. The optimal hyperparameters usually differ among different tasks. To find a better set of hyperparameters than the initial values, we provide an entry in the configuration to activate Bayesian hyperparameter optimization.</p>
+<p>The functionality is implemented based on <code class="docutils literal notranslate"><span class="pre">scikit-optimize</span></code> (<a class="reference external" href="https://scikit-optimize.github.io/">link</a>).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">tabensemb.trainer</span> <span class="kn">import</span> <span class="n">Trainer</span>
+<span class="kn">from</span> <span class="nn">tabensemb.model</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">tabensemb.config</span> <span class="kn">import</span> <span class="n">UserConfig</span>
+<span class="kn">import</span> <span class="nn">tabensemb</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using </span><span class="si">{}</span><span class="s2"> device&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+
+<span class="n">temp_path</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">()</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_output_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_config_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;configs&quot;</span><span class="p">)</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_data_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">mpg_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;mpg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cylinders&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;displacement&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;horsepower&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;weight&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acceleration&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;model_year&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;origin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;car_name&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="o">.</span><span class="n">from_uci</span><span class="p">(</span><span class="s2">&quot;Auto MPG&quot;</span><span class="p">,</span> <span class="n">column_names</span><span class="o">=</span><span class="n">mpg_columns</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">PytorchTabular</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">]),</span>
+<span class="p">]</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">add_modelbases</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Using cuda device
+Downloading https://archive.ics.uci.edu/static/public/9/auto+mpg.zip to /tmp/tmphxmeot_i/data/Auto MPG.zip
+cylinders is Integer and will be treated as a continuous feature.
+model_year is Integer and will be treated as a continuous feature.
+origin is Integer and will be treated as a continuous feature.
+Unknown values are detected in [&#39;horsepower&#39;]. They will be treated as np.nan.
+The project will be saved to /tmp/tmphxmeot_i/output/auto-mpg/2023-09-23-20-37-29-0_UserInputConfig
+Dataset size: 238 80 80
+Data saved to /tmp/tmphxmeot_i/output/auto-mpg/2023-09-23-20-37-29-0_UserInputConfig (data.csv and tabular_data.csv).
+</pre></div></div>
+</div>
+<p>The initial hyperparameters can be seen using the following line.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_get_params</span><span class="p">(</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;dropout&#39;: 0.0,
+ &#39;embedding_dropout&#39;: 0.1,
+ &#39;lr&#39;: 0.001,
+ &#39;weight_decay&#39;: 1e-09,
+ &#39;batch_size&#39;: 1024}
+</pre></div></div>
+</div>
+<p>Let us see the performance of the model using initial hyperparameters.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">stderr_to_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">get_leaderboard</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+-------------Run PytorchTabular-------------
+
+Training Category Embedding
+Global seed set to 42
+2023-09-23 20:37:30,020 - {pytorch_tabular.tabular_model:473} - INFO - Preparing the DataLoaders
+2023-09-23 20:37:30,021 - {pytorch_tabular.tabular_datamodule:290} - INFO - Setting up the datamodule for regression task
+2023-09-23 20:37:30,029 - {pytorch_tabular.tabular_model:521} - INFO - Preparing the Model: CategoryEmbeddingModel
+2023-09-23 20:37:30,041 - {pytorch_tabular.tabular_model:268} - INFO - Preparing the Trainer
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/trainer/connectors/accelerator_connector.py:589: LightningDeprecationWarning: The Trainer argument `auto_select_gpus` has been deprecated in v1.9.0 and will be removed in v2.0.0. Please use the function `pytorch_lightning.accelerators.find_usable_cuda_devices` instead.
+  rank_zero_deprecation(
+Auto select gpus: [0]
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+2023-09-23 20:37:31,045 - {pytorch_tabular.tabular_model:582} - INFO - Training Started
+You are using a CUDA device (&#39;NVIDIA GeForce RTX 3090&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name             | Type                      | Params
+---------------------------------------------------------------
+0 | _backbone        | CategoryEmbeddingBackbone | 11.4 K
+1 | _embedding_layer | Embedding1dLayer          | 14
+2 | head             | LinearHead                | 33
+3 | loss             | MSELoss                   | 0
+---------------------------------------------------------------
+11.4 K    Trainable params
+0         Non-trainable params
+11.4 K    Total params
+0.046     Total estimated model params size (MB)
+Epoch: 1/300, Train loss: 677.8015, Val loss: 582.9557, Min val loss: 582.9557, Epoch time: 0.016s.
+Epoch: 20/300, Train loss: 353.7851, Val loss: 302.0203, Min val loss: 302.0203, Epoch time: 0.010s.
+Epoch: 40/300, Train loss: 85.0776, Val loss: 62.1153, Min val loss: 62.1153, Epoch time: 0.010s.
+Epoch: 60/300, Train loss: 45.2654, Val loss: 34.2778, Min val loss: 34.2691, Epoch time: 0.010s.
+Epoch: 80/300, Train loss: 33.9537, Val loss: 26.8622, Min val loss: 26.8622, Epoch time: 0.010s.
+Epoch: 100/300, Train loss: 26.9038, Val loss: 23.2417, Min val loss: 23.2372, Epoch time: 0.009s.
+Epoch: 120/300, Train loss: 24.9622, Val loss: 20.4360, Min val loss: 20.4360, Epoch time: 0.011s.
+Epoch: 140/300, Train loss: 24.1636, Val loss: 19.4010, Min val loss: 19.4010, Epoch time: 0.009s.
+Epoch: 160/300, Train loss: 22.9200, Val loss: 18.0232, Min val loss: 17.9749, Epoch time: 0.008s.
+Epoch: 180/300, Train loss: 19.7677, Val loss: 16.9469, Min val loss: 16.9469, Epoch time: 0.009s.
+Epoch: 200/300, Train loss: 17.9390, Val loss: 16.6545, Min val loss: 16.4093, Epoch time: 0.012s.
+Epoch: 220/300, Train loss: 19.4496, Val loss: 15.4451, Min val loss: 15.1788, Epoch time: 0.011s.
+Epoch: 240/300, Train loss: 16.0483, Val loss: 14.5508, Min val loss: 14.5508, Epoch time: 0.010s.
+Epoch: 260/300, Train loss: 16.4672, Val loss: 13.8354, Min val loss: 13.8354, Epoch time: 0.019s.
+Epoch: 280/300, Train loss: 13.6031, Val loss: 12.9315, Min val loss: 12.9315, Epoch time: 0.017s.
+Epoch: 300/300, Train loss: 16.5369, Val loss: 12.3673, Min val loss: 12.3673, Epoch time: 0.010s.
+`Trainer.fit` stopped: `max_epochs=300` reached.
+2023-09-23 20:37:37,327 - {pytorch_tabular.tabular_model:584} - INFO - Training the model completed
+2023-09-23 20:37:37,327 - {pytorch_tabular.tabular_model:1258} - INFO - Loading the best model
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/utilities/cloud_io.py:33: LightningDeprecationWarning: `pytorch_lightning.utilities.cloud_io.get_filesystem` has been deprecated in v1.8.0 and will be removed in v2.0.0. Please use `lightning_fabric.utilities.cloud_io.get_filesystem` instead.
+  rank_zero_deprecation(
+Training mse loss: 11.25175
+Validation mse loss: 12.36725
+Testing mse loss: 7.83801
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmphxmeot_i/output/auto-mpg/2023-09-23-20-37-29-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------PytorchTabular End-------------
+
+PytorchTabular metrics
+Category Embedding 1/1
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmphxmeot_i/output/auto-mpg/2023-09-23-20-37-29-0_UserInputConfig/trainer.pkl&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Program</th>
+      <th>Model</th>
+      <th>Training RMSE</th>
+      <th>Training MSE</th>
+      <th>Training MAE</th>
+      <th>Training MAPE</th>
+      <th>Training R2</th>
+      <th>Training MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Training EXPLAINED_VARIANCE_SCORE</th>
+      <th>Testing RMSE</th>
+      <th>...</th>
+      <th>Testing R2</th>
+      <th>Testing MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Testing EXPLAINED_VARIANCE_SCORE</th>
+      <th>Validation RMSE</th>
+      <th>Validation MSE</th>
+      <th>Validation MAE</th>
+      <th>Validation MAPE</th>
+      <th>Validation R2</th>
+      <th>Validation MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Validation EXPLAINED_VARIANCE_SCORE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PytorchTabular</td>
+      <td>Category Embedding</td>
+      <td>3.354362</td>
+      <td>11.251746</td>
+      <td>2.445915</td>
+      <td>0.101659</td>
+      <td>0.825442</td>
+      <td>1.775388</td>
+      <td>0.854523</td>
+      <td>2.799644</td>
+      <td>...</td>
+      <td>0.854221</td>
+      <td>1.963455</td>
+      <td>0.888258</td>
+      <td>3.51671</td>
+      <td>12.36725</td>
+      <td>2.731159</td>
+      <td>0.125136</td>
+      <td>0.779071</td>
+      <td>2.375105</td>
+      <td>0.808039</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 23 columns</p>
+</div></div>
+</div>
+<p>To activate Bayesian hyperparameter optimization, change the value of <code class="docutils literal notranslate"><span class="pre">bayes_opt</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> in the configuration file or later in <code class="docutils literal notranslate"><span class="pre">trainer.args</span></code>. By improving the MSE loss (default for regression tasks) or log loss (default for classification tasks) on the validation set, the performance on the testing set might improve.</p>
+<p><strong>Remark</strong>: But the improvement is not always guaranteed (neither on the validation set nor on the testing set):</p>
+<ol class="arabic simple">
+<li><p>The number of epochs (the configuration <code class="docutils literal notranslate"><span class="pre">bayes_epoch</span></code>) used in an optimization iteration is less than that used in the final formal training.</p></li>
+<li><p>The validation set and the testing set might come from different distributions, which forms the so-called observational bias.</p></li>
+</ol>
+<p>The hyperparameters obtained by Bayesian hyperparameter optimization are saved and will be loaded and used automatically in the future.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;bayes_opt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;bayes_epoch&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;bayes_calls&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="s2">&quot;pytorch_lightning&quot;</span><span class="p">)</span>
+    <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">stderr_to_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">get_leaderboard</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+-------------Run PytorchTabular-------------
+
+Training Category Embedding
+Bayes-opt 1/30, tot 0.62s, avg 0.62s/it: {&#39;ls&#39;: 349.8274, &#39;param&#39;: [0.0, 0.1, 0.001, 0.0, 1024], &#39;min ls&#39;: 349.8274, &#39;min param&#39;: [0.0, 0.1, 0.001, 0.0, 1024], &#39;min at&#39;: 1}
+Bayes-opt 2/30, tot 1.16s, avg 0.58s/it: {&#39;ls&#39;: 38.2165, &#39;param&#39;: [0.29642, 0.42213, 0.02068, 0.00333, 512], &#39;min ls&#39;: 38.2165, &#39;min param&#39;: [0.29642, 0.42213, 0.02068, 0.00333, 512], &#39;min at&#39;: 2}
+Bayes-opt 3/30, tot 1.81s, avg 0.60s/it: {&#39;ls&#39;: 629.1395, &#39;param&#39;: [0.19219, 0.14877, 0.00014, 0.0, 256], &#39;min ls&#39;: 38.2165, &#39;min param&#39;: [0.29642, 0.42213, 0.02068, 0.00333, 512], &#39;min at&#39;: 2}
+Bayes-opt 4/30, tot 2.26s, avg 0.56s/it: {&#39;ls&#39;: 324.7059, &#39;param&#39;: [0.40608, 0.23999, 0.00115, 0.00273, 256], &#39;min ls&#39;: 38.2165, &#39;min param&#39;: [0.29642, 0.42213, 0.02068, 0.00333, 512], &#39;min at&#39;: 2}
+Bayes-opt 5/30, tot 2.60s, avg 0.52s/it: {&#39;ls&#39;: 30.744, &#39;param&#39;: [0.32409, 0.18412, 0.03831, 0.0, 1024], &#39;min ls&#39;: 30.744, &#39;min param&#39;: [0.32409, 0.18412, 0.03831, 0.0, 1024], &#39;min at&#39;: 5}
+Bayes-opt 6/30, tot 3.05s, avg 0.51s/it: {&#39;ls&#39;: 60.8855, &#39;param&#39;: [0.2368, 0.40046, 0.00254, 0.00017, 1024], &#39;min ls&#39;: 30.744, &#39;min param&#39;: [0.32409, 0.18412, 0.03831, 0.0, 1024], &#39;min at&#39;: 5}
+Bayes-opt 7/30, tot 3.48s, avg 0.50s/it: {&#39;ls&#39;: 48.1221, &#39;param&#39;: [0.29101, 0.26869, 0.01116, 0.0, 256], &#39;min ls&#39;: 30.744, &#39;min param&#39;: [0.32409, 0.18412, 0.03831, 0.0, 1024], &#39;min at&#39;: 5}
+Bayes-opt 8/30, tot 3.97s, avg 0.50s/it: {&#39;ls&#39;: 544.2315, &#39;param&#39;: [0.09317, 0.36846, 0.00038, 0.0, 256], &#39;min ls&#39;: 30.744, &#39;min param&#39;: [0.32409, 0.18412, 0.03831, 0.0, 1024], &#39;min at&#39;: 5}
+Bayes-opt 9/30, tot 4.50s, avg 0.50s/it: {&#39;ls&#39;: 315.017, &#39;param&#39;: [0.07484, 0.11116, 0.0011, 0.00889, 256], &#39;min ls&#39;: 30.744, &#39;min param&#39;: [0.32409, 0.18412, 0.03831, 0.0, 1024], &#39;min at&#39;: 5}
+Bayes-opt 10/30, tot 5.02s, avg 0.50s/it: {&#39;ls&#39;: 616.4534, &#39;param&#39;: [0.30653, 0.45117, 0.00019, 0.02928, 512], &#39;min ls&#39;: 30.744, &#39;min param&#39;: [0.32409, 0.18412, 0.03831, 0.0, 1024], &#39;min at&#39;: 5}
+Bayes-opt 11/30, tot 6.17s, avg 0.56s/it: {&#39;ls&#39;: 26.3264, &#39;param&#39;: [0.08545, 0.17908, 0.01062, 5e-05, 256], &#39;min ls&#39;: 26.3264, &#39;min param&#39;: [0.08545, 0.17908, 0.01062, 5e-05, 256], &#39;min at&#39;: 11}
+Bayes-opt 12/30, tot 7.01s, avg 0.58s/it: {&#39;ls&#39;: 27.8408, &#39;param&#39;: [0.01454, 0.19714, 0.01039, 0.00065, 512], &#39;min ls&#39;: 26.3264, &#39;min param&#39;: [0.08545, 0.17908, 0.01062, 5e-05, 256], &#39;min at&#39;: 11}
+Bayes-opt 13/30, tot 7.89s, avg 0.61s/it: {&#39;ls&#39;: 14.8487, &#39;param&#39;: [0.0, 0.0, 0.00464, 0.05, 64], &#39;min ls&#39;: 14.8487, &#39;min param&#39;: [0.0, 0.0, 0.00464, 0.05, 64], &#39;min at&#39;: 13}
+Bayes-opt 14/30, tot 8.85s, avg 0.63s/it: {&#39;ls&#39;: 15.9753, &#39;param&#39;: [0.0, 0.5, 0.05, 0.05, 64], &#39;min ls&#39;: 14.8487, &#39;min param&#39;: [0.0, 0.0, 0.00464, 0.05, 64], &#39;min at&#39;: 13}
+Bayes-opt 15/30, tot 10.18s, avg 0.68s/it: {&#39;ls&#39;: 9.0207, &#39;param&#39;: [0.0, 0.0, 0.03287, 0.05, 64], &#39;min ls&#39;: 9.0207, &#39;min param&#39;: [0.0, 0.0, 0.03287, 0.05, 64], &#39;min at&#39;: 15}
+Bayes-opt 16/30, tot 10.91s, avg 0.68s/it: {&#39;ls&#39;: 42.5235, &#39;param&#39;: [0.0, 0.5, 0.03274, 0.0, 2048], &#39;min ls&#39;: 9.0207, &#39;min param&#39;: [0.0, 0.0, 0.03287, 0.05, 64], &#39;min at&#39;: 15}
+Bayes-opt 17/30, tot 11.98s, avg 0.70s/it: {&#39;ls&#39;: 8.8255, &#39;param&#39;: [0.0, 0.0, 0.05, 0.05, 64], &#39;min ls&#39;: 8.8255, &#39;min param&#39;: [0.0, 0.0, 0.05, 0.05, 64], &#39;min at&#39;: 17}
+Bayes-opt 18/30, tot 12.99s, avg 0.72s/it: {&#39;ls&#39;: 15.7142, &#39;param&#39;: [0.5, 0.0, 0.05, 0.05, 64], &#39;min ls&#39;: 8.8255, &#39;min param&#39;: [0.0, 0.0, 0.05, 0.05, 64], &#39;min at&#39;: 17}
+Bayes-opt 19/30, tot 13.98s, avg 0.74s/it: {&#39;ls&#39;: 9.2985, &#39;param&#39;: [0.0, 0.0, 0.04368, 0.05, 64], &#39;min ls&#39;: 8.8255, &#39;min param&#39;: [0.0, 0.0, 0.05, 0.05, 64], &#39;min at&#39;: 17}
+Bayes-opt 20/30, tot 14.99s, avg 0.75s/it: {&#39;ls&#39;: 9.3999, &#39;param&#39;: [0.0, 0.0, 0.04339, 0.05, 64], &#39;min ls&#39;: 8.8255, &#39;min param&#39;: [0.0, 0.0, 0.05, 0.05, 64], &#39;min at&#39;: 17}
+Bayes-opt 21/30, tot 15.95s, avg 0.76s/it: {&#39;ls&#39;: 11.0562, &#39;param&#39;: [0.0, 0.0, 0.01061, 0.05, 64], &#39;min ls&#39;: 8.8255, &#39;min param&#39;: [0.0, 0.0, 0.05, 0.05, 64], &#39;min at&#39;: 17}
+Bayes-opt 22/30, tot 16.91s, avg 0.77s/it: {&#39;ls&#39;: 8.7002, &#39;param&#39;: [0.0, 0.0, 0.04072, 0.05, 64], &#39;min ls&#39;: 8.7002, &#39;min param&#39;: [0.0, 0.0, 0.04072, 0.05, 64], &#39;min at&#39;: 22}
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/skopt/optimizer/optimizer.py:449: UserWarning: The objective has been evaluated at this point before.
+  warnings.warn(&#34;The objective has been evaluated &#34;
+Bayes-opt 23/30, tot 17.95s, avg 0.78s/it: {&#39;ls&#39;: 8.8255, &#39;param&#39;: [0.0, 0.0, 0.05, 0.05, 64], &#39;min ls&#39;: 8.7002, &#39;min param&#39;: [0.0, 0.0, 0.04072, 0.05, 64], &#39;min at&#39;: 22}
+Bayes-opt 24/30, tot 18.89s, avg 0.79s/it: {&#39;ls&#39;: 40.0748, &#39;param&#39;: [0.0, 0.0, 0.00441, 0.05, 512], &#39;min ls&#39;: 8.7002, &#39;min param&#39;: [0.0, 0.0, 0.04072, 0.05, 64], &#39;min at&#39;: 22}
+Bayes-opt 25/30, tot 20.11s, avg 0.80s/it: {&#39;ls&#39;: 8.7661, &#39;param&#39;: [0.0855, 0.0, 0.03797, 0.05, 64], &#39;min ls&#39;: 8.7002, &#39;min param&#39;: [0.0, 0.0, 0.04072, 0.05, 64], &#39;min at&#39;: 22}
+Bayes-opt 26/30, tot 21.30s, avg 0.82s/it: {&#39;ls&#39;: 76.1117, &#39;param&#39;: [0.12949, 0.5, 0.00367, 0.05, 64], &#39;min ls&#39;: 8.7002, &#39;min param&#39;: [0.0, 0.0, 0.04072, 0.05, 64], &#39;min at&#39;: 22}
+Bayes-opt 27/30, tot 22.52s, avg 0.83s/it: {&#39;ls&#39;: 9.3727, &#39;param&#39;: [0.0, 0.0, 0.03705, 0.05, 64], &#39;min ls&#39;: 8.7002, &#39;min param&#39;: [0.0, 0.0, 0.04072, 0.05, 64], &#39;min at&#39;: 22}
+Bayes-opt 28/30, tot 23.60s, avg 0.84s/it: {&#39;ls&#39;: 13.069, &#39;param&#39;: [0.0, 0.0, 0.00735, 0.05, 64], &#39;min ls&#39;: 8.7002, &#39;min param&#39;: [0.0, 0.0, 0.04072, 0.05, 64], &#39;min at&#39;: 22}
+Bayes-opt 29/30, tot 24.81s, avg 0.86s/it: {&#39;ls&#39;: 9.1393, &#39;param&#39;: [0.0, 0.06589, 0.05, 0.05, 64], &#39;min ls&#39;: 8.7002, &#39;min param&#39;: [0.0, 0.0, 0.04072, 0.05, 64], &#39;min at&#39;: 22}
+Bayes-opt 30/30, tot 25.73s, avg 0.86s/it: {&#39;ls&#39;: 16.2183, &#39;param&#39;: [0.0, 0.0, 0.0118, 0.05, 128], &#39;min ls&#39;: 8.7002, &#39;min param&#39;: [0.0, 0.0, 0.04072, 0.05, 64], &#39;min at&#39;: 22}
+Previous params loaded: {&#39;dropout&#39;: 0.0, &#39;embedding_dropout&#39;: 0.0, &#39;lr&#39;: 0.040720275962475405, &#39;weight_decay&#39;: 0.04999999999999999, &#39;batch_size&#39;: 64, &#39;original_batch_size&#39;: 64}
+Global seed set to 42
+2023-09-23 20:38:03,278 - {pytorch_tabular.tabular_model:473} - INFO - Preparing the DataLoaders
+2023-09-23 20:38:03,279 - {pytorch_tabular.tabular_datamodule:290} - INFO - Setting up the datamodule for regression task
+2023-09-23 20:38:03,290 - {pytorch_tabular.tabular_model:521} - INFO - Preparing the Model: CategoryEmbeddingModel
+2023-09-23 20:38:03,303 - {pytorch_tabular.tabular_model:268} - INFO - Preparing the Trainer
+Auto select gpus: [0]
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+2023-09-23 20:38:03,319 - {pytorch_tabular.tabular_model:582} - INFO - Training Started
+You are using a CUDA device (&#39;NVIDIA GeForce RTX 3090&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name             | Type                      | Params
+---------------------------------------------------------------
+0 | _backbone        | CategoryEmbeddingBackbone | 11.4 K
+1 | _embedding_layer | Embedding1dLayer          | 14
+2 | head             | LinearHead                | 33
+3 | loss             | MSELoss                   | 0
+---------------------------------------------------------------
+11.4 K    Trainable params
+0         Non-trainable params
+11.4 K    Total params
+0.046     Total estimated model params size (MB)
+Epoch: 1/300, Train loss: 354.9424, Val loss: 140.1831, Min val loss: 140.1831, Epoch time: 0.031s.
+Epoch: 20/300, Train loss: 9.6374, Val loss: 8.8711, Min val loss: 8.7002, Epoch time: 0.020s.
+Epoch: 40/300, Train loss: 7.3040, Val loss: 9.2379, Min val loss: 8.6125, Epoch time: 0.024s.
+Epoch: 60/300, Train loss: 7.6705, Val loss: 12.4185, Min val loss: 8.3944, Epoch time: 0.021s.
+Epoch: 80/300, Train loss: 9.2612, Val loss: 9.6877, Min val loss: 8.1813, Epoch time: 0.022s.
+Epoch: 100/300, Train loss: 11.8986, Val loss: 13.2131, Min val loss: 8.1813, Epoch time: 0.020s.
+Epoch: 120/300, Train loss: 14.2237, Val loss: 9.1487, Min val loss: 8.1813, Epoch time: 0.021s.
+Epoch: 140/300, Train loss: 11.3343, Val loss: 9.3349, Min val loss: 8.1813, Epoch time: 0.024s.
+Epoch: 160/300, Train loss: 6.1817, Val loss: 8.9987, Min val loss: 8.1813, Epoch time: 0.021s.
+2023-09-23 20:38:07,718 - {pytorch_tabular.tabular_model:584} - INFO - Training the model completed
+2023-09-23 20:38:07,719 - {pytorch_tabular.tabular_model:1258} - INFO - Loading the best model
+Training mse loss: 5.30917
+Validation mse loss: 8.18127
+Testing mse loss: 4.27680
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmphxmeot_i/output/auto-mpg/2023-09-23-20-37-29-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------PytorchTabular End-------------
+
+PytorchTabular metrics
+Category Embedding 1/1
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmphxmeot_i/output/auto-mpg/2023-09-23-20-37-29-0_UserInputConfig/trainer.pkl&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Program</th>
+      <th>Model</th>
+      <th>Training RMSE</th>
+      <th>Training MSE</th>
+      <th>Training MAE</th>
+      <th>Training MAPE</th>
+      <th>Training R2</th>
+      <th>Training MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Training EXPLAINED_VARIANCE_SCORE</th>
+      <th>Testing RMSE</th>
+      <th>...</th>
+      <th>Testing R2</th>
+      <th>Testing MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Testing EXPLAINED_VARIANCE_SCORE</th>
+      <th>Validation RMSE</th>
+      <th>Validation MSE</th>
+      <th>Validation MAE</th>
+      <th>Validation MAPE</th>
+      <th>Validation R2</th>
+      <th>Validation MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Validation EXPLAINED_VARIANCE_SCORE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PytorchTabular</td>
+      <td>Category Embedding</td>
+      <td>2.304163</td>
+      <td>5.309167</td>
+      <td>1.631622</td>
+      <td>0.065262</td>
+      <td>0.917634</td>
+      <td>1.16303</td>
+      <td>0.919889</td>
+      <td>2.068042</td>
+      <td>...</td>
+      <td>0.920456</td>
+      <td>1.294664</td>
+      <td>0.923491</td>
+      <td>2.860293</td>
+      <td>8.181274</td>
+      <td>2.009064</td>
+      <td>0.087603</td>
+      <td>0.85385</td>
+      <td>1.49169</td>
+      <td>0.854234</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 23 columns</p>
+</div></div>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="use_data_functionalities.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Using data functionalities</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cross_validation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Cross-validation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ANONYMOUS/tabular_ensemble/edit/main/docs/source/examples/get_started/bayes.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/examples/get_started/bayes.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,908 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Multimodal data: Image classification as an example &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/advanced_usage/image_classification';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="API references" href="../../api/api.html" />
+    <link rel="prev" title="New data processors" href="new_data_processors.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="customized_model_base.html">Customized model base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customized_model_base_advanced.html">Advanced customized model base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set_optimizers_lrschedulers.html">Change optimizers and lr shedulers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_model_upon_others.html">Build your own model upon others</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_splitters.html">New data splitters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_derivers.html">New data derivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_imputers.html">New data imputers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_processors.html">New data processors</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Multimodal data: Image classification as an example</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../advanced_usage.html" class="nav-link">Advanced Usage</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Multimodal data: Image classification as an example</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Multimodal-data:-Image-classification-as-an-example">
+<h1>Multimodal data: Image classification as an example<a class="headerlink" href="#Multimodal-data:-Image-classification-as-an-example" title="Link to this heading">#</a></h1>
+<p>We take the MNIST image classification task as an example of loading multimodal data. This tutorial is for those that have read all parts in “Get Started” and advanced parts in “Advanced Usage” including “New data derivers” and “Customized model base”.</p>
+<p>Although we support multimodal data, multimodal models are currently not integrated as part of the package (that’s why this part is in “Advanced Usage”). <code class="docutils literal notranslate"><span class="pre">pytorch_widedeep</span></code> (<code class="docutils literal notranslate"><span class="pre">WideDeep</span></code> in this package) and <code class="docutils literal notranslate"><span class="pre">autogluon</span></code> (<code class="docutils literal notranslate"><span class="pre">AutoGluon</span></code> in this package) support some multimodal models. If you are willing to develop multimodal models or add support to model bases, you are welcome to contribute on GitHub.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tabensemb</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+
+<span class="n">temp_path</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">()</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_output_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_config_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;configs&quot;</span><span class="p">)</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_data_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>The following code is copied from <a class="reference external" href="https://github.com/pytorch/examples/blob/main/mnist/main.py">an official example</a> of <code class="docutils literal notranslate"><span class="pre">pytorch</span></code> that defines the network and transformation of images and downloads the dataset.</p>
+<p><strong>Remark</strong>: Note that the <code class="docutils literal notranslate"><span class="pre">Net</span></code> returns logits instead of the <code class="docutils literal notranslate"><span class="pre">log_softmax</span></code> transformed values in the official example for compatibility with the framework. We have emphasized this in “Customized model base”.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
+
+<span class="k">class</span> <span class="nc">Net</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Net</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">9216</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.1307</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.3081</span><span class="p">,))</span>
+        <span class="p">])</span>
+
+<span class="n">dataset1</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">),</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+<span class="n">dataset2</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">),</span> <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz
+Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz to /tmp/tmpcdcd59k_/data/MNIST/raw/train-images-idx3-ubyte.gz
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "3f03bb96d3ce4c20bcc81958927fcf09"}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Extracting /tmp/tmpcdcd59k_/data/MNIST/raw/train-images-idx3-ubyte.gz to /tmp/tmpcdcd59k_/data/MNIST/raw
+
+Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz
+Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz to /tmp/tmpcdcd59k_/data/MNIST/raw/train-labels-idx1-ubyte.gz
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9956944d9d6f4639890fdaeee93634b7"}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Extracting /tmp/tmpcdcd59k_/data/MNIST/raw/train-labels-idx1-ubyte.gz to /tmp/tmpcdcd59k_/data/MNIST/raw
+
+Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz
+Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz to /tmp/tmpcdcd59k_/data/MNIST/raw/t10k-images-idx3-ubyte.gz
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "15e42ffc21d449aeb986934d763679c6"}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Extracting /tmp/tmpcdcd59k_/data/MNIST/raw/t10k-images-idx3-ubyte.gz to /tmp/tmpcdcd59k_/data/MNIST/raw
+
+Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz
+Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz to /tmp/tmpcdcd59k_/data/MNIST/raw/t10k-labels-idx1-ubyte.gz
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "d6b8e6d6fe5d43918728c24f6d0f30de"}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Extracting /tmp/tmpcdcd59k_/data/MNIST/raw/t10k-labels-idx1-ubyte.gz to /tmp/tmpcdcd59k_/data/MNIST/raw
+
+</pre></div></div>
+</div>
+<p>In this tutorial, the images are loaded into the memory.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">train_images</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">train_targets</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">test_images</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">test_targets</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">img</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">dataset1</span><span class="p">:</span>
+    <span class="n">train_images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">train_targets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">img</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">dataset2</span><span class="p">:</span>
+    <span class="n">test_images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">test_targets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+<span class="n">images_array</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">train_images</span> <span class="o">+</span> <span class="n">test_images</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">targets_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_targets</span> <span class="o">+</span> <span class="n">test_targets</span><span class="p">)</span>
+<span class="n">images_array</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">targets_array</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+((70000, 28, 28), (70000,))
+</pre></div></div>
+</div>
+<p>Under this framework, multimodal data is loaded through data derivers. For data derivers, to load images for each data point, we need a column (here we name it <code class="docutils literal notranslate"><span class="pre">image_index</span></code>) in the tabular dataset that indicates the location of the image. In our case, the location is the index of the image in <code class="docutils literal notranslate"><span class="pre">images_array</span></code>. In other cases, the location might be a path to the image in the drive.</p>
+<p>The MNIST dataset has a separate testing set (index&gt;=60,000 in the <code class="docutils literal notranslate"><span class="pre">images_array</span></code> and <code class="docutils literal notranslate"><span class="pre">targets_array</span></code> defined above). We will use it after training to see the performance.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;image_index&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_images</span><span class="p">))),</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="n">train_targets</span><span class="p">})</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;image_index&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_images</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_images</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_images</span><span class="p">))),</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="n">test_targets</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<p>The data deriver to load images is very simple. Multimodal data is not in the tabular data, so <code class="docutils literal notranslate"><span class="pre">stacked=False</span></code> is set. The tabular data <code class="docutils literal notranslate"><span class="pre">df</span></code> contains indices of images that can be used to extract images from the above <code class="docutils literal notranslate"><span class="pre">images_array</span></code>. We need the user to pass an argument <code class="docutils literal notranslate"><span class="pre">image_path</span></code> to specify the column that indicates the location of images. This is not necessary because we can directly use <code class="docutils literal notranslate"><span class="pre">&quot;image_index&quot;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">self.kwargs[&quot;image_path&quot;]</span></code> since we already know which column is
+needed.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.data</span> <span class="kn">import</span> <span class="n">AbstractDeriver</span>
+<span class="kn">from</span> <span class="nn">tabensemb.data.dataderiver</span> <span class="kn">import</span> <span class="n">deriver_mapping</span>
+
+<span class="k">class</span> <span class="nc">MNISTLoader</span><span class="p">(</span><span class="n">AbstractDeriver</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_required_cols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;image_path&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">stacked</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">derived_name</span><span class="o">=</span><span class="s2">&quot;images&quot;</span><span class="p">,</span> <span class="n">intermediate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">is_continuous</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_derive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">):</span>
+        <span class="n">images</span> <span class="o">=</span> <span class="n">images_array</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;image_path&quot;</span><span class="p">]]]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded images: </span><span class="si">{</span><span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">images</span>
+
+<span class="n">deriver_mapping</span><span class="p">[</span><span class="s2">&quot;MNISTLoader&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">MNISTLoader</span>
+</pre></div>
+</div>
+</div>
+<p>The network of the official example can be easily migrated to the framework. In the forward passing, loaded images from the data deriver can be accessed in <code class="docutils literal notranslate"><span class="pre">derived_tensors</span></code>, and the key is <code class="docutils literal notranslate"><span class="pre">&quot;images&quot;</span></code> as defined above in <code class="docutils literal notranslate"><span class="pre">_defaults</span></code>. The tensor is of the shape <code class="docutils literal notranslate"><span class="pre">(n_samples,</span> <span class="pre">width,</span> <span class="pre">height)</span></code> and we transform it into <code class="docutils literal notranslate"><span class="pre">(n_samples,</span> <span class="pre">n_channels,</span> <span class="pre">width,</span> <span class="pre">height)</span></code> where <code class="docutils literal notranslate"><span class="pre">n_channels=1</span></code> to meet the requirement of <code class="docutils literal notranslate"><span class="pre">Net</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.model</span> <span class="kn">import</span> <span class="n">TorchModel</span><span class="p">,</span> <span class="n">AbstractNN</span>
+
+<span class="k">class</span> <span class="nc">NetNN</span><span class="p">(</span><span class="n">AbstractNN</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NetNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">datamodule</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">Net</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">derived_tensors</span><span class="p">):</span>
+        <span class="n">images</span> <span class="o">=</span> <span class="n">derived_tensors</span><span class="p">[</span><span class="s2">&quot;images&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The implementation of the model base is straightforward.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NetModel</span><span class="p">(</span><span class="n">TorchModel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_initial_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">chosen_params</span>
+
+    <span class="k">def</span> <span class="nf">_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span>
+
+    <span class="k">def</span> <span class="nf">_new_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">NetNN</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_program_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;NetModel&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_get_model_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;Net&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Then we configure the <code class="docutils literal notranslate"><span class="pre">Trainer</span></code>. Importantly, the <code class="docutils literal notranslate"><span class="pre">MNISTLoader</span></code> defined above is used to load images, and the argument <code class="docutils literal notranslate"><span class="pre">image_path</span></code> is given here.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.config</span> <span class="kn">import</span> <span class="n">UserConfig</span>
+<span class="kn">from</span> <span class="nn">tabensemb.trainer</span> <span class="kn">import</span> <span class="n">Trainer</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span>
+    <span class="s2">&quot;database&quot;</span><span class="p">:</span> <span class="s2">&quot;mnist&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;label_name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="s2">&quot;multiclass&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;data_derivers&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;MNISTLoader&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;image_path&quot;</span><span class="p">:</span> <span class="s2">&quot;image_index&quot;</span><span class="p">})],</span>
+    <span class="s2">&quot;epoch&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">cfg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The project will be saved to /tmp/tmpcdcd59k_/output/mnist/2023-09-18-10-50-06-0_UserInputConfig
+</pre></div></div>
+</div>
+<p>Since we have a separate testing set, during the training stage, we use the first 50,000 images for training and the last 10,000 images for validation and testing. We use the <code class="docutils literal notranslate"><span class="pre">DataModule.set_data</span></code> API instead of <code class="docutils literal notranslate"><span class="pre">load_data</span></code> to configure the dataset using these indices, which will skip the data splitter.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">train_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50000</span><span class="p">)</span>
+<span class="n">val_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50000</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+<span class="n">test_indices</span> <span class="o">=</span> <span class="n">val_indices</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">train_df</span><span class="p">,</span> <span class="n">cont_feature_names</span><span class="o">=</span><span class="p">[],</span> <span class="n">cat_feature_names</span><span class="o">=</span><span class="p">[],</span> <span class="n">label_name</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">],</span> <span class="n">train_indices</span><span class="o">=</span><span class="n">train_indices</span><span class="p">,</span> <span class="n">val_indices</span><span class="o">=</span><span class="n">val_indices</span><span class="p">,</span> <span class="n">test_indices</span><span class="o">=</span><span class="n">test_indices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Loaded images: (60000, 28, 28)
+</pre></div></div>
+</div>
+<p>We can see that the images are loaded in <code class="docutils literal notranslate"><span class="pre">DataModule.derived_data</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;images&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(60000, 28, 28)
+</pre></div></div>
+</div>
+<p>Now train the model. The default loss function is cross entropy loss as shown in the output.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">clear_modelbase</span><span class="p">()</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">add_modelbases</span><span class="p">([</span><span class="n">NetModel</span><span class="p">(</span><span class="n">trainer</span><span class="p">)])</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">stderr_to_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+-------------Run NetModel-------------
+
+Training Net
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+You are using a CUDA device (&#39;NVIDIA GeForce RTX 3090&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name                | Type             | Params
+---------------------------------------------------------
+0 | default_loss_fn     | CrossEntropyLoss | 0
+1 | default_output_norm | Softmax          | 0
+2 | net                 | Net              | 1.2 M
+---------------------------------------------------------
+1.2 M     Trainable params
+0         Non-trainable params
+1.2 M     Total params
+4.800     Total estimated model params size (MB)
+Epoch: 1/100, Train loss: 0.6124, Val loss: 0.1363, Min val loss: 0.1363, Min ES val loss: 0.1363, Epoch time: 1.463s.
+Epoch: 20/100, Train loss: 0.0194, Val loss: 0.0381, Min val loss: 0.0372, Min ES val loss: 0.0372, Epoch time: 1.424s.
+Epoch: 40/100, Train loss: 0.0119, Val loss: 0.0428, Min val loss: 0.0372, Min ES val loss: 0.0372, Epoch time: 1.339s.
+Epoch: 60/100, Train loss: 0.0084, Val loss: 0.0490, Min val loss: 0.0372, Min ES val loss: 0.0372, Epoch time: 1.189s.
+Epoch: 80/100, Train loss: 0.0073, Val loss: 0.0527, Min val loss: 0.0372, Min ES val loss: 0.0372, Epoch time: 1.075s.
+Epoch: 100/100, Train loss: 0.0063, Val loss: 0.0533, Min val loss: 0.0372, Min ES val loss: 0.0372, Epoch time: 1.164s.
+`Trainer.fit` stopped: `max_epochs=100` reached.
+Training log_loss loss: 0.00392
+Validation log_loss loss: 0.03531
+Testing log_loss loss: 0.03531
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpcdcd59k_/output/mnist/2023-09-18-10-50-06-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------NetModel End-------------
+
+</pre></div></div>
+</div>
+<p>It is easy to make inferences on the testing set for both predicted classes and probabilities. The data deriver again loads images from <code class="docutils literal notranslate"><span class="pre">images_array</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">get_modelbase</span><span class="p">(</span><span class="s2">&quot;NetModel&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Net&quot;</span><span class="p">)</span>
+<span class="n">proba</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">get_modelbase</span><span class="p">(</span><span class="s2">&quot;NetModel&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Net&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Loaded images: (10000, 28, 28)
+Loaded images: (10000, 28, 28)
+</pre></div></div>
+</div>
+<p>The prediction accuracy reaches around 99% on the testing set.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.utils</span> <span class="kn">import</span> <span class="n">auto_metric_sklearn</span>
+
+<span class="n">auto_metric_sklearn</span><span class="p">(</span><span class="n">targets_array</span><span class="p">[</span><span class="mi">60000</span><span class="p">:],</span> <span class="n">proba</span><span class="p">,</span> <span class="s2">&quot;accuracy_score&quot;</span><span class="p">,</span> <span class="s2">&quot;multiclass&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.9914
+</pre></div></div>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="new_data_processors.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">New data processors</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../api/api.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API references</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ANONYMOUS/tabular_ensemble/edit/main/docs/source/examples/advanced_usage/image_classification.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/examples/advanced_usage/image_classification.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

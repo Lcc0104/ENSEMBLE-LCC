@@ -1,0 +1,1854 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Using data functionalities &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/get_started/use_data_functionalities';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bayesian hyperparameter optimization" href="bayes.html" />
+    <link rel="prev" title="Inference on an upcoming dataset" href="inference.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run_sample.html">Basics of running benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_dataset.html">Dataset and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inference.html">Inference on an upcoming dataset</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Using data functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">Bayesian hyperparameter optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross_validation.html">Cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../get_started.html" class="nav-link">Get Started</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Using data functionalities</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Using-data-functionalities">
+<h1>Using data functionalities<a class="headerlink" href="#Using-data-functionalities" title="Link to this heading">#</a></h1>
+<p>Running <code class="docutils literal notranslate"><span class="pre">Trainer.load_data</span></code> or <code class="docutils literal notranslate"><span class="pre">DataModule.load_data</span></code> will process the dataset in the following order:</p>
+<ol class="arabic simple">
+<li><p>Data splitting (training/validation/testing sets): See “Data splitters”</p></li>
+<li><p>Data imputation: See “Data imputers”</p></li>
+<li><p>Data augmentation (for features): See “Data derivers”</p></li>
+<li><p>Data processing <strong>(orderless except for data scaling)</strong>: See “Data processors”</p>
+<ul class="simple">
+<li><p>Data augmentation (for data points)</p></li>
+<li><p>Data filtering</p></li>
+<li><p>Feature selection</p></li>
+<li><p>Categorical encoding</p></li>
+<li><p>Data scaling</p></li>
+<li><p>etc.</p></li>
+</ul>
+</li>
+<li><p>Data augmentation (for features, especially multi-modal features and physics-informed features): See “Data derivers”.</p></li>
+</ol>
+<p>In this part, we will introduce the usage of “data splitters”, “data imputers”, “data processors”, and “data derivers”. Implementing new functionalities is left as a section in “Advanced Usage”.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">tabensemb.trainer</span> <span class="kn">import</span> <span class="n">Trainer</span>
+<span class="kn">from</span> <span class="nn">tabensemb.model</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">tabensemb</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;../../../../&quot;</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_output_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;output&quot;</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_config_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;configs&quot;</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_data_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;data&quot;</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Data-splitters">
+<h2>Data splitters<a class="headerlink" href="#Data-splitters" title="Link to this heading">#</a></h2>
+<p>Data splitters are used to split the whole dataset into training, validation, and testing sets. They inherit <code class="docutils literal notranslate"><span class="pre">tabensemb.data.AbstractSplitter</span></code>, and implement <code class="docutils literal notranslate"><span class="pre">_split</span></code> (the main method) and <code class="docutils literal notranslate"><span class="pre">_next_cv</span></code> (to generate the next fold for a k-fold CV process).</p>
+<p><strong>Remark</strong>: If <code class="docutils literal notranslate"><span class="pre">AbstractSplitter.support_cv=False</span></code>, the data splitter does not support k-fold CV.</p>
+<p>There are several ways to specify the used data splitter. These ways can also be used to specify other configurations.</p>
+<ol class="arabic simple">
+<li><p>Modify the configuration file, <code class="docutils literal notranslate"><span class="pre">configs/sample.py</span></code> for example:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;data_splitter&quot;</span><span class="p">:</span> <span class="s2">&quot;RandomSplitter&quot;</span><span class="p">,</span>
+    <span class="c1"># Some other configurations...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">manual_config</span></code> argument of <code class="docutils literal notranslate"><span class="pre">Trainer.load_config</span></code>.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="n">manual_config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data_splitter&quot;</span><span class="p">:</span> <span class="s2">&quot;RandomSplitter&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>After <code class="docutils literal notranslate"><span class="pre">Trainer.load_config</span></code> is called and if one does not want to call it again, use <code class="docutils literal notranslate"><span class="pre">DataModule.set_data_splitter</span></code>.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">set_data_splitter</span><span class="p">(</span><span class="s2">&quot;RandomSplitter&quot;</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">])</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The project will be saved to ../../../../output/sample/2023-09-23-20-36-52-0_sample
+Dataset size: 178 39 39
+Data saved to ../../../../output/sample/2023-09-23-20-36-52-0_sample (data.csv and tabular_data.csv).
+</pre></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ratio</span></code> argument can also be given in the configuration file, <code class="docutils literal notranslate"><span class="pre">manual_config</span></code>, or <code class="docutils literal notranslate"><span class="pre">set_data_splitter</span></code> as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># This will overwrite the `split_ratio` configuration.</span>
+    <span class="s2">&quot;data_splitter&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;RandomSplitter&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;train_val_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]}],</span>
+    <span class="c1"># Some other configurations...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="n">manual_config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data_splitter&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;RandomSplitter&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;train_val_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]}]})</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">set_data_splitter</span><span class="p">([</span><span class="s2">&quot;RandomSplitter&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;train_val_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]}])</span>
+</pre></div>
+</div>
+<p>Available data splitters can be seen using:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.data.datasplitter</span> <span class="kn">import</span> <span class="n">splitter_mapping</span>
+<span class="n">splitter_mapping</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;AbstractSplitter&#39;: tabensemb.data.base.AbstractSplitter,
+ &#39;RandomSplitter&#39;: tabensemb.data.datasplitter.RandomSplitter}
+</pre></div></div>
+</div>
+</section>
+<section id="Data-imputers">
+<h2>Data imputers<a class="headerlink" href="#Data-imputers" title="Link to this heading">#</a></h2>
+<p>Imputation is necessary when NaNs exist in the dataset. <code class="docutils literal notranslate"><span class="pre">tabensemb</span></code> provides several methods incorporating other packages like <code class="docutils literal notranslate"><span class="pre">miceforest</span></code> and <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. The configuration for an imputer contains two parts: the name of the imputer and its arguments. Data imputers can be set similarly to data splitters in the following ways:</p>
+<ol class="arabic simple">
+<li><p>Modify the configuration file, <code class="docutils literal notranslate"><span class="pre">configs/sample.py</span></code> for example:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;data_imputer&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;MiceImputer&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;max_iter&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}],</span>
+    <span class="c1"># &quot;data_imputer&quot;: &quot;MiceImputer&quot;, (If no kwargs is given)</span>
+    <span class="c1"># Some other configurations...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">manual_config</span></code> argument of <code class="docutils literal notranslate"><span class="pre">Trainer.load_config</span></code>.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="n">manual_config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data_imputer&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;MiceImputer&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;max_iter&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}]})</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="n">manual_config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data_imputer&quot;</span><span class="p">:</span> <span class="s2">&quot;MiceImputer&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">DataModule.set_data_imputer</span></code></p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">set_data_imputer</span><span class="p">([</span><span class="s2">&quot;MiceImputer&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;max_iter&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}])</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The project will be saved to ../../../../output/sample/2023-09-23-20-36-52-0_sample-I1
+Dataset size: 153 51 52
+Data saved to ../../../../output/sample/2023-09-23-20-36-52-0_sample-I1 (data.csv and tabular_data.csv).
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+cont_0                False
+cont_1                False
+cont_2                False
+cont_3                False
+cont_4                False
+cont_5                False
+cont_6                False
+cont_7                False
+cont_8                False
+cont_9                False
+cat_0                 False
+cat_1                 False
+cat_2                 False
+cat_3                 False
+cat_4                 False
+cat_5                 False
+cat_6                 False
+cat_7                 False
+cat_8                 False
+cat_9                 False
+target                False
+target_binary         False
+target_multi_class    False
+dtype: bool
+</pre></div></div>
+</div>
+<p>Available data splitters can be seen using:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.data.dataimputer</span> <span class="kn">import</span> <span class="n">imputer_mapping</span><span class="p">,</span> <span class="n">get_data_imputer</span>
+<span class="n">imputer_mapping</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;AbstractImputer&#39;: tabensemb.data.base.AbstractImputer,
+ &#39;AbstractSklearnImputer&#39;: tabensemb.data.base.AbstractSklearnImputer,
+ &#39;GainImputer&#39;: tabensemb.data.dataimputer.GainImputer,
+ &#39;MeanImputer&#39;: tabensemb.data.dataimputer.MeanImputer,
+ &#39;MedianImputer&#39;: tabensemb.data.dataimputer.MedianImputer,
+ &#39;MiceImputer&#39;: tabensemb.data.dataimputer.MiceImputer,
+ &#39;MiceLightgbmImputer&#39;: tabensemb.data.dataimputer.MiceLightgbmImputer,
+ &#39;MissForestImputer&#39;: tabensemb.data.dataimputer.MissForestImputer,
+ &#39;ModeImputer&#39;: tabensemb.data.dataimputer.ModeImputer}
+</pre></div></div>
+</div>
+<p>Arguments can be seen in API docs or in docstrings</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">get_data_imputer</span><span class="p">(</span><span class="s2">&quot;MeanImputer&quot;</span><span class="p">)</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+    Imputation with average values implemented using sklearn&#39;s SimpleImputer.
+
+    Parameters
+    ----------
+    **kwargs
+        Arguments for ``sklearn.impute.SimpleImputer`` (except for ``strategy``)
+
+</pre></div></div>
+</div>
+</section>
+<section id="Data-processors">
+<h2>Data processors<a class="headerlink" href="#Data-processors" title="Link to this heading">#</a></h2>
+<p>As listed in Step 4 above, data processing includes filtering, augmentation, feature selection, and much more. <code class="docutils literal notranslate"><span class="pre">tabensemb</span></code> provides a unified framework for implementing various data processing steps. The data imputation and processing procedure is quite similar to the <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> structure in <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>, but is fully compatible with the other two modules introduced in this part and all four modules automatically do all preparations before training for the user.</p>
+<p>Configuration for a processor also contains two parts: the name of the processor and arguments. Here we provide several examples:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CategoricalOrdinalEncoder</span></code>: similar to the <code class="docutils literal notranslate"><span class="pre">OrdinalEncoder</span></code> in <code class="docutils literal notranslate"><span class="pre">sklearn</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NaNFeatureRemover</span></code>: remove features that are all NaNs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VarianceFeatureSelector</span></code>: same as the <code class="docutils literal notranslate"><span class="pre">VarianceThreshold</span></code> from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FeatureValueSelector</span></code>: select data points that have a certain value of a feature</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CorrFeatureSelector</span></code>: remove highly correlated features</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IQRRemover</span></code>: remove outliers found by the 1.5*IQR criteria</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">StdRemover</span></code>: remove outliers found by 3*std criteria</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SampleDataAugmentor</span></code>: just an example to show the data augmentation capability (it copies the last two data points in the validation set)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>: same as the <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code></p></li>
+</ul>
+<p><strong>Remark</strong>: Data scalers like a <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> must be the last data processor.</p>
+<p><strong>Remark</strong>: Data points derived from data augmenters (inheriting <code class="docutils literal notranslate"><span class="pre">AbstractAugmenter</span></code>) will be added to the training set.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">processor_configs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">&quot;CategoricalOrdinalEncoder&quot;</span><span class="p">,</span> <span class="p">{}],</span>
+    <span class="p">[</span><span class="s2">&quot;NaNFeatureRemover&quot;</span><span class="p">,</span> <span class="p">{}],</span>
+    <span class="p">[</span><span class="s2">&quot;VarianceFeatureSelector&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;thres&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}],</span>
+    <span class="p">[</span><span class="s2">&quot;FeatureValueSelector&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;feature&quot;</span><span class="p">:</span> <span class="s2">&quot;cat_1&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}],</span>
+    <span class="p">[</span><span class="s2">&quot;CorrFeatureSelector&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;thres&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}],</span>
+    <span class="p">[</span><span class="s2">&quot;IQRRemover&quot;</span><span class="p">,</span> <span class="p">{}],</span>
+    <span class="p">[</span><span class="s2">&quot;StdRemover&quot;</span><span class="p">,</span> <span class="p">{}],</span>
+    <span class="p">[</span><span class="s2">&quot;SampleDataAugmenter&quot;</span><span class="p">,</span> <span class="p">{}],</span>
+    <span class="p">[</span><span class="s2">&quot;StandardScaler&quot;</span><span class="p">,</span> <span class="p">{}],</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>Modify the configuration file:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;data_processors&quot;</span><span class="p">:</span> <span class="n">processor_configs</span><span class="p">,</span>
+    <span class="c1"># Some other configurations...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">manual_config</span></code> argument of <code class="docutils literal notranslate"><span class="pre">Trainer.load_config</span></code>.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="n">manual_config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data_processors&quot;</span><span class="p">:</span> <span class="n">processor_configs</span><span class="p">})</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">DataModule.set_data_processors</span></code></p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">numba</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">set_data_processors</span><span class="p">(</span><span class="n">processor_configs</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">numba</span><span class="o">.</span><span class="n">NumbaDeprecationWarning</span><span class="p">)</span>
+    <span class="n">trainer</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The project will be saved to ../../../../output/sample/2023-09-23-20-36-52-0_sample-I2
+Correlated features (Ranked by SHAP):
+{
+        &#39;cont_2&#39;: 13.650428051938668,
+        &#39;cont_1&#39;: 8.98106859262871
+}
+1 features removed: [&#39;cont_1&#39;]. 7 features retained: [&#39;cont_0&#39;, &#39;cont_3&#39;, &#39;cont_4&#39;, &#39;cont_2&#39;, &#39;cat_0&#39;, &#39;cat_1&#39;, &#39;cat_2&#39;].
+Removing outliers by IQR. Original size: 36, Final size: 36.
+Removing outliers by std. Original size: 36, Final size: 36.
+Dataset size: 27 11 12
+Data saved to ../../../../output/sample/2023-09-23-20-36-52-0_sample-I2 (data.csv and tabular_data.csv).
+</pre></div></div>
+</div>
+<p>Let’s check the effectiveness of these processors. Categorical features are encoded by <code class="docutils literal notranslate"><span class="pre">CategoricalOrdinalEncoder</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">categorical_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cat_0</th>
+      <th>cat_1</th>
+      <th>cat_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>The original categorical features can be accessed using</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">categories_inverse_transform</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">categorical_data</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cat_0</th>
+      <th>cat_1</th>
+      <th>cat_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>category_3</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>category_3</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>category_3</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>category_0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>category_4</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>One feature is removed by <code class="docutils literal notranslate"><span class="pre">CorrFeatureSelector</span></code>. It removes the feature with the lowest feature importance (ranked using <code class="docutils literal notranslate"><span class="pre">shap</span></code> in the example) in the correlation chain.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;cont_0&#39;, &#39;cont_2&#39;, &#39;cont_3&#39;, &#39;cont_4&#39;]
+</pre></div></div>
+</div>
+<p>The specific <code class="docutils literal notranslate"><span class="pre">cat_1</span></code> feature value is selected by the <code class="docutils literal notranslate"><span class="pre">FeatureValueSelector</span></code>. Some outliers are removed by the <code class="docutils literal notranslate"><span class="pre">IQRRemover</span></code>. Original indices of the removed data points can be seen using</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">dropped_indices</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([  0,   1,   2,   3,   4,   5,   8,   9,  10,  11,  12,  13,  14,
+        15,  18,  19,  20,  22,  24,  25,  26,  27,  28,  29,  30,  31,
+        32,  35,  37,  38,  39,  40,  41,  42,  43,  45,  46,  48,  49,
+        50,  51,  52,  53,  54,  55,  56,  57,  58,  59,  60,  61,  62,
+        63,  64,  65,  66,  67,  68,  69,  70,  72,  74,  75,  76,  77,
+        80,  81,  82,  83,  85,  86,  89,  90,  93,  94,  96,  97,  98,
+        99, 100, 102, 103, 104, 105, 106, 107, 109, 110, 111, 112, 113,
+       114, 115, 116, 118, 119, 120, 121, 123, 124, 125, 127, 130, 131,
+       132, 133, 135, 136, 137, 139, 140, 141, 142, 143, 144, 145, 146,
+       147, 148, 150, 151, 152, 153, 157, 158, 159, 161, 163, 165, 166,
+       167, 168, 170, 172, 173, 175, 176, 177, 178, 179, 180, 182, 183,
+       184, 185, 186, 187, 188, 189, 190, 192, 193, 194, 195, 196, 197,
+       199, 200, 201, 202, 203, 207, 208, 209, 210, 211, 212, 213, 214,
+       217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229,
+       230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242,
+       243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255])
+</pre></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">SampleDataAugmentor</span></code> copies the last two data points in the validation set as a showcase. <code class="docutils literal notranslate"><span class="pre">DataModule.augmented_indices</span></code> represents the indices of these data points before dropping <code class="docutils literal notranslate"><span class="pre">DataModule.dropped_indices</span></code>. We can see augmented data points using</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">augmented_indices</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">dropped_indices</span><span class="p">),</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cont_0</th>
+      <th>cont_1</th>
+      <th>cont_2</th>
+      <th>cont_3</th>
+      <th>cont_4</th>
+      <th>cont_5</th>
+      <th>cont_6</th>
+      <th>cont_7</th>
+      <th>cont_8</th>
+      <th>cont_9</th>
+      <th>...</th>
+      <th>cat_3</th>
+      <th>cat_4</th>
+      <th>cat_5</th>
+      <th>cat_6</th>
+      <th>cat_7</th>
+      <th>cat_8</th>
+      <th>cat_9</th>
+      <th>target</th>
+      <th>target_binary</th>
+      <th>target_multi_class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>48</th>
+      <td>-0.505358</td>
+      <td>-0.104343</td>
+      <td>-0.507518</td>
+      <td>-0.988002</td>
+      <td>-0.815792</td>
+      <td>-1.284552</td>
+      <td>-1.051880</td>
+      <td>0.564009</td>
+      <td>2.49720</td>
+      <td>-2.245322</td>
+      <td>...</td>
+      <td>4</td>
+      <td>4</td>
+      <td>category_4</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>-246.101543</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>-2.115056</td>
+      <td>0.138315</td>
+      <td>1.618054</td>
+      <td>0.541008</td>
+      <td>1.405365</td>
+      <td>-1.449118</td>
+      <td>-0.824409</td>
+      <td>-0.813794</td>
+      <td>0.42258</td>
+      <td>0.547481</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>category_2</td>
+      <td>4</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>-156.813059</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<p>2 rows × 23 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">val_indices</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:],</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cont_0</th>
+      <th>cont_1</th>
+      <th>cont_2</th>
+      <th>cont_3</th>
+      <th>cont_4</th>
+      <th>cont_5</th>
+      <th>cont_6</th>
+      <th>cont_7</th>
+      <th>cont_8</th>
+      <th>cont_9</th>
+      <th>...</th>
+      <th>cat_3</th>
+      <th>cat_4</th>
+      <th>cat_5</th>
+      <th>cat_6</th>
+      <th>cat_7</th>
+      <th>cat_8</th>
+      <th>cat_9</th>
+      <th>target</th>
+      <th>target_binary</th>
+      <th>target_multi_class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>16</th>
+      <td>-0.505358</td>
+      <td>-0.104343</td>
+      <td>-0.507518</td>
+      <td>-0.988002</td>
+      <td>-0.815792</td>
+      <td>-1.284552</td>
+      <td>-1.051880</td>
+      <td>0.564009</td>
+      <td>2.49720</td>
+      <td>-2.245322</td>
+      <td>...</td>
+      <td>4</td>
+      <td>4</td>
+      <td>category_4</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>-246.101543</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>-2.115056</td>
+      <td>0.138315</td>
+      <td>1.618054</td>
+      <td>0.541008</td>
+      <td>1.405365</td>
+      <td>-1.449118</td>
+      <td>-0.824409</td>
+      <td>-0.813794</td>
+      <td>0.42258</td>
+      <td>0.547481</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>category_2</td>
+      <td>4</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>-156.813059</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<p>2 rows × 23 columns</p>
+</div></div>
+</div>
+<p>Finally, <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> scales the dataset. <code class="docutils literal notranslate"><span class="pre">DataModule.df</span></code> is the unscaled data frame, and <code class="docutils literal notranslate"><span class="pre">scaled_df</span></code> is the scaled one.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cont_0</th>
+      <th>cont_2</th>
+      <th>cont_3</th>
+      <th>cont_4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>-0.153242</td>
+      <td>-0.086822</td>
+      <td>0.083808</td>
+      <td>0.194227</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.961960</td>
+      <td>0.947694</td>
+      <td>0.762640</td>
+      <td>1.026297</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-2.115056</td>
+      <td>-1.945703</td>
+      <td>-1.665956</td>
+      <td>-1.884586</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-0.666141</td>
+      <td>-0.809715</td>
+      <td>-0.437357</td>
+      <td>-0.697263</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>-0.087749</td>
+      <td>0.082401</td>
+      <td>-0.059459</td>
+      <td>0.246986</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.329382</td>
+      <td>0.765257</td>
+      <td>0.541008</td>
+      <td>1.110425</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2.929096</td>
+      <td>1.618054</td>
+      <td>1.576299</td>
+      <td>2.285601</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">scaled_df</span><span class="p">[</span><span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cont_0</th>
+      <th>cont_2</th>
+      <th>cont_3</th>
+      <th>cont_4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.069544</td>
+      <td>0.049781</td>
+      <td>0.002835</td>
+      <td>0.034550</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.072721</td>
+      <td>0.975998</td>
+      <td>0.971265</td>
+      <td>1.002871</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-2.118156</td>
+      <td>-1.864617</td>
+      <td>-2.225588</td>
+      <td>-1.996813</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-0.502411</td>
+      <td>-0.694703</td>
+      <td>-0.660898</td>
+      <td>-0.836591</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.142578</td>
+      <td>0.224057</td>
+      <td>-0.179623</td>
+      <td>0.086104</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.607738</td>
+      <td>0.927307</td>
+      <td>0.585106</td>
+      <td>0.929836</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>3.506786</td>
+      <td>1.805574</td>
+      <td>1.903607</td>
+      <td>2.078188</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p><strong>Remark</strong>: All modules are fitted on training and validation sets and transform the testing set.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">scaled_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">train_indices</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">val_indices</span><span class="p">),</span> <span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cont_0</th>
+      <th>cont_2</th>
+      <th>cont_3</th>
+      <th>cont_4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>3.800000e+01</td>
+      <td>3.800000e+01</td>
+      <td>3.800000e+01</td>
+      <td>3.800000e+01</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>4.674623e-17</td>
+      <td>5.843279e-18</td>
+      <td>-4.090295e-17</td>
+      <td>-2.921640e-17</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.013423e+00</td>
+      <td>1.013423e+00</td>
+      <td>1.013423e+00</td>
+      <td>1.013423e+00</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-2.118156e+00</td>
+      <td>-1.864617e+00</td>
+      <td>-2.225588e+00</td>
+      <td>-1.996813e+00</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-5.160307e-01</td>
+      <td>-6.772407e-01</td>
+      <td>-7.744541e-01</td>
+      <td>-8.633614e-01</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>1.425780e-01</td>
+      <td>2.926057e-02</td>
+      <td>-5.491499e-02</td>
+      <td>6.457453e-02</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>6.018802e-01</td>
+      <td>8.600076e-01</td>
+      <td>5.851057e-01</td>
+      <td>9.298360e-01</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1.814086e+00</td>
+      <td>1.805574e+00</td>
+      <td>1.903607e+00</td>
+      <td>2.005587e+00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Data-derivers">
+<h2>Data derivers<a class="headerlink" href="#Data-derivers" title="Link to this heading">#</a></h2>
+<p>Existing features in the dataset may not be sufficient to represent the inner relations between features and the target. Extending more features that can be strongly correlated with the target using existing ones can be helpful. Data derivers can be used to extend continuous features (stacked in the tabular dataset, Step 3 above) or <strong>multi-modal</strong> features (unstacked, Step 5 above).</p>
+<p>Configurations are similar. Necessary and shared arguments are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stacked</span></code>: Should the derived feature stack in the processed <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>?</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intermediate</span></code>: Is the derived <code class="docutils literal notranslate"><span class="pre">stacked</span></code> feature excluded from continuous features?</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">derived_name</span></code>: What is the name of the feature?</p></li>
+</ul>
+<p>Here we give three examples:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RelativeDeriver</span></code> calculates the result of dividing <code class="docutils literal notranslate"><span class="pre">absolute_col</span></code> by <code class="docutils literal notranslate"><span class="pre">relative2_col</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SampleWeightDeriver</span></code> calculates the degree to which a data point is an outlier (it is just an example and there isn’t detailed research on it);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UnscaledDataDeriver</span></code> records all continuous features before scaling (standard scaling by default).</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">deriver_configs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;RelativeDeriver&quot;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s2">&quot;stacked&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;absolute_col&quot;</span><span class="p">:</span> <span class="s2">&quot;cont_0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;relative2_col&quot;</span><span class="p">:</span> <span class="s2">&quot;cont_1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;intermediate&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;derived_name&quot;</span><span class="p">:</span> <span class="s2">&quot;derived_cont&quot;</span><span class="p">,</span>
+    <span class="p">}),</span>
+    <span class="p">(</span><span class="s2">&quot;SampleWeightDeriver&quot;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s2">&quot;stacked&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;intermediate&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;derived_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sample_weight&quot;</span><span class="p">,</span>
+    <span class="p">}),</span>
+    <span class="p">(</span><span class="s2">&quot;UnscaledDataDeriver&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;derived_name&quot;</span><span class="p">:</span> <span class="s2">&quot;unscaled&quot;</span><span class="p">,</span> <span class="s2">&quot;stacked&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>Modify the configuration file:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;data_derivers&quot;</span><span class="p">:</span> <span class="n">deriver_configs</span><span class="p">,</span>
+    <span class="c1"># Some other configurations...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">manual_config</span></code> argument of <code class="docutils literal notranslate"><span class="pre">Trainer.load_config</span></code>.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="n">manual_config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data_derivers&quot;</span><span class="p">:</span> <span class="n">deriver_configs</span><span class="p">})</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">DataModule.set_data_derivers</span></code></p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">set_data_derivers</span><span class="p">(</span><span class="n">deriver_configs</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The project will be saved to ../../../../output/sample/2023-09-23-20-36-53-0_sample
+Dataset size: 153 51 52
+Data saved to ../../../../output/sample/2023-09-23-20-36-53-0_sample (data.csv and tabular_data.csv).
+</pre></div></div>
+</div>
+<p>Two <code class="docutils literal notranslate"><span class="pre">stacked</span></code> features can be found in <code class="docutils literal notranslate"><span class="pre">Trainer.df</span></code> or <code class="docutils literal notranslate"><span class="pre">Trainer.datamodule.df</span></code>. <code class="docutils literal notranslate"><span class="pre">derived_cont</span></code> is a continuous feature because <code class="docutils literal notranslate"><span class="pre">intermediate=False</span></code>, but <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code> is not.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;derived_cont&quot;</span><span class="p">,</span> <span class="s2">&quot;sample_weight&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>derived_cont</th>
+      <th>sample_weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.884222</td>
+      <td>1.045746</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-9.058123</td>
+      <td>1.063506</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-3.650394</td>
+      <td>0.959582</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.678893</td>
+      <td>0.974096</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-4.099185</td>
+      <td>1.000761</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>251</th>
+      <td>-1.355422</td>
+      <td>0.958380</td>
+    </tr>
+    <tr>
+      <th>252</th>
+      <td>1.088160</td>
+      <td>0.978138</td>
+    </tr>
+    <tr>
+      <th>253</th>
+      <td>0.374183</td>
+      <td>0.969419</td>
+    </tr>
+    <tr>
+      <th>254</th>
+      <td>1.199032</td>
+      <td>0.967882</td>
+    </tr>
+    <tr>
+      <th>255</th>
+      <td>-1.521539</td>
+      <td>0.979158</td>
+    </tr>
+  </tbody>
+</table>
+<p>256 rows × 2 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;derived_cont&quot;</span> <span class="ow">in</span> <span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">,</span> <span class="s2">&quot;sample_weight&quot;</span> <span class="ow">in</span> <span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(True, False)
+</pre></div></div>
+</div>
+<p>The unstacked feature <code class="docutils literal notranslate"><span class="pre">unscaled</span></code> can be found in <code class="docutils literal notranslate"><span class="pre">Trainer.derived_data</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;unscaled&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([[-1.30652685, -0.22203901, -0.11816405, -0.15957344,  1.65813068,
+         5.88422203],
+       [ 2.01125668, -0.22203901,  0.1950697 ,  0.52700421, -0.04459543,
+        -9.05812296],
+       [-1.21607658,  0.33313567, -0.74367217,  0.73018353,  0.1406719 ,
+        -3.65039438],
+       ...,
+       [-0.0698565 , -0.18669092, -1.02191332, -1.1436414 ,  0.25011391,
+         0.37418262],
+       [-1.03148246, -0.86026245, -0.06163805,  0.3283013 , -1.42999126,
+         1.19903229],
+       [-1.46173269,  0.9606934 ,  0.3675449 ,  1.32906285, -0.68343977,
+        -1.52153922]])
+</pre></div></div>
+</div>
+<p>Available derivers can be seen by</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.data.dataderiver</span> <span class="kn">import</span> <span class="n">deriver_mapping</span><span class="p">,</span> <span class="n">get_data_deriver</span>
+<span class="n">deriver_mapping</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;AbstractDeriver&#39;: tabensemb.data.base.AbstractDeriver,
+ &#39;RelativeDeriver&#39;: tabensemb.data.dataderiver.RelativeDeriver,
+ &#39;SampleWeightDeriver&#39;: tabensemb.data.dataderiver.SampleWeightDeriver,
+ &#39;UnscaledDataDeriver&#39;: tabensemb.data.dataderiver.UnscaledDataDeriver}
+</pre></div></div>
+</div>
+<p>Arguments can be found in API docs or in the docstring.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">get_data_deriver</span><span class="p">(</span><span class="s2">&quot;RelativeDeriver&quot;</span><span class="p">)</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+    Dividing a feature by another to derive a new feature. Required arguments are:
+
+    absolute_col: str
+        The feature that needs to be divided.
+    relative2_col: str
+        The feature that acts as the denominator.
+
+</pre></div></div>
+</div>
+</section>
+<section id="Access-the-processed-dataset">
+<h2>Access the processed dataset<a class="headerlink" href="#Access-the-processed-dataset" title="Link to this heading">#</a></h2>
+<p>All these data can be found in the <code class="docutils literal notranslate"><span class="pre">DataModule</span></code> instance in the trainer, along with many modified data structures for further usage:</p>
+<ul class="simple">
+<li><p>Continuous features</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataModule.feature_data</span></code>: scaled</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataModule.unscaled_feature_data</span></code>: not scaled</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataModule.X_train/X_val/X_test[trainer.cont_feature_names]</span></code>: scaled and divided into three partitions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataModule.tensors[0]</span></code>: scaled and transformed into torch.Tensor.</p></li>
+</ul>
+</li>
+<li><p>Categorical features</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataModule.categorical_data</span></code>: ordinal-encoded</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataModule.X_train/X_val/X_test[trainer.cat_feature_names]</span></code>: ordinal-encoded and divided into three partitions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataModule.derived_data[&quot;categorical&quot;]</span></code>: ordinal-encoded</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trainer.datamodule.tensors[list(trainer.datamodule.derived_data.keys()).index(&quot;categorical&quot;)+1]</span></code>: ordinal-encoded and transformed into torch.Tensor.</p></li>
+</ul>
+</li>
+<li><p>Derived unstacked features</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataModule.derived_data</span></code>: include unstacked features, categorical features, and the signal for each data point representing whether it is an augmented one.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataModule.tensors[1:-1]</span></code>: same as <code class="docutils literal notranslate"><span class="pre">DataModule.derived_data</span></code>, but are <code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code>s.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Remark</strong>: Currently, derived unstacked features are not used in the supported external model bases. But it can be easily accessed using the above approaches, even easier for a customized <code class="docutils literal notranslate"><span class="pre">PyTorch</span></code>-based model base class <code class="docutils literal notranslate"><span class="pre">TorchModel</span></code>, which will be introduced in the “Advanced Usage” sections.</p>
+<p><strong>Remark</strong>: Stacked (continuous) derived features are derived after imputation but before data processing. These features will also be imputed. Unstacked derived features are derived after all other steps are finished.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="inference.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Inference on an upcoming dataset</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="bayes.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bayesian hyperparameter optimization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Data-splitters">Data splitters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Data-imputers">Data imputers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Data-processors">Data processors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Data-derivers">Data derivers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Access-the-processed-dataset">Access the processed dataset</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ANONYMOUS/tabular_ensemble/edit/main/docs/source/examples/get_started/use_data_functionalities.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/examples/get_started/use_data_functionalities.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

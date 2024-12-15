@@ -1,0 +1,639 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>New data processors &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/advanced_usage/new_data_processors';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Multimodal data: Image classification as an example" href="image_classification.html" />
+    <link rel="prev" title="New data imputers" href="new_data_imputers.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="customized_model_base.html">Customized model base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customized_model_base_advanced.html">Advanced customized model base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set_optimizers_lrschedulers.html">Change optimizers and lr shedulers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_model_upon_others.html">Build your own model upon others</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_splitters.html">New data splitters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_derivers.html">New data derivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_imputers.html">New data imputers</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">New data processors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image_classification.html">Multimodal data: Image classification as an example</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../advanced_usage.html" class="nav-link">Advanced Usage</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">New data processors</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="New-data-processors">
+<h1>New data processors<a class="headerlink" href="#New-data-processors" title="Link to this heading">#</a></h1>
+<p>Data processors are the core functionalities in the processing procedure. They can</p>
+<ol class="arabic simple">
+<li><p>Add new data points by inheriting <code class="docutils literal notranslate"><span class="pre">tabensemb.data.AbstractAugmenter</span></code>;</p></li>
+<li><p>Remove data points by inheriting <code class="docutils literal notranslate"><span class="pre">tabensemb.data.AbstractProcessor</span></code>;</p></li>
+<li><p>Change values of features by inheriting <code class="docutils literal notranslate"><span class="pre">tabensemb.data.AbstractTransformer</span></code> or <code class="docutils literal notranslate"><span class="pre">tabensemb.data.AbstractScaler</span></code>;</p></li>
+<li><p>Reduce the number of features by inheriting <code class="docutils literal notranslate"><span class="pre">tabensemb.data.AbstractFeatureSelector</span></code>.</p></li>
+</ol>
+<p>The above-mentioned classes are all subclasses of <code class="docutils literal notranslate"><span class="pre">tabensemb.data.AbstractProcessor</span></code>. A subclass of <code class="docutils literal notranslate"><span class="pre">AbstractProcessor</span></code> should have <code class="docutils literal notranslate"><span class="pre">_fit_transform</span></code> and <code class="docutils literal notranslate"><span class="pre">_transform</span></code> implemented. <code class="docutils literal notranslate"><span class="pre">_fit_transform</span></code> is used to fit the processor and transform the training set and the validation set. <code class="docutils literal notranslate"><span class="pre">_transform</span></code> will be called to transform the testing set or an upcoming dataset using the fitted processor. For all these classes, you can implement <code class="docutils literal notranslate"><span class="pre">_required_kwargs</span></code> and <code class="docutils literal notranslate"><span class="pre">_defaults</span></code> as we did in “New
+data derivers” because they all inherit <code class="docutils literal notranslate"><span class="pre">tabensemb.data.AbstractDataStep</span></code>.</p>
+<p>The usage of processors is already introduced in “Using data functionalities”.</p>
+<p>The implemented processors should be registered as follows to be recognized by <code class="docutils literal notranslate"><span class="pre">DataModule.set_data_processors</span></code> automatically.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.data.dataprocessor</span> <span class="kn">import</span> <span class="n">processor_mapping</span>
+<span class="n">processor_mapping</span><span class="p">[</span><span class="s2">&quot;ADataProcessor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ADataProcessor</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.data</span> <span class="kn">import</span> <span class="n">AbstractAugmenter</span><span class="p">,</span> <span class="n">AbstractProcessor</span><span class="p">,</span> <span class="n">AbstractTransformer</span><span class="p">,</span> <span class="n">AbstractScaler</span><span class="p">,</span> <span class="n">AbstractFeatureSelector</span><span class="p">,</span> <span class="n">DataModule</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+<section id="AbstractAugmenter">
+<h2><code class="docutils literal notranslate"><span class="pre">AbstractAugmenter</span></code><a class="headerlink" href="#AbstractAugmenter" title="Link to this heading">#</a></h2>
+<p>We provide an example of data augmentation in the package, which simply copies the last two data points of the input <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> that contains the training set and the validation set. The method <code class="docutils literal notranslate"><span class="pre">_get_augmented</span></code>, which returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> containing new data points, is the only method that needs to be implemented.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SampleDataAugmenter</span><span class="p">(</span><span class="n">AbstractAugmenter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_get_augmented</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="n">augmented</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:],</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">augmented</span>
+</pre></div>
+</div>
+</section>
+<section id="AbstractProcessor">
+<h2><code class="docutils literal notranslate"><span class="pre">AbstractProcessor</span></code><a class="headerlink" href="#AbstractProcessor" title="Link to this heading">#</a></h2>
+<p>It is the base class for data processors. Other mentioned classes implement these two methods and provide higher-level methods for simplification. Currently, only processors that remove some data points are still implemented under <code class="docutils literal notranslate"><span class="pre">AbstractProcessor</span></code> directly. Take <code class="docutils literal notranslate"><span class="pre">tabensemb.data.dataprocessors.FeatureValueSelector</span></code> as an example.</p>
+<p><code class="docutils literal notranslate"><span class="pre">FeatureValueSelector</span></code> is used to select data points that have the specific value (the argument “value”) of a certain feature (the argument “feature”). These two arguments are defined in <code class="docutils literal notranslate"><span class="pre">_required_kwargs</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FeatureValueSelector</span><span class="p">(</span><span class="n">AbstractProcessor</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_required_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>It directly removes unwanted data points in the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
+<p><strong>Remark</strong>: <strong>DO NOT</strong> reset the index of the returned <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, which is used to update the indices of training/validation/testing sets.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+    <span class="n">feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">]</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+    <span class="n">where_value</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">==</span> <span class="n">value</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">where_value</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">feature</span><span class="p">,</span> <span class="n">value</span>
+    <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">FeatureValueSelector</span></code> behaves differently when processing the dataset at hand (<code class="docutils literal notranslate"><span class="pre">datamodule.training==True</span></code>) and the upcoming dataset (<code class="docutils literal notranslate"><span class="pre">datamodule.training==False</span></code>) respectively. In the latter case, data points should not be removed when making inferences. However, data points can be removed from the validation or testing sets (<code class="docutils literal notranslate"><span class="pre">datamodule.training==True</span></code>) because we only want the specific value of the feature in the entire dataset.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">datamodule</span><span class="o">.</span><span class="n">training</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Value </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> not available for feature </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="si">}</span><span class="s2">. Select from </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="n">where_value</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">where_value</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="p">]):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Value </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> not available for feature </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="si">}</span><span class="s2"> selected by &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+</section>
+<section id="AbstractFeatureSelector">
+<h2><code class="docutils literal notranslate"><span class="pre">AbstractFeatureSelector</span></code><a class="headerlink" href="#AbstractFeatureSelector" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">AbstractFeatureSelector</span></code> is used to select tabular features and thus reduce the dimension of the problem. The only necessary method is <code class="docutils literal notranslate"><span class="pre">_get_feature_names_out</span></code> which returns a list of selected features. Take <code class="docutils literal notranslate"><span class="pre">tabensemb.data.dataprocessors.VarianceFeatureSelector</span></code> that uses <code class="docutils literal notranslate"><span class="pre">sklearn.feature_selection.VarianceThreshold</span></code> as an example. A parameter <code class="docutils literal notranslate"><span class="pre">thres</span></code> can be given. The input <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> is the training and validation set.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">VarianceThreshold</span>
+
+<span class="k">class</span> <span class="nc">FeatureSelector</span><span class="p">(</span><span class="n">AbstractFeatureSelector</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">thres</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_feature_names_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">):</span>
+        <span class="n">thres</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;thres&quot;</span><span class="p">]</span>
+        <span class="n">sel</span> <span class="o">=</span> <span class="n">VarianceThreshold</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="p">(</span><span class="n">thres</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">thres</span><span class="p">)))</span>
+        <span class="n">sel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">all_feature_names</span><span class="p">],</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="k">else</span> <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>  <span class="c1"># Ignored.</span>
+        <span class="p">)</span>
+        <span class="n">retain_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sel</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">retain_features</span>
+</pre></div>
+</div>
+</section>
+<section id="AbstractTransformer">
+<h2><code class="docutils literal notranslate"><span class="pre">AbstractTransformer</span></code><a class="headerlink" href="#AbstractTransformer" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">AbstractTransformer</span></code> is used to modify the values of features. Its implementation is exactly the same as that of <code class="docutils literal notranslate"><span class="pre">AbstractProcessor</span></code>. It is mostly a classification criteria to tell the user what it will do, and so does the following <code class="docutils literal notranslate"><span class="pre">AbstractScaler</span></code> that inherits it. A typical example is <code class="docutils literal notranslate"><span class="pre">tabensemb.data.dataprocessors.CategoricalOrdinalEncoder</span></code> which turns categorical features containing meaningful strings into numerical representations.</p>
+<p>A method called <code class="docutils literal notranslate"><span class="pre">DataModule.get_var_change</span></code> can calculate what a specific value of a specific feature will become after going through all <code class="docutils literal notranslate"><span class="pre">AbstractTransformer</span></code>s used. It can be useful when the zero values are needed to be unchanged.</p>
+</section>
+<section id="AbstractScaler">
+<h2><code class="docutils literal notranslate"><span class="pre">AbstractScaler</span></code><a class="headerlink" href="#AbstractScaler" title="Link to this heading">#</a></h2>
+<p>It inherits <code class="docutils literal notranslate"><span class="pre">AbstractTransformer</span></code>. The last data processor defined in an <code class="docutils literal notranslate"><span class="pre">DataModule</span></code> must be a <code class="docutils literal notranslate"><span class="pre">AbstractScaler</span></code>. As shown in “Customized model base”, some representations of the dataset in the <code class="docutils literal notranslate"><span class="pre">DataModule</span></code> are stored in the unscaled form, which means they have gone through all data processors except for the last one. Call <code class="docutils literal notranslate"><span class="pre">datamodule.data_transform(df,</span> <span class="pre">scaler_only=True)</span></code> to scale them by calling the last data processor (the <code class="docutils literal notranslate"><span class="pre">AbstractScaler</span></code>). The implementation is similar to
+<code class="docutils literal notranslate"><span class="pre">AbstractProcessor</span></code>. Take <code class="docutils literal notranslate"><span class="pre">tabensemb.data.dataprocessors.StandardScaler</span></code> which uses <code class="docutils literal notranslate"><span class="pre">sklearn.preprocessing.StandardScaler</span></code> as an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span> <span class="k">as</span> <span class="n">skStandardScaler</span>
+
+<span class="k">class</span> <span class="nc">StandardScaler</span><span class="p">(</span><span class="n">AbstractScaler</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+        <span class="n">scaler</span> <span class="o">=</span> <span class="n">skStandardScaler</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span> <span class="o">=</span> <span class="n">scaler</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+<p><strong>Remark</strong>: It is highly recommended to use the 64-bit float (double) precision to avoid inconsistent result between <code class="docutils literal notranslate"><span class="pre">_fit_transform</span></code> and <code class="docutils literal notranslate"><span class="pre">_transform</span></code>.</p>
+<p><strong>Remark</strong>: There can be no continuous and/or categorical features. Please confirm that your <code class="docutils literal notranslate"><span class="pre">AbstractProcessor</span></code>s support empty <code class="docutils literal notranslate"><span class="pre">datamodule.cont_feature_names</span></code> and/or <code class="docutils literal notranslate"><span class="pre">datamodule.cat_feature_names</span></code>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="new_data_imputers.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">New data imputers</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="image_classification.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Multimodal data: Image classification as an example</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#AbstractAugmenter"><code class="docutils literal notranslate"><span class="pre">AbstractAugmenter</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#AbstractProcessor"><code class="docutils literal notranslate"><span class="pre">AbstractProcessor</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#AbstractFeatureSelector"><code class="docutils literal notranslate"><span class="pre">AbstractFeatureSelector</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#AbstractTransformer"><code class="docutils literal notranslate"><span class="pre">AbstractTransformer</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#AbstractScaler"><code class="docutils literal notranslate"><span class="pre">AbstractScaler</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ANONYMOUS/tabular_ensemble/edit/main/docs/source/examples/advanced_usage/new_data_processors.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/examples/advanced_usage/new_data_processors.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1216 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Build your own model upon others &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/advanced_usage/build_model_upon_others';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="New data splitters" href="new_data_splitters.html" />
+    <link rel="prev" title="Change optimizers and lr shedulers" href="set_optimizers_lrschedulers.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="customized_model_base.html">Customized model base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customized_model_base_advanced.html">Advanced customized model base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set_optimizers_lrschedulers.html">Change optimizers and lr shedulers</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Build your own model upon others</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_splitters.html">New data splitters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_derivers.html">New data derivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_imputers.html">New data imputers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_processors.html">New data processors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image_classification.html">Multimodal data: Image classification as an example</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../advanced_usage.html" class="nav-link">Advanced Usage</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Build your own model upon others</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Build-your-own-model-upon-others">
+<h1>Build your own model upon others<a class="headerlink" href="#Build-your-own-model-upon-others" title="Link to this heading">#</a></h1>
+<p>Models can be built based on other trained models in the current model base or in other model bases. Both <code class="docutils literal notranslate"><span class="pre">AbstractModel</span></code> and <code class="docutils literal notranslate"><span class="pre">TorchModel</span></code> support this feature.</p>
+<section id="For-AbstractModel">
+<h2>For <code class="docutils literal notranslate"><span class="pre">AbstractModel</span></code><a class="headerlink" href="#For-AbstractModel" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tabensemb</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+<span class="kn">from</span> <span class="nn">tabensemb.model</span> <span class="kn">import</span> <span class="n">WideDeep</span><span class="p">,</span> <span class="n">AbstractModel</span>
+
+<span class="n">temp_path</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">()</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_output_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_config_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;configs&quot;</span><span class="p">)</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_data_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Suppose that we want to call TabMlp of WideDeep in another model base <code class="docutils literal notranslate"><span class="pre">CallTabMlp</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CallTabMlp</span><span class="p">(</span><span class="n">AbstractModel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_get_program_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;CallTabMlp&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_get_model_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;CalledTabMlp&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">_initial_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<p>Extracting another model can be done by setting <code class="docutils literal notranslate"><span class="pre">required_models</span></code> in a specific format. In the following code, “EXTERN” means that the model is from another model base. “WideDeep” is the name of the model base which the wanted model is from. “TabMlp” is the wanted model in the model base. If the model is from the current model base, only the name of the wanted model is needed (<code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">[&quot;TabMlp&quot;]</span></code>). Multiple required models can be specified in the returned list.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">required_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;EXTERN_WideDeep_TabMlp&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>As normal, <code class="docutils literal notranslate"><span class="pre">_train_data_preprocess</span></code>, <code class="docutils literal notranslate"><span class="pre">_data_preprocess</span></code>, <code class="docutils literal notranslate"><span class="pre">_new_model</span></code>, <code class="docutils literal notranslate"><span class="pre">_train_single_model</span></code>, and <code class="docutils literal notranslate"><span class="pre">_pred_single_model</span></code> should be implemented. First, <code class="docutils literal notranslate"><span class="pre">_train_data_preprocess</span></code> is called, and <code class="docutils literal notranslate"><span class="pre">_get_required_models</span></code> is used to extract the external model. In this case, a <code class="docutils literal notranslate"><span class="pre">WideDeep</span></code> instance containing the trained TabMlp model is returned. If the model is from the current model base, calling <code class="docutils literal notranslate"><span class="pre">self._get_required_models(&quot;TabMlp&quot;)</span></code> is equivalent to calling <code class="docutils literal notranslate"><span class="pre">self.model[&quot;TabMlp&quot;]</span></code>.</p>
+<p>Then the <code class="docutils literal notranslate"><span class="pre">_train_data_preprocess</span></code> method from <code class="docutils literal notranslate"><span class="pre">WideDeep</span></code> is directly used to process the dataset to get compatible processed data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_train_data_preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;net&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_required_models</span><span class="p">(</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">)[</span><span class="s2">&quot;EXTERN_WideDeep_TabMlp&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">trainer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">_train_data_preprocess</span><span class="p">(</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Also, <code class="docutils literal notranslate"><span class="pre">_data_preprocess</span></code> calls the same method from <code class="docutils literal notranslate"><span class="pre">WideDeep</span></code> instead to get compatible processed data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_data_preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">derived_data</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">_data_preprocess</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">derived_data</span><span class="p">,</span> <span class="s2">&quot;TabMlp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">_new_model</span></code>, the extracted model is directly returned.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_new_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">_pred_single_model</span></code> calls the same method from <code class="docutils literal notranslate"><span class="pre">WideDeep</span></code> to make predictions based on the extracted model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_pred_single_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">_pred_single_model</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">],</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this example, we won’t do further training on the extracted model, but it is straightforward to do other operations on the predictions from the extracted model obtained by <code class="docutils literal notranslate"><span class="pre">model._pred_single_model</span></code> as shown above.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_train_single_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CallTabMlp</span><span class="p">(</span><span class="n">AbstractModel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_get_program_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;CallTabMlp&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_get_model_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">_initial_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">required_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;EXTERN_WideDeep_TabMlp&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_train_data_preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;net&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_required_models</span><span class="p">(</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">)[</span><span class="s2">&quot;EXTERN_WideDeep_TabMlp&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">trainer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">_train_data_preprocess</span><span class="p">(</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_data_preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">derived_data</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">_data_preprocess</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">derived_data</span><span class="p">,</span> <span class="s2">&quot;TabMlp&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_new_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span>
+
+    <span class="k">def</span> <span class="nf">_train_single_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">_pred_single_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">_pred_single_model</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">],</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="For-TorchModel">
+<h2>For <code class="docutils literal notranslate"><span class="pre">TorchModel</span></code><a class="headerlink" href="#For-TorchModel" title="Link to this heading">#</a></h2>
+<p>It is easier to build a model based on others in <code class="docutils literal notranslate"><span class="pre">TorchModel</span></code> because we have already implemented complex dataset-building operations internally.</p>
+<p>Similar to the implementation above, we specify methods except for <code class="docutils literal notranslate"><span class="pre">_train_data_preprocess</span></code> and <code class="docutils literal notranslate"><span class="pre">_data_preprocess</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CallTabMlpTorch</span><span class="p">(</span><span class="n">TorchModel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_get_program_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;CallTabMlpTorch&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_get_model_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">required_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;EXTERN_WideDeep_TabMlp&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">_initial_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<p>We build our model <code class="docutils literal notranslate"><span class="pre">CallTabMlpNN</span></code> on the top of TabMlp from WideDeep. In this tutorial, we will not train anything.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_new_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">CallTabMlpNN</span><span class="p">(</span><span class="n">datamodule</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_train_single_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Now comes <code class="docutils literal notranslate"><span class="pre">CallTabMlpNN</span></code>. A positional argument <code class="docutils literal notranslate"><span class="pre">required_models</span></code> is passed to <code class="docutils literal notranslate"><span class="pre">__init__</span></code> containing all required and extracted models specified in <code class="docutils literal notranslate"><span class="pre">CallTabMlpTorch.required_models</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CallTabMlpNN</span><span class="p">(</span><span class="n">AbstractNN</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">,</span> <span class="n">required_models</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CallTabMlpNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">datamodule</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">required_models</span><span class="p">[</span><span class="s2">&quot;EXTERN_WideDeep_TabMlp&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>To get results from the extracted model, use <code class="docutils literal notranslate"><span class="pre">self.call_required_model</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">derived_tensors</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_required_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">derived_tensors</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Remark</strong>: Indeed, the output of the model is already calculated when preparing the dataset and is stored in <code class="docutils literal notranslate"><span class="pre">derived_tensors[&quot;data_required_models&quot;][&quot;MODELNAME_pred&quot;]</span></code>. <code class="docutils literal notranslate"><span class="pre">self.call_required_model</span></code> first tries to find the pre-calculated output. If failed, the output is calculated using the dataset for the model base stored in <code class="docutils literal notranslate"><span class="pre">derived_tensors[&quot;data_required_models&quot;][&quot;MODELNAME&quot;]</span></code>. Therefore, if you want to actually calculate the output during <code class="docutils literal notranslate"><span class="pre">forward</span></code>, just remove the stored predictions
+in <code class="docutils literal notranslate"><span class="pre">derived_tensors</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.model</span> <span class="kn">import</span> <span class="n">TorchModel</span><span class="p">,</span> <span class="n">AbstractNN</span>
+
+<span class="k">class</span> <span class="nc">CallTabMlpNN</span><span class="p">(</span><span class="n">AbstractNN</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">,</span> <span class="n">required_models</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CallTabMlpNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">datamodule</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">required_models</span><span class="p">[</span><span class="s2">&quot;EXTERN_WideDeep_TabMlp&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">derived_tensors</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_required_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">derived_tensors</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">CallTabMlpTorch</span><span class="p">(</span><span class="n">TorchModel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_new_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">CallTabMlpNN</span><span class="p">(</span><span class="n">datamodule</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_program_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;CallTabMlpTorch&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_get_model_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">required_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;EXTERN_WideDeep_TabMlp&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">_initial_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">_train_single_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<p>We can compare results from the original model and the extracted model. They get exactly the same results.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.trainer</span> <span class="kn">import</span> <span class="n">Trainer</span>
+<span class="kn">from</span> <span class="nn">tabensemb.config</span> <span class="kn">import</span> <span class="n">UserConfig</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">mpg_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;mpg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cylinders&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;displacement&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;horsepower&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;weight&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acceleration&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;model_year&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;origin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;car_name&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="o">.</span><span class="n">from_uci</span><span class="p">(</span><span class="s2">&quot;Auto MPG&quot;</span><span class="p">,</span> <span class="n">column_names</span><span class="o">=</span><span class="n">mpg_columns</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">add_modelbases</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">WideDeep</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">]),</span>
+        <span class="n">CallTabMlp</span><span class="p">(</span><span class="n">trainer</span><span class="p">),</span>
+        <span class="n">CallTabMlpTorch</span><span class="p">(</span><span class="n">trainer</span><span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">stderr_to_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">get_leaderboard</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Downloading https://archive.ics.uci.edu/static/public/9/auto+mpg.zip to /tmp/tmpvlx3s8em/data/Auto MPG.zip
+cylinders is Integer and will be treated as a continuous feature.
+model_year is Integer and will be treated as a continuous feature.
+origin is Integer and will be treated as a continuous feature.
+Unknown values are detected in [&#39;horsepower&#39;]. They will be treated as np.nan.
+The project will be saved to /tmp/tmpvlx3s8em/output/auto-mpg/2023-09-23-20-41-06-0_UserInputConfig
+Dataset size: 238 80 80
+Data saved to /tmp/tmpvlx3s8em/output/auto-mpg/2023-09-23-20-41-06-0_UserInputConfig (data.csv and tabular_data.csv).
+
+-------------Run WideDeep-------------
+
+Training TabMlp
+Epoch: 1/300, Train loss: 635.5330, Val loss: 555.4755, Min val loss: 555.4755
+Epoch: 21/300, Train loss: 441.6902, Val loss: 375.7337, Min val loss: 375.7337
+Epoch: 41/300, Train loss: 145.8623, Val loss: 119.9598, Min val loss: 119.9598
+Epoch: 61/300, Train loss: 45.9133, Val loss: 34.0160, Min val loss: 34.0160
+Epoch: 81/300, Train loss: 27.6878, Val loss: 24.1525, Min val loss: 24.1525
+Epoch: 101/300, Train loss: 23.0877, Val loss: 18.2096, Min val loss: 18.2096
+Epoch: 121/300, Train loss: 21.4056, Val loss: 17.2203, Min val loss: 17.1303
+Epoch: 141/300, Train loss: 21.2559, Val loss: 16.0746, Min val loss: 16.0746
+Epoch: 161/300, Train loss: 19.2337, Val loss: 15.3027, Min val loss: 15.3027
+Epoch: 181/300, Train loss: 16.1232, Val loss: 14.5777, Min val loss: 14.5777
+Epoch: 201/300, Train loss: 16.7095, Val loss: 14.2274, Min val loss: 14.2274
+Epoch: 221/300, Train loss: 15.7366, Val loss: 13.5223, Min val loss: 13.5223
+Epoch: 241/300, Train loss: 16.9825, Val loss: 12.9892, Min val loss: 12.9892
+Epoch: 261/300, Train loss: 15.3358, Val loss: 12.4278, Min val loss: 12.4278
+Epoch: 281/300, Train loss: 13.3989, Val loss: 12.1155, Min val loss: 12.1155
+Restoring model weights from the end of the best epoch
+Training mse loss: 10.17037
+Validation mse loss: 11.66271
+Testing mse loss: 6.43856
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpvlx3s8em/output/auto-mpg/2023-09-23-20-41-06-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------WideDeep End-------------
+
+
+-------------Run CallTabMlp-------------
+
+Training TabMlp
+Training mse loss: 10.17037
+Validation mse loss: 11.66271
+Testing mse loss: 6.43856
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpvlx3s8em/output/auto-mpg/2023-09-23-20-41-06-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------CallTabMlp End-------------
+
+
+-------------Run CallTabMlpTorch-------------
+
+Training TabMlp
+Training mse loss: 10.17037
+Validation mse loss: 11.66271
+Testing mse loss: 6.43856
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpvlx3s8em/output/auto-mpg/2023-09-23-20-41-06-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------CallTabMlpTorch End-------------
+
+WideDeep metrics
+TabMlp 1/1
+CallTabMlp metrics
+TabMlp 1/1
+CallTabMlpTorch metrics
+TabMlp 1/1
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpvlx3s8em/output/auto-mpg/2023-09-23-20-41-06-0_UserInputConfig/trainer.pkl&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Program</th>
+      <th>Model</th>
+      <th>Training RMSE</th>
+      <th>Training MSE</th>
+      <th>Training MAE</th>
+      <th>Training MAPE</th>
+      <th>Training R2</th>
+      <th>Training MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Training EXPLAINED_VARIANCE_SCORE</th>
+      <th>Testing RMSE</th>
+      <th>...</th>
+      <th>Testing R2</th>
+      <th>Testing MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Testing EXPLAINED_VARIANCE_SCORE</th>
+      <th>Validation RMSE</th>
+      <th>Validation MSE</th>
+      <th>Validation MAE</th>
+      <th>Validation MAPE</th>
+      <th>Validation R2</th>
+      <th>Validation MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Validation EXPLAINED_VARIANCE_SCORE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>WideDeep</td>
+      <td>TabMlp</td>
+      <td>3.189102</td>
+      <td>10.170372</td>
+      <td>2.318564</td>
+      <td>0.096454</td>
+      <td>0.842218</td>
+      <td>1.669983</td>
+      <td>0.859805</td>
+      <td>2.537431</td>
+      <td>...</td>
+      <td>0.88025</td>
+      <td>1.767459</td>
+      <td>0.900587</td>
+      <td>3.415071</td>
+      <td>11.662707</td>
+      <td>2.539188</td>
+      <td>0.116035</td>
+      <td>0.791657</td>
+      <td>1.90416</td>
+      <td>0.806152</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CallTabMlp</td>
+      <td>TabMlp</td>
+      <td>3.189102</td>
+      <td>10.170372</td>
+      <td>2.318564</td>
+      <td>0.096454</td>
+      <td>0.842218</td>
+      <td>1.669983</td>
+      <td>0.859805</td>
+      <td>2.537431</td>
+      <td>...</td>
+      <td>0.88025</td>
+      <td>1.767459</td>
+      <td>0.900587</td>
+      <td>3.415071</td>
+      <td>11.662707</td>
+      <td>2.539188</td>
+      <td>0.116035</td>
+      <td>0.791657</td>
+      <td>1.90416</td>
+      <td>0.806152</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CallTabMlpTorch</td>
+      <td>TabMlp</td>
+      <td>3.189102</td>
+      <td>10.170372</td>
+      <td>2.318564</td>
+      <td>0.096454</td>
+      <td>0.842218</td>
+      <td>1.669983</td>
+      <td>0.859805</td>
+      <td>2.537431</td>
+      <td>...</td>
+      <td>0.88025</td>
+      <td>1.767459</td>
+      <td>0.900587</td>
+      <td>3.415071</td>
+      <td>11.662707</td>
+      <td>2.539188</td>
+      <td>0.116035</td>
+      <td>0.791657</td>
+      <td>1.90416</td>
+      <td>0.806152</td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 23 columns</p>
+</div></div>
+</div>
+</section>
+<section id="Extract-learned-hidden-representation-from-models">
+<h2>Extract learned hidden representation from models<a class="headerlink" href="#Extract-learned-hidden-representation-from-models" title="Link to this heading">#</a></h2>
+<p>The original correlation among input features and targets can be complex, especially for high dimensional inputs and multimodal inputs, which is why we want deep learning models to extract the internal relations and reduce the dimension. For most deep learning models, no matter what the backbone structure is, the output of the backbone is normally a low dimension tensor (for instance, <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">16)</span></code>), which contains learned information from the deep learning model, so we name it “hidden
+representation” of the deep learning model. The hidden representation will be projected to the output dimension through a linear layer, an MLP, etc.</p>
+<p>Most models in two model bases, <code class="docutils literal notranslate"><span class="pre">pytorch_widedeep</span></code> (WideDeep) and <code class="docutils literal notranslate"><span class="pre">pytorch_tabular</span></code> (PyTorchTabular), are supported to extract hidden representations in an <code class="docutils literal notranslate"><span class="pre">AbstractNN</span></code>.</p>
+<p>To use this functionality, first, change the name in <code class="docutils literal notranslate"><span class="pre">required_models</span></code>. A postfix “_WRAP” is added.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CallTabMlpTorchWrapped</span><span class="p">(</span><span class="n">CallTabMlpTorch</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">required_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;EXTERN_WideDeep_TabMlp_WRAP&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_get_program_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;CallTabMlpTorchWrapped&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_new_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">CallTabMlpNNWrapped</span><span class="p">(</span><span class="n">datamodule</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now more operations can be done in the <code class="docutils literal notranslate"><span class="pre">AbstractNN</span></code>. In <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, <code class="docutils literal notranslate"><span class="pre">_test_required_model</span></code> can be used to check the validity of hidden representations and get its dimension to further generate <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>s like a linear layer or MLP.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CallTabMlpNNWrapped</span><span class="p">(</span><span class="n">AbstractNN</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">,</span> <span class="n">required_models</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CallTabMlpNNWrapped</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">datamodule</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">required_models</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">required_models</span><span class="p">[</span><span class="s2">&quot;EXTERN_WideDeep_TabMlp_WRAP&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_hidden_rep</span><span class="p">,</span> <span class="n">hidden_rep_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test_required_model</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Does the model support extracting hidden representation?: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">use_hidden_rep</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The dimension of the hidden representation: </span><span class="si">{</span><span class="n">hidden_rep_dim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When doing forward propagation, the hidden representation can be extracted using <code class="docutils literal notranslate"><span class="pre">get_hidden_state</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">derived_tensors</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">derived_tensors</span><span class="p">[</span><span class="s2">&quot;data_required_models&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_required_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">derived_tensors</span><span class="p">)</span>
+    <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_hidden_state</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">derived_tensors</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The dimensions of the batched hidden representation: </span><span class="si">{</span><span class="n">hidden</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+</div>
+<p><strong>Remark</strong>: If the model does not support extracting hidden representations, <code class="docutils literal notranslate"><span class="pre">self.use_hidden_rep</span></code> shown above will be <code class="docutils literal notranslate"><span class="pre">False</span></code>, and <code class="docutils literal notranslate"><span class="pre">hidden_rep_dim</span></code> will be <code class="docutils literal notranslate"><span class="pre">self.n_inputs</span> <span class="pre">+</span> <span class="pre">1</span></code>, which suggests concatenating continuous features and the output of the model.</p>
+<p><strong>Remark</strong>: Same as the output, the hidden representation is calculated when preparing the dataset and is stored in <code class="docutils literal notranslate"><span class="pre">derived_tensors[&quot;data_required_models&quot;][&quot;MODELNAME_hidden&quot;]</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.model</span> <span class="kn">import</span> <span class="n">TorchModel</span><span class="p">,</span> <span class="n">AbstractNN</span>
+
+<span class="k">class</span> <span class="nc">CallTabMlpNNWrapped</span><span class="p">(</span><span class="n">AbstractNN</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">,</span> <span class="n">required_models</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CallTabMlpNNWrapped</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">datamodule</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">required_models</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">required_models</span><span class="p">[</span><span class="s2">&quot;EXTERN_WideDeep_TabMlp_WRAP&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_hidden_rep</span><span class="p">,</span> <span class="n">hidden_rep_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test_required_model</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Does the model support extracting hidden representation?: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">use_hidden_rep</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The dimension of the hidden representation: </span><span class="si">{</span><span class="n">hidden_rep_dim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">derived_tensors</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">derived_tensors</span><span class="p">[</span><span class="s2">&quot;data_required_models&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_required_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">derived_tensors</span><span class="p">)</span>
+        <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_hidden_state</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">derived_tensors</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The dimensions of the batched hidden representation: </span><span class="si">{</span><span class="n">hidden</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span>
+
+<span class="k">class</span> <span class="nc">CallTabMlpTorchWrapped</span><span class="p">(</span><span class="n">CallTabMlpTorch</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_get_program_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;CallTabMlpTorchWrapped&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_new_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">CallTabMlpNNWrapped</span><span class="p">(</span><span class="n">datamodule</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">required_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;EXTERN_WideDeep_TabMlp_WRAP&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>We can show the information of the extracted model, the hidden representation, and the stored data and predictions.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">add_modelbases</span><span class="p">([</span><span class="n">CallTabMlpTorchWrapped</span><span class="p">(</span><span class="n">trainer</span><span class="p">)])</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">get_modelbase</span><span class="p">(</span><span class="s2">&quot;CallTabMlpTorchWrapped&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">stderr_to_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">get_leaderboard</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+-------------Run CallTabMlpTorchWrapped-------------
+
+Training TabMlp
+{&#39;EXTERN_WideDeep_TabMlp_WRAP&#39;: &lt;tabensemb.model.widedeep.WideDeepWrapper object at 0x7f8f782182b0&gt;}
+Does the model support extracting hidden representation?: True
+The dimension of the hidden representation: 100
+dict_keys([&#39;EXTERN_WideDeep_TabMlp&#39;, &#39;EXTERN_WideDeep_TabMlp_pred&#39;, &#39;EXTERN_WideDeep_TabMlp_hidden&#39;])
+The dimensions of the batched hidden representation: torch.Size([238, 100])
+Training mse loss: 10.17037
+dict_keys([&#39;EXTERN_WideDeep_TabMlp&#39;, &#39;EXTERN_WideDeep_TabMlp_pred&#39;, &#39;EXTERN_WideDeep_TabMlp_hidden&#39;])
+The dimensions of the batched hidden representation: torch.Size([80, 100])
+Validation mse loss: 11.66271
+dict_keys([&#39;EXTERN_WideDeep_TabMlp&#39;, &#39;EXTERN_WideDeep_TabMlp_pred&#39;, &#39;EXTERN_WideDeep_TabMlp_hidden&#39;])
+The dimensions of the batched hidden representation: torch.Size([80, 100])
+Testing mse loss: 6.43856
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpvlx3s8em/output/auto-mpg/2023-09-23-20-41-06-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------CallTabMlpTorchWrapped End-------------
+
+WideDeep metrics
+TabMlp 1/1
+CallTabMlp metrics
+TabMlp 1/1
+CallTabMlpTorch metrics
+TabMlp 1/1
+CallTabMlpTorchWrapped metrics
+TabMlp 1/1
+dict_keys([&#39;EXTERN_WideDeep_TabMlp&#39;, &#39;EXTERN_WideDeep_TabMlp_pred&#39;, &#39;EXTERN_WideDeep_TabMlp_hidden&#39;])
+The dimensions of the batched hidden representation: torch.Size([238, 100])
+dict_keys([&#39;EXTERN_WideDeep_TabMlp&#39;, &#39;EXTERN_WideDeep_TabMlp_pred&#39;, &#39;EXTERN_WideDeep_TabMlp_hidden&#39;])
+The dimensions of the batched hidden representation: torch.Size([80, 100])
+dict_keys([&#39;EXTERN_WideDeep_TabMlp&#39;, &#39;EXTERN_WideDeep_TabMlp_pred&#39;, &#39;EXTERN_WideDeep_TabMlp_hidden&#39;])
+The dimensions of the batched hidden representation: torch.Size([80, 100])
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpvlx3s8em/output/auto-mpg/2023-09-23-20-41-06-0_UserInputConfig/trainer.pkl&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Program</th>
+      <th>Model</th>
+      <th>Training RMSE</th>
+      <th>Training MSE</th>
+      <th>Training MAE</th>
+      <th>Training MAPE</th>
+      <th>Training R2</th>
+      <th>Training MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Training EXPLAINED_VARIANCE_SCORE</th>
+      <th>Testing RMSE</th>
+      <th>...</th>
+      <th>Testing R2</th>
+      <th>Testing MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Testing EXPLAINED_VARIANCE_SCORE</th>
+      <th>Validation RMSE</th>
+      <th>Validation MSE</th>
+      <th>Validation MAE</th>
+      <th>Validation MAPE</th>
+      <th>Validation R2</th>
+      <th>Validation MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Validation EXPLAINED_VARIANCE_SCORE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>WideDeep</td>
+      <td>TabMlp</td>
+      <td>3.189102</td>
+      <td>10.170372</td>
+      <td>2.318564</td>
+      <td>0.096454</td>
+      <td>0.842218</td>
+      <td>1.669983</td>
+      <td>0.859805</td>
+      <td>2.537431</td>
+      <td>...</td>
+      <td>0.88025</td>
+      <td>1.767459</td>
+      <td>0.900587</td>
+      <td>3.415071</td>
+      <td>11.662707</td>
+      <td>2.539188</td>
+      <td>0.116035</td>
+      <td>0.791657</td>
+      <td>1.90416</td>
+      <td>0.806152</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CallTabMlp</td>
+      <td>TabMlp</td>
+      <td>3.189102</td>
+      <td>10.170372</td>
+      <td>2.318564</td>
+      <td>0.096454</td>
+      <td>0.842218</td>
+      <td>1.669983</td>
+      <td>0.859805</td>
+      <td>2.537431</td>
+      <td>...</td>
+      <td>0.88025</td>
+      <td>1.767459</td>
+      <td>0.900587</td>
+      <td>3.415071</td>
+      <td>11.662707</td>
+      <td>2.539188</td>
+      <td>0.116035</td>
+      <td>0.791657</td>
+      <td>1.90416</td>
+      <td>0.806152</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CallTabMlpTorch</td>
+      <td>TabMlp</td>
+      <td>3.189102</td>
+      <td>10.170372</td>
+      <td>2.318564</td>
+      <td>0.096454</td>
+      <td>0.842218</td>
+      <td>1.669983</td>
+      <td>0.859805</td>
+      <td>2.537431</td>
+      <td>...</td>
+      <td>0.88025</td>
+      <td>1.767459</td>
+      <td>0.900587</td>
+      <td>3.415071</td>
+      <td>11.662707</td>
+      <td>2.539188</td>
+      <td>0.116035</td>
+      <td>0.791657</td>
+      <td>1.90416</td>
+      <td>0.806152</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CallTabMlpTorchWrapped</td>
+      <td>TabMlp</td>
+      <td>3.189102</td>
+      <td>10.170372</td>
+      <td>2.318564</td>
+      <td>0.096454</td>
+      <td>0.842218</td>
+      <td>1.669983</td>
+      <td>0.859805</td>
+      <td>2.537431</td>
+      <td>...</td>
+      <td>0.88025</td>
+      <td>1.767459</td>
+      <td>0.900587</td>
+      <td>3.415071</td>
+      <td>11.662707</td>
+      <td>2.539188</td>
+      <td>0.116035</td>
+      <td>0.791657</td>
+      <td>1.90416</td>
+      <td>0.806152</td>
+    </tr>
+  </tbody>
+</table>
+<p>4 rows × 23 columns</p>
+</div></div>
+</div>
+<p><strong>Remark</strong>: If a model from the same <code class="docutils literal notranslate"><span class="pre">TorchModel</span></code> is required, the <code class="docutils literal notranslate"><span class="pre">AbstractNN</span></code> is extracted and passed as <code class="docutils literal notranslate"><span class="pre">required_models</span></code>. When calling <code class="docutils literal notranslate"><span class="pre">call_required_model</span></code> and <code class="docutils literal notranslate"><span class="pre">get_hidden_state</span></code>, you must pass the <code class="docutils literal notranslate"><span class="pre">model_name</span></code> argument.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="set_optimizers_lrschedulers.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Change optimizers and lr shedulers</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="new_data_splitters.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">New data splitters</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#For-AbstractModel">For <code class="docutils literal notranslate"><span class="pre">AbstractModel</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#For-TorchModel">For <code class="docutils literal notranslate"><span class="pre">TorchModel</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Extract-learned-hidden-representation-from-models">Extract learned hidden representation from models</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ANONYMOUS/tabular_ensemble/edit/main/docs/source/examples/advanced_usage/build_model_upon_others.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/examples/advanced_usage/build_model_upon_others.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

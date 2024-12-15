@@ -1,0 +1,2076 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Basics of running benchmarks &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/get_started/run_sample';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Dataset and configuration" href="new_dataset.html" />
+    <link rel="prev" title="Quick start" href="quick_start.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick start</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basics of running benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_dataset.html">Dataset and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inference.html">Inference on an upcoming dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_data_functionalities.html">Using data functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">Bayesian hyperparameter optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross_validation.html">Cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../get_started.html" class="nav-link">Get Started</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Basics of running benchmarks</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Basics-of-running-benchmarks">
+<h1>Basics of running benchmarks<a class="headerlink" href="#Basics-of-running-benchmarks" title="Link to this heading">#</a></h1>
+<p>Tabular Ensemble (<code class="docutils literal notranslate"><span class="pre">tabensemb</span></code>) is a benchmark platform for tabular prediction tasks. We support three well-established model bases as baselines:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">autogluon</span></code>: <a class="reference external" href="https://github.com/autogluon/autogluon">Link</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pytorch_widedeep</span></code>: <a class="reference external" href="https://github.com/jrzaurin/pytorch-widedeep">Link</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pytorch_tabular</span></code>: <a class="reference external" href="https://github.com/manujosephv/pytorch_tabular">Link</a></p></li>
+</ul>
+<p>Users can run benchmarks on customized datasets using customized preprocessing steps and implement customized models in the framework to run and compare their performance with baselines within a consistent procedure.</p>
+<p>In this part, minimum examples of regression, binary classification, and multiclass classification are performed to show the basic functionality of the package.</p>
+<section id="Regression">
+<h2>Regression<a class="headerlink" href="#Regression" title="Link to this heading">#</a></h2>
+<section id="Loading-packages">
+<h3>Loading packages<a class="headerlink" href="#Loading-packages" title="Link to this heading">#</a></h3>
+<p>First, import the necessary modules. Then check the validity of <code class="docutils literal notranslate"><span class="pre">CUDA</span></code> and determine the training device.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">tabensemb.trainer</span> <span class="kn">import</span> <span class="n">Trainer</span>
+<span class="kn">from</span> <span class="nn">tabensemb.model</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">tabensemb.config</span> <span class="kn">import</span> <span class="n">UserConfig</span>
+<span class="kn">import</span> <span class="nn">tabensemb</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using </span><span class="si">{}</span><span class="s2"> device&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Using cuda device
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">tabensemb</span></code> uses paths relative to the current directory. For different IDEs (PyCharm, VSCode, etc.), the directory can be different. Set default paths to desired ones.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tabensemb.setting[&quot;default_output_path&quot;]</span></code>: It will be used to save results. This path will be created if it does not exist.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tabensemb.setting[&quot;default_config_path&quot;]</span></code>: It should be the path to configuration files (See “Using a configuration file” for its case).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tabensemb.setting[&quot;default_config_path&quot;]</span></code>: It should be the path to data files. It will also be used to save downloaded datasets (See “Using a configuration file” for its case).</p></li>
+</ul>
+<p>In this notebook, we use a temporary directory for cleanliness. Change <code class="docutils literal notranslate"><span class="pre">temp_path.name</span></code> to your own directory.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+
+<span class="n">temp_path</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">()</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_output_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_config_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;configs&quot;</span><span class="p">)</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_data_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Configuring-a-Trainer">
+<h3>Configuring a <code class="docutils literal notranslate"><span class="pre">Trainer</span></code><a class="headerlink" href="#Configuring-a-Trainer" title="Link to this heading">#</a></h3>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">Trainer</span></code>, which acts as a bridge of data and models and provides some useful utilities.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>As an example, we use the Auto MPG dataset from <a class="reference external" href="https://archive.ics.uci.edu/datasets">UCI datasets</a>. We can import UCI datasets through the <code class="docutils literal notranslate"><span class="pre">UserConfig</span></code> class.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mpg_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;mpg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cylinders&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;displacement&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;horsepower&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;weight&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acceleration&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;model_year&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;origin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;car_name&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="o">.</span><span class="n">from_uci</span><span class="p">(</span><span class="s2">&quot;Auto MPG&quot;</span><span class="p">,</span> <span class="n">column_names</span><span class="o">=</span><span class="n">mpg_columns</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Downloading https://archive.ics.uci.edu/static/public/9/auto+mpg.zip to /tmp/tmpqcxgn2l1/data/Auto MPG.zip
+cylinders is Integer and will be treated as a continuous feature.
+model_year is Integer and will be treated as a continuous feature.
+origin is Integer and will be treated as a continuous feature.
+Unknown values are detected in [&#39;horsepower&#39;]. They will be treated as np.nan.
+The project will be saved to /tmp/tmpqcxgn2l1/output/auto-mpg/2023-09-23-20-36-00-0_UserInputConfig
+</pre></div></div>
+</div>
+<p><em>Optional</em>: We provide a useful <code class="docutils literal notranslate"><span class="pre">Logging</span></code> class to record all outputs to a file located in the above project root so that users can review the training process. This step is optional but we strongly recommend using it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.project_root</span></code> is the output directory of the <code class="docutils literal notranslate"><span class="pre">trainer</span></code>, and here we log all <code class="docutils literal notranslate"><span class="pre">stdout</span></code> and <code class="docutils literal notranslate"><span class="pre">stderr</span></code> to <code class="docutils literal notranslate"><span class="pre">log.txt</span></code> in this directory.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.utils</span> <span class="kn">import</span> <span class="n">Logging</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">Logging</span><span class="p">()</span>
+<span class="n">log</span><span class="o">.</span><span class="n">enter</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">project_root</span><span class="p">,</span> <span class="s2">&quot;log.txt&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Viewing-configurations">
+<h3>Viewing configurations<a class="headerlink" href="#Viewing-configurations" title="Link to this heading">#</a></h3>
+<p>We can view the summary of the current environment, including devices/Python version, the loaded configuration, and global settings of <code class="docutils literal notranslate"><span class="pre">tabensemb</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">summarize_setting</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Device:
+{
+        &#39;System&#39;: &#39;Linux&#39;,
+        &#39;Node name&#39;: &#39;xlluo-WS&#39;,
+        &#39;System release&#39;: &#39;5.15.6-custom&#39;,
+        &#39;System version&#39;: &#39;#1 SMP Mon Dec 13 20:27:58 CST 2021&#39;,
+        &#39;Machine architecture&#39;: &#39;x86_64&#39;,
+        &#39;Processor architecture&#39;: &#39;x86_64&#39;,
+        &#39;Processor model&#39;: &#39;11th Gen Intel(R) Core(TM) i9-11900K @ 3.50GHz&#39;,
+        &#39;Physical cores&#39;: 8,
+        &#39;Total cores&#39;: 16,
+        &#39;Max core frequency&#39;: &#39;5150.00Mhz&#39;,
+        &#39;Total memory&#39;: &#39;31.20GB&#39;,
+        &#39;Python version&#39;: &#39;3.10.12&#39;,
+        &#39;Python implementation&#39;: &#39;CPython&#39;,
+        &#39;Python compiler&#39;: &#39;GCC 11.2.0&#39;,
+        &#39;Cuda availability&#39;: True,
+        &#39;GPU devices&#39;: [
+                &#39;NVIDIA GeForce RTX 3090&#39;
+        ]
+}
+Configurations:
+{
+        &#39;database&#39;: &#39;auto-mpg&#39;,
+        &#39;task&#39;: &#39;regression&#39;,
+        &#39;loss&#39;: None,
+        &#39;bayes_opt&#39;: False,
+        &#39;bayes_calls&#39;: 50,
+        &#39;bayes_epoch&#39;: 30,
+        &#39;patience&#39;: 100,
+        &#39;epoch&#39;: 300,
+        &#39;lr&#39;: 0.001,
+        &#39;weight_decay&#39;: 1e-09,
+        &#39;batch_size&#39;: 1024,
+        &#39;layers&#39;: [
+                64,
+                128,
+                256,
+                128,
+                64
+        ],
+        &#39;SPACEs&#39;: {
+                &#39;lr&#39;: {
+                        &#39;type&#39;: &#39;Real&#39;,
+                        &#39;low&#39;: 0.0001,
+                        &#39;high&#39;: 0.05,
+                        &#39;prior&#39;: &#39;log-uniform&#39;
+                },
+                &#39;weight_decay&#39;: {
+                        &#39;type&#39;: &#39;Real&#39;,
+                        &#39;low&#39;: 1e-09,
+                        &#39;high&#39;: 0.05,
+                        &#39;prior&#39;: &#39;log-uniform&#39;
+                },
+                &#39;batch_size&#39;: {
+                        &#39;type&#39;: &#39;Categorical&#39;,
+                        &#39;categories&#39;: [
+                                64,
+                                128,
+                                256,
+                                512,
+                                1024,
+                                2048
+                        ]
+                }
+        },
+        &#39;data_splitter&#39;: &#39;RandomSplitter&#39;,
+        &#39;split_ratio&#39;: [
+                0.6,
+                0.2,
+                0.2
+        ],
+        &#39;data_imputer&#39;: &#39;MissForestImputer&#39;,
+        &#39;data_processors&#39;: [
+                (
+                        &#39;CategoricalOrdinalEncoder&#39;,
+                        {
+                        }
+                ),
+                (
+                        &#39;NaNFeatureRemover&#39;,
+                        {
+                        }
+                ),
+                (
+                        &#39;VarianceFeatureSelector&#39;,
+                        {
+                                &#39;thres&#39;: 1
+                        }
+                ),
+                (
+                        &#39;StandardScaler&#39;,
+                        {
+                        }
+                )
+        ],
+        &#39;data_derivers&#39;: [
+        ],
+        &#39;categorical_feature_names&#39;: [
+        ],
+        &#39;continuous_feature_names&#39;: [
+                &#39;displacement&#39;,
+                &#39;cylinders&#39;,
+                &#39;horsepower&#39;,
+                &#39;weight&#39;,
+                &#39;acceleration&#39;,
+                &#39;model_year&#39;,
+                &#39;origin&#39;
+        ],
+        &#39;feature_types&#39;: {
+                &#39;displacement&#39;: &#39;Continuous&#39;,
+                &#39;cylinders&#39;: &#39;Continuous&#39;,
+                &#39;horsepower&#39;: &#39;Continuous&#39;,
+                &#39;weight&#39;: &#39;Continuous&#39;,
+                &#39;acceleration&#39;: &#39;Continuous&#39;,
+                &#39;model_year&#39;: &#39;Continuous&#39;,
+                &#39;origin&#39;: &#39;Continuous&#39;
+        },
+        &#39;unique_feature_types&#39;: [
+                &#39;Continuous&#39;
+        ],
+        &#39;label_name&#39;: [
+                &#39;mpg&#39;
+        ]
+}
+Global settings:
+{
+        &#39;random_seed&#39;: 42,
+        &#39;low_memory&#39;: True,
+        &#39;verbose_per_epoch&#39;: 20,
+        &#39;test_with_no_grad&#39;: True,
+        &#39;debug_mode&#39;: False,
+        &#39;default_output_path&#39;: &#39;/tmp/tmpqcxgn2l1/output&#39;,
+        &#39;default_config_path&#39;: &#39;/tmp/tmpqcxgn2l1/configs&#39;,
+        &#39;default_data_path&#39;: &#39;/tmp/tmpqcxgn2l1/data&#39;,
+        &#39;warn_nan_metric&#39;: True,
+        &#39;raise_inconsistent_inferred_task&#39;: False,
+        &#39;matplotlib_usetex&#39;: False
+}
+</pre></div></div>
+</div>
+</section>
+<section id="Loading-data">
+<h3>Loading data<a class="headerlink" href="#Loading-data" title="Link to this heading">#</a></h3>
+<p>In the configuration summary above, the dataset file is defined by “database” under the <code class="docutils literal notranslate"><span class="pre">Configurations</span></code> category. <code class="docutils literal notranslate"><span class="pre">Trainer.load_data</span></code> automatically searches the file in the current directory and <code class="docutils literal notranslate"><span class="pre">tabensemb.setting[&quot;default_data_path&quot;]</span></code>. Now, load the Auto MPG dataset into the <code class="docutils literal notranslate"><span class="pre">Trainer</span></code>. It will process the dataset and get ready for training models:</p>
+<ol class="arabic simple">
+<li><p>Data splitting (training/validation/testing sets)</p></li>
+<li><p>Data imputation</p></li>
+<li><p>Data augmentation (for features)</p></li>
+<li><p>Data processing</p>
+<ul class="simple">
+<li><p>Data augmentation (for data points)</p></li>
+<li><p>Data filtering</p></li>
+<li><p>Feature selection</p></li>
+<li><p>Categorical encoding</p></li>
+<li><p>Data scaling</p></li>
+<li><p>etc.</p></li>
+</ul>
+</li>
+<li><p>Data augmentation (for features, especially multi-modal features)</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Dataset size: 238 80 80
+Data saved to /tmp/tmpqcxgn2l1/output/auto-mpg/2023-09-23-20-36-00-0_UserInputConfig (data.csv and tabular_data.csv).
+</pre></div></div>
+</div>
+</section>
+<section id="Initializing-model-bases">
+<h3>Initializing model bases<a class="headerlink" href="#Initializing-model-bases" title="Link to this heading">#</a></h3>
+<p>Initialize model bases and add them to the <code class="docutils literal notranslate"><span class="pre">Trainer</span></code>. We only choose a subset of models in each model base for demonstration by passing the <code class="docutils literal notranslate"><span class="pre">model_subset</span></code> argument (without it, all available models will be trained).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">PytorchTabular</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">]),</span>
+    <span class="n">WideDeep</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">]),</span>
+    <span class="n">AutoGluon</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">]),</span>
+<span class="p">]</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">add_modelbases</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Start-training">
+<h3>Start training<a class="headerlink" href="#Start-training" title="Link to this heading">#</a></h3>
+<p>Now train the model bases. The argument <code class="docutils literal notranslate"><span class="pre">stderr_to_stdout</span></code> will redirect warnings and loggings to <code class="docutils literal notranslate"><span class="pre">stdout</span></code> and make records in the notebook clean.</p>
+<p><em>Optional</em>: Using the following line, we can run k-fold cross-validation to get the leaderboard, where k is <code class="docutils literal notranslate"><span class="pre">cross_validation</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">get_leaderboard</span><span class="p">(</span><span class="n">cross_validation</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">split_type</span><span class="o">=</span><span class="s2">&quot;cv&quot;</span><span class="p">,</span> <span class="n">stderr_to_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Remark</strong>: <code class="docutils literal notranslate"><span class="pre">split_type</span></code> can be <code class="docutils literal notranslate"><span class="pre">random</span></code>, which means that the dataset is randomly split according to the given <code class="docutils literal notranslate"><span class="pre">split_ratio</span></code> in the configuration and different random seeds.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">stderr_to_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+-------------Run PytorchTabular-------------
+
+Training Category Embedding
+Global seed set to 42
+2023-09-23 20:36:01,062 - {pytorch_tabular.tabular_model:473} - INFO - Preparing the DataLoaders
+2023-09-23 20:36:01,062 - {pytorch_tabular.tabular_datamodule:290} - INFO - Setting up the datamodule for regression task
+2023-09-23 20:36:01,070 - {pytorch_tabular.tabular_model:521} - INFO - Preparing the Model: CategoryEmbeddingModel
+2023-09-23 20:36:01,081 - {pytorch_tabular.tabular_model:268} - INFO - Preparing the Trainer
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/trainer/connectors/accelerator_connector.py:589: LightningDeprecationWarning: The Trainer argument `auto_select_gpus` has been deprecated in v1.9.0 and will be removed in v2.0.0. Please use the function `pytorch_lightning.accelerators.find_usable_cuda_devices` instead.
+  rank_zero_deprecation(
+Auto select gpus: [0]
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+2023-09-23 20:36:01,991 - {pytorch_tabular.tabular_model:582} - INFO - Training Started
+You are using a CUDA device (&#39;NVIDIA GeForce RTX 3090&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name             | Type                      | Params
+---------------------------------------------------------------
+0 | _backbone        | CategoryEmbeddingBackbone | 11.4 K
+1 | _embedding_layer | Embedding1dLayer          | 14
+2 | head             | LinearHead                | 33
+3 | loss             | MSELoss                   | 0
+---------------------------------------------------------------
+11.4 K    Trainable params
+0         Non-trainable params
+11.4 K    Total params
+0.046     Total estimated model params size (MB)
+Epoch: 1/300, Train loss: 677.8015, Val loss: 582.9557, Min val loss: 582.9557, Epoch time: 0.012s.
+Epoch: 20/300, Train loss: 353.7851, Val loss: 302.0203, Min val loss: 302.0203, Epoch time: 0.010s.
+Epoch: 40/300, Train loss: 85.0776, Val loss: 62.1153, Min val loss: 62.1153, Epoch time: 0.009s.
+Epoch: 60/300, Train loss: 45.2654, Val loss: 34.2778, Min val loss: 34.2691, Epoch time: 0.009s.
+Epoch: 80/300, Train loss: 33.9537, Val loss: 26.8622, Min val loss: 26.8622, Epoch time: 0.016s.
+Epoch: 100/300, Train loss: 26.9038, Val loss: 23.2417, Min val loss: 23.2372, Epoch time: 0.011s.
+Epoch: 120/300, Train loss: 24.9622, Val loss: 20.4360, Min val loss: 20.4360, Epoch time: 0.008s.
+Epoch: 140/300, Train loss: 24.1636, Val loss: 19.4010, Min val loss: 19.4010, Epoch time: 0.012s.
+Epoch: 160/300, Train loss: 22.9200, Val loss: 18.0232, Min val loss: 17.9749, Epoch time: 0.010s.
+Epoch: 180/300, Train loss: 19.7677, Val loss: 16.9469, Min val loss: 16.9469, Epoch time: 0.011s.
+Epoch: 200/300, Train loss: 17.9390, Val loss: 16.6545, Min val loss: 16.4093, Epoch time: 0.010s.
+Epoch: 220/300, Train loss: 19.4496, Val loss: 15.4451, Min val loss: 15.1788, Epoch time: 0.011s.
+Epoch: 240/300, Train loss: 16.0483, Val loss: 14.5508, Min val loss: 14.5508, Epoch time: 0.010s.
+Epoch: 260/300, Train loss: 16.4672, Val loss: 13.8354, Min val loss: 13.8354, Epoch time: 0.010s.
+Epoch: 280/300, Train loss: 13.6031, Val loss: 12.9315, Min val loss: 12.9315, Epoch time: 0.018s.
+Epoch: 300/300, Train loss: 16.5369, Val loss: 12.3673, Min val loss: 12.3673, Epoch time: 0.011s.
+`Trainer.fit` stopped: `max_epochs=300` reached.
+2023-09-23 20:36:07,420 - {pytorch_tabular.tabular_model:584} - INFO - Training the model completed
+2023-09-23 20:36:07,420 - {pytorch_tabular.tabular_model:1258} - INFO - Loading the best model
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/utilities/cloud_io.py:33: LightningDeprecationWarning: `pytorch_lightning.utilities.cloud_io.get_filesystem` has been deprecated in v1.8.0 and will be removed in v2.0.0. Please use `lightning_fabric.utilities.cloud_io.get_filesystem` instead.
+  rank_zero_deprecation(
+Training mse loss: 11.25175
+Validation mse loss: 12.36725
+Testing mse loss: 7.83801
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/auto-mpg/2023-09-23-20-36-00-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------PytorchTabular End-------------
+
+
+-------------Run WideDeep-------------
+
+Training TabMlp
+Epoch: 1/300, Train loss: 635.5330, Val loss: 555.4755, Min val loss: 555.4755
+Epoch: 21/300, Train loss: 441.6902, Val loss: 375.7337, Min val loss: 375.7337
+Epoch: 41/300, Train loss: 145.8623, Val loss: 119.9598, Min val loss: 119.9598
+Epoch: 61/300, Train loss: 45.9133, Val loss: 34.0160, Min val loss: 34.0160
+Epoch: 81/300, Train loss: 27.6878, Val loss: 24.1525, Min val loss: 24.1525
+Epoch: 101/300, Train loss: 23.0877, Val loss: 18.2096, Min val loss: 18.2096
+Epoch: 121/300, Train loss: 21.4056, Val loss: 17.2203, Min val loss: 17.1303
+Epoch: 141/300, Train loss: 21.2559, Val loss: 16.0746, Min val loss: 16.0746
+Epoch: 161/300, Train loss: 19.2337, Val loss: 15.3027, Min val loss: 15.3027
+Epoch: 181/300, Train loss: 16.1232, Val loss: 14.5777, Min val loss: 14.5777
+Epoch: 201/300, Train loss: 16.7095, Val loss: 14.2274, Min val loss: 14.2274
+Epoch: 221/300, Train loss: 15.7366, Val loss: 13.5223, Min val loss: 13.5223
+Epoch: 241/300, Train loss: 16.9825, Val loss: 12.9892, Min val loss: 12.9892
+Epoch: 261/300, Train loss: 15.3358, Val loss: 12.4278, Min val loss: 12.4278
+Epoch: 281/300, Train loss: 13.3989, Val loss: 12.1155, Min val loss: 12.1155
+Restoring model weights from the end of the best epoch
+Training mse loss: 10.17037
+Validation mse loss: 11.66271
+Testing mse loss: 6.43856
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/auto-mpg/2023-09-23-20-36-00-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------WideDeep End-------------
+
+
+-------------Run AutoGluon-------------
+
+Training Random Forest
+Presets specified: [&#39;best_quality&#39;]
+Warning: hyperparameter tuning is currently experimental and may cause the process to hang.
+Stack configuration (auto_stack=True): num_stack_levels=0, num_bag_folds=5, num_bag_sets=1
+Beginning AutoGluon training ...
+AutoGluon will save models to &#34;/tmp/tmpqcxgn2l1/output/auto-mpg/2023-09-23-20-36-00-0_UserInputConfig/AutoGluon/Random Forest/&#34;
+AutoGluon Version:  0.8.2
+Python Version:     3.10.12
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #1 SMP Mon Dec 13 20:27:58 CST 2021
+Disk Space Avail:   149.28 GB / 502.47 GB (29.7%)
+Train Data Rows:    238
+Train Data Columns: 7
+Tuning Data Rows:    80
+Tuning Data Columns: 7
+Label Column: mpg
+Preprocessing data ...
+Using Feature Generators to preprocess the data ...
+Fitting PipelineFeatureGenerator...
+        Available Memory:                    12533.16 MB
+        Train Data (Original)  Memory Usage: 0.02 MB (0.0% of available memory)
+        Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+        Stage 1 Generators:
+                Fitting AsTypeFeatureGenerator...
+        Stage 2 Generators:
+                Fitting FillNaFeatureGenerator...
+        Stage 3 Generators:
+                Fitting IdentityFeatureGenerator...
+                        Warning: feature_metadata_in passed as input to fit_transform, but self.feature_metadata_in was already set. Ignoring feature_metadata_in.
+        Stage 4 Generators:
+                Fitting DropUniqueFeatureGenerator...
+        Stage 5 Generators:
+                Fitting DropDuplicatesFeatureGenerator...
+        Types of features in original data (raw dtype, special dtypes):
+                (&#39;float&#39;, []) : 4 | [&#39;displacement&#39;, &#39;horsepower&#39;, &#39;weight&#39;, &#39;acceleration&#39;]
+                (&#39;int&#39;, [])   : 3 | [&#39;cylinders&#39;, &#39;model_year&#39;, &#39;origin&#39;]
+        Types of features in processed data (raw dtype, special dtypes):
+                (&#39;float&#39;, []) : 4 | [&#39;displacement&#39;, &#39;horsepower&#39;, &#39;weight&#39;, &#39;acceleration&#39;]
+                (&#39;int&#39;, [])   : 3 | [&#39;cylinders&#39;, &#39;model_year&#39;, &#39;origin&#39;]
+        0.0s = Fit runtime
+        7 features in original data used to generate 7 features in processed data.
+        Train Data (Processed) Memory Usage: 0.02 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.03s ...
+AutoGluon will gauge predictive performance using evaluation metric: &#39;mean_squared_error&#39;
+        This metric&#39;s sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+        To change this, specify the eval_metric parameter of Predictor()
+use_bag_holdout=True, will use tuning_data as holdout (will not be used for early stopping).
+User-specified model hyperparameters to be fit:
+{
+        &#39;RF&#39;: {},
+}
+Fitting 1 L1 models ...
+Hyperparameter tuning model: RandomForest_BAG_L1 ...
+        No hyperparameter search space specified for RandomForest_BAG_L1. Skipping HPO. Will train one model based on the provided hyperparameters.
+Fitted model: RandomForest_BAG_L1 ...
+        -8.1918  = Validation score   (-mean_squared_error)
+        0.28s    = Training   runtime
+        0.0s     = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+        -11.4141         = Validation score   (-mean_squared_error)
+        0.0s     = Training   runtime
+        0.0s     = Validation runtime
+AutoGluon training complete, total runtime = 0.35s ... Best model: &#34;WeightedEnsemble_L2&#34;
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load(&#34;/tmp/tmpqcxgn2l1/output/auto-mpg/2023-09-23-20-36-00-0_UserInputConfig/AutoGluon/Random Forest/&#34;)
+Training mse loss: 1.07741
+Validation mse loss: 11.41409
+Testing mse loss: 4.19031
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/auto-mpg/2023-09-23-20-36-00-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------AutoGluon End-------------
+
+</pre></div></div>
+</div>
+<p>After training finishes, check the leaderboard to see their performance.</p>
+<p>Metrics used in leaderboards can be found in <code class="docutils literal notranslate"><span class="pre">tabensemb.utils.utils.REGRESSION_METRICS/BINARY_METRICS/MULTICLASS_METRICS</span></code>. Most of the metrics are from <code class="docutils literal notranslate"><span class="pre">sklearn.metrics</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">get_leaderboard</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+PytorchTabular metrics
+Category Embedding 1/1
+WideDeep metrics
+TabMlp 1/1
+AutoGluon metrics
+Random Forest 1/1
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/auto-mpg/2023-09-23-20-36-00-0_UserInputConfig/trainer.pkl&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Program</th>
+      <th>Model</th>
+      <th>Training RMSE</th>
+      <th>Training MSE</th>
+      <th>Training MAE</th>
+      <th>Training MAPE</th>
+      <th>Training R2</th>
+      <th>Training MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Training EXPLAINED_VARIANCE_SCORE</th>
+      <th>Testing RMSE</th>
+      <th>...</th>
+      <th>Testing R2</th>
+      <th>Testing MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Testing EXPLAINED_VARIANCE_SCORE</th>
+      <th>Validation RMSE</th>
+      <th>Validation MSE</th>
+      <th>Validation MAE</th>
+      <th>Validation MAPE</th>
+      <th>Validation R2</th>
+      <th>Validation MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Validation EXPLAINED_VARIANCE_SCORE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AutoGluon</td>
+      <td>Random Forest</td>
+      <td>1.037981</td>
+      <td>1.077405</td>
+      <td>0.741566</td>
+      <td>0.031074</td>
+      <td>0.983285</td>
+      <td>0.529500</td>
+      <td>0.983293</td>
+      <td>2.047025</td>
+      <td>...</td>
+      <td>0.922065</td>
+      <td>1.156333</td>
+      <td>0.922591</td>
+      <td>3.378475</td>
+      <td>11.414091</td>
+      <td>2.269187</td>
+      <td>0.102995</td>
+      <td>0.796098</td>
+      <td>1.641334</td>
+      <td>0.796506</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WideDeep</td>
+      <td>TabMlp</td>
+      <td>3.189102</td>
+      <td>10.170372</td>
+      <td>2.318564</td>
+      <td>0.096454</td>
+      <td>0.842218</td>
+      <td>1.669983</td>
+      <td>0.859805</td>
+      <td>2.537431</td>
+      <td>...</td>
+      <td>0.880250</td>
+      <td>1.767459</td>
+      <td>0.900587</td>
+      <td>3.415071</td>
+      <td>11.662707</td>
+      <td>2.539188</td>
+      <td>0.116035</td>
+      <td>0.791657</td>
+      <td>1.904160</td>
+      <td>0.806152</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PytorchTabular</td>
+      <td>Category Embedding</td>
+      <td>3.354362</td>
+      <td>11.251746</td>
+      <td>2.445915</td>
+      <td>0.101659</td>
+      <td>0.825442</td>
+      <td>1.775388</td>
+      <td>0.854523</td>
+      <td>2.799644</td>
+      <td>...</td>
+      <td>0.854221</td>
+      <td>1.963455</td>
+      <td>0.888258</td>
+      <td>3.516710</td>
+      <td>12.367250</td>
+      <td>2.731159</td>
+      <td>0.125136</td>
+      <td>0.779071</td>
+      <td>2.375105</td>
+      <td>0.808039</td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 23 columns</p>
+</div></div>
+</div>
+</section>
+</section>
+<section id="Binary-classification">
+<h2>Binary classification<a class="headerlink" href="#Binary-classification" title="Link to this heading">#</a></h2>
+<p>As a showcase for binary classification, we use the Adult dataset from UCI datasets. Note that the Adult dataset has an individual testing set, which will be discussed in the “Inference on an upcoming dataset” part.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">adult_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;age&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;workclass&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fnlwgt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;education&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;education-num&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;marital-status&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;occupation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;relationship&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;race&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sex&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;capital-gain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;capital-loss&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hours-per-week&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;native-country&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;income&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="o">.</span><span class="n">from_uci</span><span class="p">(</span><span class="s2">&quot;Adult&quot;</span><span class="p">,</span> <span class="n">column_names</span><span class="o">=</span><span class="n">adult_columns</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">PytorchTabular</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">]),</span>
+    <span class="n">WideDeep</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">]),</span>
+    <span class="n">AutoGluon</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">]),</span>
+<span class="p">]</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">add_modelbases</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">stderr_to_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">get_leaderboard</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Downloading https://archive.ics.uci.edu/static/public/2/adult.zip to /tmp/tmpqcxgn2l1/data/Adult.zip
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/xlluo/hdd/tabular_ensemble/tabensemb/config/user_config.py:292: UserWarning: There exists .test file(s) [&#39;adult.test&#39;] which should be used for final metrics. The .zip file is left for the user to process.
+  warnings.warn(
+/home/xlluo/hdd/tabular_ensemble/tabensemb/utils/utils.py:464: ParserWarning: Falling back to the &#39;python&#39; engine because the &#39;c&#39; engine does not support regex separators (separators &gt; 1 char and different from &#39;\s+&#39; are interpreted as regex); you can avoid this warning by specifying engine=&#39;python&#39;.
+  df = pd.read_csv(StringIO(s), names=names, sep=sep)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+age is Integer and will be treated as a continuous feature.
+fnlwgt is Integer and will be treated as a continuous feature.
+education-num is Integer and will be treated as a continuous feature.
+capital-gain is Integer and will be treated as a continuous feature.
+capital-loss is Integer and will be treated as a continuous feature.
+hours-per-week is Integer and will be treated as a continuous feature.
+The project will be saved to /tmp/tmpqcxgn2l1/output/adult/2023-09-23-20-36-15-0_UserInputConfig
+Dataset size: 19536 6512 6513
+Data saved to /tmp/tmpqcxgn2l1/output/adult/2023-09-23-20-36-15-0_UserInputConfig (data.csv and tabular_data.csv).
+
+-------------Run PytorchTabular-------------
+
+Training Category Embedding
+Global seed set to 42
+2023-09-23 20:36:17,315 - {pytorch_tabular.tabular_model:473} - INFO - Preparing the DataLoaders
+2023-09-23 20:36:17,317 - {pytorch_tabular.tabular_datamodule:290} - INFO - Setting up the datamodule for classification task
+2023-09-23 20:36:17,382 - {pytorch_tabular.tabular_model:521} - INFO - Preparing the Model: CategoryEmbeddingModel
+2023-09-23 20:36:17,412 - {pytorch_tabular.tabular_model:268} - INFO - Preparing the Trainer
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/trainer/connectors/accelerator_connector.py:589: LightningDeprecationWarning: The Trainer argument `auto_select_gpus` has been deprecated in v1.9.0 and will be removed in v2.0.0. Please use the function `pytorch_lightning.accelerators.find_usable_cuda_devices` instead.
+  rank_zero_deprecation(
+Auto select gpus: [0]
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+2023-09-23 20:36:17,437 - {pytorch_tabular.tabular_model:582} - INFO - Training Started
+You are using a CUDA device (&#39;NVIDIA GeForce RTX 3090&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name             | Type                      | Params
+---------------------------------------------------------------
+0 | _backbone        | CategoryEmbeddingBackbone | 18.5 K
+1 | _embedding_layer | Embedding1dLayer          | 1.4 K
+2 | head             | LinearHead                | 66
+3 | loss             | CrossEntropyLoss          | 0
+---------------------------------------------------------------
+20.0 K    Trainable params
+0         Non-trainable params
+20.0 K    Total params
+0.080     Total estimated model params size (MB)
+Epoch: 1/300, Train loss: 0.4666, Val loss: 0.3794, Min val loss: 0.3794, Epoch time: 0.465s.
+Epoch: 20/300, Train loss: 0.3112, Val loss: 0.3184, Min val loss: 0.3177, Epoch time: 0.472s.
+Epoch: 40/300, Train loss: 0.2972, Val loss: 0.3213, Min val loss: 0.3162, Epoch time: 0.435s.
+Epoch: 60/300, Train loss: 0.2864, Val loss: 0.3248, Min val loss: 0.3162, Epoch time: 0.476s.
+Epoch: 80/300, Train loss: 0.2766, Val loss: 0.3323, Min val loss: 0.3162, Epoch time: 0.530s.
+Epoch: 100/300, Train loss: 0.2677, Val loss: 0.3416, Min val loss: 0.3162, Epoch time: 0.385s.
+Epoch: 120/300, Train loss: 0.2602, Val loss: 0.3484, Min val loss: 0.3162, Epoch time: 0.527s.
+2023-09-23 20:37:10,637 - {pytorch_tabular.tabular_model:584} - INFO - Training the model completed
+2023-09-23 20:37:10,638 - {pytorch_tabular.tabular_model:1258} - INFO - Loading the best model
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/utilities/cloud_io.py:33: LightningDeprecationWarning: `pytorch_lightning.utilities.cloud_io.get_filesystem` has been deprecated in v1.8.0 and will be removed in v2.0.0. Please use `lightning_fabric.utilities.cloud_io.get_filesystem` instead.
+  rank_zero_deprecation(
+Training log_loss loss: 0.28862
+Validation log_loss loss: 0.31619
+Testing log_loss loss: 0.31114
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/adult/2023-09-23-20-36-15-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------PytorchTabular End-------------
+
+
+-------------Run WideDeep-------------
+
+Training TabMlp
+Epoch: 1/300, Train loss: 0.5206, Val loss: 0.4274, Min val loss: 0.4274
+Epoch: 21/300, Train loss: 0.3145, Val loss: 0.3161, Min val loss: 0.3161
+Epoch: 41/300, Train loss: 0.3063, Val loss: 0.3192, Min val loss: 0.3161
+Epoch: 61/300, Train loss: 0.2984, Val loss: 0.3209, Min val loss: 0.3161
+Epoch: 81/300, Train loss: 0.2905, Val loss: 0.3227, Min val loss: 0.3161
+Epoch: 101/300, Train loss: 0.2819, Val loss: 0.3266, Min val loss: 0.3161
+Epoch: 121/300, Train loss: 0.2754, Val loss: 0.3293, Min val loss: 0.3161
+Epoch 00121: early stopping
+Restoring model weights from the end of the best epoch
+Training log_loss loss: 0.30084
+Validation log_loss loss: 0.31729
+Testing log_loss loss: 0.31133
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/adult/2023-09-23-20-36-15-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------WideDeep End-------------
+
+
+-------------Run AutoGluon-------------
+
+Training Random Forest
+Presets specified: [&#39;best_quality&#39;]
+Warning: hyperparameter tuning is currently experimental and may cause the process to hang.
+Stack configuration (auto_stack=True): num_stack_levels=0, num_bag_folds=8, num_bag_sets=1
+Beginning AutoGluon training ...
+AutoGluon will save models to &#34;/tmp/tmpqcxgn2l1/output/adult/2023-09-23-20-36-15-0_UserInputConfig/AutoGluon/Random Forest/&#34;
+AutoGluon Version:  0.8.2
+Python Version:     3.10.12
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #1 SMP Mon Dec 13 20:27:58 CST 2021
+Disk Space Avail:   148.97 GB / 502.47 GB (29.6%)
+Train Data Rows:    19536
+Train Data Columns: 14
+Tuning Data Rows:    6512
+Tuning Data Columns: 14
+Label Column: income
+Preprocessing data ...
+Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
+Using Feature Generators to preprocess the data ...
+Fitting PipelineFeatureGenerator...
+        Available Memory:                    6146.04 MB
+        Train Data (Original)  Memory Usage: 15.07 MB (0.2% of available memory)
+        Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+        Stage 1 Generators:
+                Fitting AsTypeFeatureGenerator...
+                        Note: Converting 1 features to boolean dtype as they only contain 2 unique values.
+        Stage 2 Generators:
+                Fitting FillNaFeatureGenerator...
+        Stage 3 Generators:
+                Fitting IdentityFeatureGenerator...
+                        Warning: feature_metadata_in passed as input to fit_transform, but self.feature_metadata_in was already set. Ignoring feature_metadata_in.
+                Fitting CategoryFeatureGenerator...
+                        Warning: feature_metadata_in passed as input to fit_transform, but self.feature_metadata_in was already set. Ignoring feature_metadata_in.
+                        Fitting CategoryMemoryMinimizeFeatureGenerator...
+        Stage 4 Generators:
+                Fitting DropUniqueFeatureGenerator...
+        Stage 5 Generators:
+                Fitting DropDuplicatesFeatureGenerator...
+        Types of features in original data (raw dtype, special dtypes):
+                (&#39;int&#39;, [])    : 6 | [&#39;age&#39;, &#39;fnlwgt&#39;, &#39;education-num&#39;, &#39;capital-gain&#39;, &#39;capital-loss&#39;, ...]
+                (&#39;object&#39;, []) : 8 | [&#39;education&#39;, &#39;marital-status&#39;, &#39;native-country&#39;, &#39;occupation&#39;, &#39;race&#39;, ...]
+        Types of features in processed data (raw dtype, special dtypes):
+                (&#39;category&#39;, []) : 8 | [&#39;education&#39;, &#39;marital-status&#39;, &#39;native-country&#39;, &#39;occupation&#39;, &#39;race&#39;, ...]
+                (&#39;int&#39;, [])      : 6 | [&#39;age&#39;, &#39;fnlwgt&#39;, &#39;education-num&#39;, &#39;capital-gain&#39;, &#39;capital-loss&#39;, ...]
+        0.2s = Fit runtime
+        14 features in original data used to generate 14 features in processed data.
+        Train Data (Processed) Memory Usage: 1.46 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.18s ...
+AutoGluon will gauge predictive performance using evaluation metric: &#39;accuracy&#39;
+        To change this, specify the eval_metric parameter of Predictor()
+use_bag_holdout=True, will use tuning_data as holdout (will not be used for early stopping).
+User-specified model hyperparameters to be fit:
+{
+        &#39;RF&#39;: {},
+}
+Fitting 1 L1 models ...
+Hyperparameter tuning model: RandomForest_BAG_L1 ...
+        No hyperparameter search space specified for RandomForest_BAG_L1. Skipping HPO. Will train one model based on the provided hyperparameters.
+Fitted model: RandomForest_BAG_L1 ...
+        0.8543   = Validation score   (accuracy)
+        1.92s    = Training   runtime
+        0.0s     = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+        0.8538   = Validation score   (accuracy)
+        0.0s     = Training   runtime
+        0.01s    = Validation runtime
+AutoGluon training complete, total runtime = 2.4s ... Best model: &#34;WeightedEnsemble_L2&#34;
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load(&#34;/tmp/tmpqcxgn2l1/output/adult/2023-09-23-20-36-15-0_UserInputConfig/AutoGluon/Random Forest/&#34;)
+Training log_loss loss: 0.08021
+Validation log_loss loss: 0.31802
+Testing log_loss loss: 0.31261
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/adult/2023-09-23-20-36-15-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------AutoGluon End-------------
+
+PytorchTabular metrics
+Category Embedding 1/1
+WideDeep metrics
+TabMlp 1/1
+AutoGluon metrics
+Random Forest 1/1
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/adult/2023-09-23-20-36-15-0_UserInputConfig/trainer.pkl&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Program</th>
+      <th>Model</th>
+      <th>Training F1_SCORE</th>
+      <th>Training PRECISION_SCORE</th>
+      <th>Training RECALL_SCORE</th>
+      <th>Training JACCARD_SCORE</th>
+      <th>Training ACCURACY_SCORE</th>
+      <th>Training BALANCED_ACCURACY_SCORE</th>
+      <th>Training COHEN_KAPPA_SCORE</th>
+      <th>Training HAMMING_LOSS</th>
+      <th>...</th>
+      <th>Validation ACCURACY_SCORE</th>
+      <th>Validation BALANCED_ACCURACY_SCORE</th>
+      <th>Validation COHEN_KAPPA_SCORE</th>
+      <th>Validation HAMMING_LOSS</th>
+      <th>Validation MATTHEWS_CORRCOEF</th>
+      <th>Validation ZERO_ONE_LOSS</th>
+      <th>Validation ROC_AUC_SCORE</th>
+      <th>Validation LOG_LOSS</th>
+      <th>Validation BRIER_SCORE_LOSS</th>
+      <th>Validation AVERAGE_PRECISION_SCORE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>WideDeep</td>
+      <td>TabMlp</td>
+      <td>0.694200</td>
+      <td>0.728505</td>
+      <td>0.662981</td>
+      <td>0.531628</td>
+      <td>0.859388</td>
+      <td>0.792321</td>
+      <td>0.603167</td>
+      <td>0.140612</td>
+      <td>...</td>
+      <td>0.852426</td>
+      <td>0.784474</td>
+      <td>0.584884</td>
+      <td>0.147574</td>
+      <td>0.585738</td>
+      <td>0.147574</td>
+      <td>0.908951</td>
+      <td>0.317288</td>
+      <td>0.101612</td>
+      <td>0.868420</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AutoGluon</td>
+      <td>Random Forest</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.853808</td>
+      <td>0.776665</td>
+      <td>0.580404</td>
+      <td>0.146192</td>
+      <td>0.583003</td>
+      <td>0.146192</td>
+      <td>0.907010</td>
+      <td>0.318016</td>
+      <td>0.100486</td>
+      <td>0.875084</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PytorchTabular</td>
+      <td>Category Embedding</td>
+      <td>0.709806</td>
+      <td>0.738341</td>
+      <td>0.683394</td>
+      <td>0.550154</td>
+      <td>0.865479</td>
+      <td>0.803303</td>
+      <td>0.622423</td>
+      <td>0.134521</td>
+      <td>...</td>
+      <td>0.850430</td>
+      <td>0.784467</td>
+      <td>0.581612</td>
+      <td>0.149570</td>
+      <td>0.582150</td>
+      <td>0.149570</td>
+      <td>0.909318</td>
+      <td>0.316194</td>
+      <td>0.101722</td>
+      <td>0.868410</td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 44 columns</p>
+</div></div>
+</div>
+</section>
+<section id="Multiclass-classification">
+<h2>Multiclass classification<a class="headerlink" href="#Multiclass-classification" title="Link to this heading">#</a></h2>
+<p>Iris is a famous multiclass classification task. It is also loaded from UCI datasets. We gave the argument <code class="docutils literal notranslate"><span class="pre">column_names</span></code> to <code class="docutils literal notranslate"><span class="pre">from_uci</span></code> in the above examples. If we do not know the column labels, column names from the UCI website are used (whose order might be wrong, such as those for the Auto MPG dataset) and the downloaded archive will not be removed after <code class="docutils literal notranslate"><span class="pre">from_uci</span></code>. There should be a file named <code class="docutils literal notranslate"><span class="pre">xxx.name</span></code> in the archive with column names in it.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="o">.</span><span class="n">from_uci</span><span class="p">(</span><span class="s2">&quot;Iris&quot;</span><span class="p">,</span> <span class="n">datafile_name</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">PytorchTabular</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">]),</span>
+    <span class="n">WideDeep</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">]),</span>
+    <span class="n">AutoGluon</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">]),</span>
+<span class="p">]</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">add_modelbases</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">stderr_to_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">get_leaderboard</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Downloading https://archive.ics.uci.edu/static/public/53/iris.zip to /tmp/tmpqcxgn2l1/data/Iris.zip
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/xlluo/hdd/tabular_ensemble/tabensemb/config/user_config.py:323: UserWarning: `column_names` is not given. The order of columns will be loaded from the website. It is highly recommended to manually set column names. The downloaded .zip is saved. Please check its .name file for the correct order.
+  warnings.warn(
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The project will be saved to /tmp/tmpqcxgn2l1/output/iris/2023-09-23-20-37-50-0_UserInputConfig
+Dataset size: 90 30 30
+Data saved to /tmp/tmpqcxgn2l1/output/iris/2023-09-23-20-37-50-0_UserInputConfig (data.csv and tabular_data.csv).
+
+-------------Run PytorchTabular-------------
+
+Training Category Embedding
+Global seed set to 42
+2023-09-23 20:37:51,096 - {pytorch_tabular.tabular_model:473} - INFO - Preparing the DataLoaders
+2023-09-23 20:37:51,096 - {pytorch_tabular.tabular_datamodule:290} - INFO - Setting up the datamodule for classification task
+2023-09-23 20:37:51,106 - {pytorch_tabular.tabular_model:521} - INFO - Preparing the Model: CategoryEmbeddingModel
+2023-09-23 20:37:51,121 - {pytorch_tabular.tabular_model:268} - INFO - Preparing the Trainer
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/trainer/connectors/accelerator_connector.py:589: LightningDeprecationWarning: The Trainer argument `auto_select_gpus` has been deprecated in v1.9.0 and will be removed in v2.0.0. Please use the function `pytorch_lightning.accelerators.find_usable_cuda_devices` instead.
+  rank_zero_deprecation(
+Auto select gpus: [0]
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+2023-09-23 20:37:51,137 - {pytorch_tabular.tabular_model:582} - INFO - Training Started
+You are using a CUDA device (&#39;NVIDIA GeForce RTX 3090&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name             | Type                      | Params
+---------------------------------------------------------------
+0 | _backbone        | CategoryEmbeddingBackbone | 11.0 K
+1 | _embedding_layer | Embedding1dLayer          | 8
+2 | head             | LinearHead                | 99
+3 | loss             | CrossEntropyLoss          | 0
+---------------------------------------------------------------
+11.1 K    Trainable params
+0         Non-trainable params
+11.1 K    Total params
+0.044     Total estimated model params size (MB)
+Epoch: 1/300, Train loss: 1.7917, Val loss: 1.4287, Min val loss: 1.4287, Epoch time: 0.025s.
+Epoch: 20/300, Train loss: 0.3055, Val loss: 0.6197, Min val loss: 0.6197, Epoch time: 0.019s.
+Epoch: 40/300, Train loss: 0.2105, Val loss: 0.5668, Min val loss: 0.5668, Epoch time: 0.016s.
+Epoch: 60/300, Train loss: 0.1510, Val loss: 0.5234, Min val loss: 0.5234, Epoch time: 0.013s.
+Epoch: 80/300, Train loss: 0.1741, Val loss: 0.5314, Min val loss: 0.5216, Epoch time: 0.010s.
+Epoch: 100/300, Train loss: 0.0870, Val loss: 0.4985, Min val loss: 0.4853, Epoch time: 0.013s.
+Epoch: 120/300, Train loss: 0.0437, Val loss: 0.5143, Min val loss: 0.4853, Epoch time: 0.027s.
+Epoch: 140/300, Train loss: 0.0248, Val loss: 0.4864, Min val loss: 0.4844, Epoch time: 0.017s.
+Epoch: 160/300, Train loss: 0.0663, Val loss: 0.5182, Min val loss: 0.4506, Epoch time: 0.012s.
+Epoch: 180/300, Train loss: 0.0457, Val loss: 0.5648, Min val loss: 0.4506, Epoch time: 0.018s.
+Epoch: 200/300, Train loss: 0.0188, Val loss: 0.4554, Min val loss: 0.4319, Epoch time: 0.012s.
+Epoch: 220/300, Train loss: 0.0421, Val loss: 0.4980, Min val loss: 0.4269, Epoch time: 0.010s.
+Epoch: 240/300, Train loss: 0.0202, Val loss: 0.4948, Min val loss: 0.4187, Epoch time: 0.011s.
+Epoch: 260/300, Train loss: 0.0269, Val loss: 0.4776, Min val loss: 0.4187, Epoch time: 0.035s.
+Epoch: 280/300, Train loss: 0.0621, Val loss: 0.4086, Min val loss: 0.3670, Epoch time: 0.013s.
+Epoch: 300/300, Train loss: 0.0098, Val loss: 0.4748, Min val loss: 0.3670, Epoch time: 0.011s.
+`Trainer.fit` stopped: `max_epochs=300` reached.
+2023-09-23 20:37:56,026 - {pytorch_tabular.tabular_model:584} - INFO - Training the model completed
+2023-09-23 20:37:56,027 - {pytorch_tabular.tabular_model:1258} - INFO - Loading the best model
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/utilities/cloud_io.py:33: LightningDeprecationWarning: `pytorch_lightning.utilities.cloud_io.get_filesystem` has been deprecated in v1.8.0 and will be removed in v2.0.0. Please use `lightning_fabric.utilities.cloud_io.get_filesystem` instead.
+  rank_zero_deprecation(
+Training log_loss loss: 0.01391
+Validation log_loss loss: 0.36698
+Testing log_loss loss: 0.14373
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/iris/2023-09-23-20-37-50-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------PytorchTabular End-------------
+
+
+-------------Run WideDeep-------------
+
+Training TabMlp
+Epoch: 1/300, Train loss: 1.0850, Val loss: 1.0164, Min val loss: 1.0164
+Epoch: 21/300, Train loss: 0.3373, Val loss: 0.5153, Min val loss: 0.5153
+Epoch: 41/300, Train loss: 0.1735, Val loss: 0.3780, Min val loss: 0.3780
+Epoch: 61/300, Train loss: 0.1253, Val loss: 0.3279, Min val loss: 0.3165
+Epoch: 81/300, Train loss: 0.0960, Val loss: 0.3603, Min val loss: 0.2951
+Epoch: 101/300, Train loss: 0.1037, Val loss: 0.3682, Min val loss: 0.2951
+Epoch: 121/300, Train loss: 0.1171, Val loss: 0.3525, Min val loss: 0.2951
+Epoch: 141/300, Train loss: 0.0503, Val loss: 0.3754, Min val loss: 0.2951
+Epoch: 161/300, Train loss: 0.0421, Val loss: 0.3265, Min val loss: 0.2951
+Epoch 00167: early stopping
+Restoring model weights from the end of the best epoch
+Training log_loss loss: 0.06156
+Validation log_loss loss: 0.29513
+Testing log_loss loss: 0.11595
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/iris/2023-09-23-20-37-50-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------WideDeep End-------------
+
+
+-------------Run AutoGluon-------------
+
+Training Random Forest
+Presets specified: [&#39;best_quality&#39;]
+Warning: hyperparameter tuning is currently experimental and may cause the process to hang.
+Stack configuration (auto_stack=True): num_stack_levels=0, num_bag_folds=5, num_bag_sets=1
+Beginning AutoGluon training ...
+AutoGluon will save models to &#34;/tmp/tmpqcxgn2l1/output/iris/2023-09-23-20-37-50-0_UserInputConfig/AutoGluon/Random Forest/&#34;
+AutoGluon Version:  0.8.2
+Python Version:     3.10.12
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #1 SMP Mon Dec 13 20:27:58 CST 2021
+Disk Space Avail:   148.84 GB / 502.47 GB (29.6%)
+Train Data Rows:    90
+Train Data Columns: 4
+Tuning Data Rows:    30
+Tuning Data Columns: 4
+Label Column: class
+Preprocessing data ...
+Train Data Class Count: 3
+Using Feature Generators to preprocess the data ...
+Fitting PipelineFeatureGenerator...
+        Available Memory:                    4021.68 MB
+        Train Data (Original)  Memory Usage: 0.0 MB (0.0% of available memory)
+        Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+        Stage 1 Generators:
+                Fitting AsTypeFeatureGenerator...
+        Stage 2 Generators:
+                Fitting FillNaFeatureGenerator...
+        Stage 3 Generators:
+                Fitting IdentityFeatureGenerator...
+                        Warning: feature_metadata_in passed as input to fit_transform, but self.feature_metadata_in was already set. Ignoring feature_metadata_in.
+        Stage 4 Generators:
+                Fitting DropUniqueFeatureGenerator...
+        Stage 5 Generators:
+                Fitting DropDuplicatesFeatureGenerator...
+        Types of features in original data (raw dtype, special dtypes):
+                (&#39;float&#39;, []) : 4 | [&#39;sepal length&#39;, &#39;sepal width&#39;, &#39;petal length&#39;, &#39;petal width&#39;]
+        Types of features in processed data (raw dtype, special dtypes):
+                (&#39;float&#39;, []) : 4 | [&#39;sepal length&#39;, &#39;sepal width&#39;, &#39;petal length&#39;, &#39;petal width&#39;]
+        0.0s = Fit runtime
+        4 features in original data used to generate 4 features in processed data.
+        Train Data (Processed) Memory Usage: 0.0 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.06s ...
+AutoGluon will gauge predictive performance using evaluation metric: &#39;accuracy&#39;
+        To change this, specify the eval_metric parameter of Predictor()
+use_bag_holdout=True, will use tuning_data as holdout (will not be used for early stopping).
+User-specified model hyperparameters to be fit:
+{
+        &#39;RF&#39;: {},
+}
+Fitting 1 L1 models ...
+Hyperparameter tuning model: RandomForest_BAG_L1 ...
+        No hyperparameter search space specified for RandomForest_BAG_L1. Skipping HPO. Will train one model based on the provided hyperparameters.
+Fitted model: RandomForest_BAG_L1 ...
+        1.0      = Validation score   (accuracy)
+        0.57s    = Training   runtime
+        0.0s     = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+        0.8      = Validation score   (accuracy)
+        0.0s     = Training   runtime
+        0.0s     = Validation runtime
+AutoGluon training complete, total runtime = 0.69s ... Best model: &#34;WeightedEnsemble_L2&#34;
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load(&#34;/tmp/tmpqcxgn2l1/output/iris/2023-09-23-20-37-50-0_UserInputConfig/AutoGluon/Random Forest/&#34;)
+Training log_loss loss: 0.01002
+Validation log_loss loss: 0.78155
+Testing log_loss loss: 0.04824
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/iris/2023-09-23-20-37-50-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------AutoGluon End-------------
+
+PytorchTabular metrics
+Category Embedding 1/1
+WideDeep metrics
+TabMlp 1/1
+AutoGluon metrics
+Random Forest 1/1
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/iris/2023-09-23-20-37-50-0_UserInputConfig/trainer.pkl&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Program</th>
+      <th>Model</th>
+      <th>Training ACCURACY_SCORE</th>
+      <th>Training BALANCED_ACCURACY_SCORE</th>
+      <th>Training COHEN_KAPPA_SCORE</th>
+      <th>Training HAMMING_LOSS</th>
+      <th>Training MATTHEWS_CORRCOEF</th>
+      <th>Training ZERO_ONE_LOSS</th>
+      <th>Training PRECISION_SCORE_MACRO</th>
+      <th>Training PRECISION_SCORE_MICRO</th>
+      <th>...</th>
+      <th>Validation F1_SCORE_MICRO</th>
+      <th>Validation F1_SCORE_WEIGHTED</th>
+      <th>Validation JACCARD_SCORE_MACRO</th>
+      <th>Validation JACCARD_SCORE_MICRO</th>
+      <th>Validation JACCARD_SCORE_WEIGHTED</th>
+      <th>Validation TOP_K_ACCURACY_SCORE</th>
+      <th>Validation LOG_LOSS</th>
+      <th>Validation ROC_AUC_SCORE_OVR_MACRO</th>
+      <th>Validation ROC_AUC_SCORE_OVR_WEIGHTED</th>
+      <th>Validation ROC_AUC_SCORE_OVO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PytorchTabular</td>
+      <td>Category Embedding</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>0.833333</td>
+      <td>0.837232</td>
+      <td>0.756944</td>
+      <td>0.714286</td>
+      <td>0.732639</td>
+      <td>1.0</td>
+      <td>0.366983</td>
+      <td>0.974891</td>
+      <td>0.971616</td>
+      <td>0.976042</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>WideDeep</td>
+      <td>TabMlp</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>0.833333</td>
+      <td>0.837232</td>
+      <td>0.756944</td>
+      <td>0.714286</td>
+      <td>0.732639</td>
+      <td>1.0</td>
+      <td>0.295129</td>
+      <td>0.979747</td>
+      <td>0.977576</td>
+      <td>0.980833</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AutoGluon</td>
+      <td>Random Forest</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>0.800000</td>
+      <td>0.804615</td>
+      <td>0.721154</td>
+      <td>0.666667</td>
+      <td>0.689423</td>
+      <td>1.0</td>
+      <td>0.781551</td>
+      <td>0.950812</td>
+      <td>0.941465</td>
+      <td>0.951042</td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 71 columns</p>
+</div></div>
+</div>
+</section>
+<section id="Using-a-configuration-file">
+<h2>Using a configuration file<a class="headerlink" href="#Using-a-configuration-file" title="Link to this heading">#</a></h2>
+<p>In the above introduction, we use UCI datasets whose configuration is automatically generated. The configuration can also be loaded from a local <code class="docutils literal notranslate"><span class="pre">.py</span></code> or <code class="docutils literal notranslate"><span class="pre">.json</span></code> file. To run a minimum example, we provide a randomly generated sample dataset (<code class="docutils literal notranslate"><span class="pre">data/sample.csv</span></code>) and its configuration file (<code class="docutils literal notranslate"><span class="pre">configs/sample.py</span></code>) in the repository. See “Dataset and configuration” for the detailed introduction of configuration files.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tabensemb</span></code> uses paths relative to the current directory. For different IDEs (PyCharm, VSCode, etc.), the directory might be different. Set default paths to desired ones after checking the current working directory using magic commands in notebooks like <code class="docutils literal notranslate"><span class="pre">!pwd</span></code> or scripts like <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">os;</span> <span class="pre">os.getcwd()</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;../../../../&quot;</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_config_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;configs&quot;</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_data_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;data&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Load the configuration file <code class="docutils literal notranslate"><span class="pre">sample.py</span></code> using <code class="docutils literal notranslate"><span class="pre">Trainer.load_config</span></code>, which automatically searches the file in the current directory and <code class="docutils literal notranslate"><span class="pre">tabensemb.setting[&quot;default_config_path&quot;]</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The project will be saved to /tmp/tmpqcxgn2l1/output/iris/2023-09-23-20-37-58-0_sample
+Dataset size: 153 51 52
+Data saved to /tmp/tmpqcxgn2l1/output/iris/2023-09-23-20-37-58-0_sample (data.csv and tabular_data.csv).
+</pre></div></div>
+</div>
+<p>Then initialize models:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">clear_modelbase</span><span class="p">()</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">PytorchTabular</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">])</span>
+<span class="p">]</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">add_modelbases</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p><em>Optional</em>: For a quick development test, changing the following global setting significantly reduces training time.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;debug_mode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">stderr_to_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">get_leaderboard</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+-------------Run PytorchTabular-------------
+
+Training Category Embedding
+Global seed set to 42
+2023-09-23 20:37:59,305 - {pytorch_tabular.tabular_model:473} - INFO - Preparing the DataLoaders
+2023-09-23 20:37:59,306 - {pytorch_tabular.tabular_datamodule:290} - INFO - Setting up the datamodule for regression task
+2023-09-23 20:37:59,326 - {pytorch_tabular.tabular_model:521} - INFO - Preparing the Model: CategoryEmbeddingModel
+2023-09-23 20:37:59,350 - {pytorch_tabular.tabular_model:268} - INFO - Preparing the Trainer
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/trainer/connectors/accelerator_connector.py:589: LightningDeprecationWarning: The Trainer argument `auto_select_gpus` has been deprecated in v1.9.0 and will be removed in v2.0.0. Please use the function `pytorch_lightning.accelerators.find_usable_cuda_devices` instead.
+  rank_zero_deprecation(
+Auto select gpus: [0]
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+2023-09-23 20:37:59,372 - {pytorch_tabular.tabular_model:582} - INFO - Training Started
+You are using a CUDA device (&#39;NVIDIA GeForce RTX 3090&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name             | Type                      | Params
+---------------------------------------------------------------
+0 | _backbone        | CategoryEmbeddingBackbone | 12.3 K
+1 | _embedding_layer | Embedding1dLayer          | 64
+2 | head             | LinearHead                | 33
+3 | loss             | MSELoss                   | 0
+---------------------------------------------------------------
+12.4 K    Trainable params
+0         Non-trainable params
+12.4 K    Total params
+0.049     Total estimated model params size (MB)
+Epoch: 1/2, Train loss: 33183.6562, Val loss: 22223.0391, Min val loss: 22223.0391, Epoch time: 0.014s.
+`Trainer.fit` stopped: `max_epochs=2` reached.
+2023-09-23 20:37:59,437 - {pytorch_tabular.tabular_model:584} - INFO - Training the model completed
+2023-09-23 20:37:59,438 - {pytorch_tabular.tabular_model:1258} - INFO - Loading the best model
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/utilities/cloud_io.py:33: LightningDeprecationWarning: `pytorch_lightning.utilities.cloud_io.get_filesystem` has been deprecated in v1.8.0 and will be removed in v2.0.0. Please use `lightning_fabric.utilities.cloud_io.get_filesystem` instead.
+  rank_zero_deprecation(
+Training mse loss: 33085.08333
+Validation mse loss: 22182.62019
+Testing mse loss: 29810.51082
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/iris/2023-09-23-20-37-58-0_sample/trainer.pkl&#39;)
+
+-------------PytorchTabular End-------------
+
+PytorchTabular metrics
+Category Embedding 1/1
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpqcxgn2l1/output/iris/2023-09-23-20-37-58-0_sample/trainer.pkl&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Program</th>
+      <th>Model</th>
+      <th>Training RMSE</th>
+      <th>Training MSE</th>
+      <th>Training MAE</th>
+      <th>Training MAPE</th>
+      <th>Training R2</th>
+      <th>Training MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Training EXPLAINED_VARIANCE_SCORE</th>
+      <th>Testing RMSE</th>
+      <th>...</th>
+      <th>Testing R2</th>
+      <th>Testing MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Testing EXPLAINED_VARIANCE_SCORE</th>
+      <th>Validation RMSE</th>
+      <th>Validation MSE</th>
+      <th>Validation MAE</th>
+      <th>Validation MAPE</th>
+      <th>Validation R2</th>
+      <th>Validation MEDIAN_ABSOLUTE_ERROR</th>
+      <th>Validation EXPLAINED_VARIANCE_SCORE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PytorchTabular</td>
+      <td>Category Embedding</td>
+      <td>181.893055</td>
+      <td>33085.083331</td>
+      <td>145.409738</td>
+      <td>1.055588</td>
+      <td>-0.004359</td>
+      <td>121.139843</td>
+      <td>0.001236</td>
+      <td>172.657206</td>
+      <td>...</td>
+      <td>-0.005851</td>
+      <td>118.665751</td>
+      <td>-0.001657</td>
+      <td>148.93831</td>
+      <td>22182.620185</td>
+      <td>121.146176</td>
+      <td>1.00906</td>
+      <td>-0.001817</td>
+      <td>92.916794</td>
+      <td>0.001214</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 23 columns</p>
+</div></div>
+</div>
+<p>Clean the temporary directory of the notebook.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp_path</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="quick_start.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Quick start</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="new_dataset.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Dataset and configuration</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Regression">Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Loading-packages">Loading packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Configuring-a-Trainer">Configuring a <code class="docutils literal notranslate"><span class="pre">Trainer</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Viewing-configurations">Viewing configurations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Loading-data">Loading data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Initializing-model-bases">Initializing model bases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Start-training">Start training</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Binary-classification">Binary classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Multiclass-classification">Multiclass classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Using-a-configuration-file">Using a configuration file</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ANONYMOUS/tabular_ensemble/edit/main/docs/source/examples/get_started/run_sample.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/examples/get_started/run_sample.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

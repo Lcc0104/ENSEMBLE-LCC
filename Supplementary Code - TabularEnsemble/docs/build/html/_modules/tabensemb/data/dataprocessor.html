@@ -1,0 +1,910 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tabensemb.data.dataprocessor &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/tabensemb/data/dataprocessor';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">tabensemb.data.dataprocessor</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for tabensemb.data.dataprocessor</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">tabensemb.utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">tabensemb.data</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AbstractProcessor</span><span class="p">,</span>
+    <span class="n">AbstractFeatureSelector</span><span class="p">,</span>
+    <span class="n">AbstractTransformer</span><span class="p">,</span>
+    <span class="n">AbstractScaler</span><span class="p">,</span>
+    <span class="n">AbstractAugmenter</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">tabensemb.data</span> <span class="kn">import</span> <span class="n">DataModule</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">VarianceThreshold</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span> <span class="k">as</span> <span class="n">skStandardScaler</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Type</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">get_corr_sets</span><span class="p">,</span> <span class="n">OrdinalEncoder</span>
+
+
+<div class="viewcode-block" id="SampleDataAugmenter">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.SampleDataAugmenter.html#tabensemb.data.dataprocessor.SampleDataAugmenter">[docs]</a>
+<span class="k">class</span> <span class="nc">SampleDataAugmenter</span><span class="p">(</span><span class="n">AbstractAugmenter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is a sample of data augmentation, which is not reasonable at all and is only used to test data augmentation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SampleDataAugmenter._get_augmented">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.SampleDataAugmenter._get_augmented.html#tabensemb.data.dataprocessor.SampleDataAugmenter._get_augmented">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_augmented</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="n">augmented</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:],</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">augmented</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="FeatureValueSelector">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.FeatureValueSelector.html#tabensemb.data.dataprocessor.FeatureValueSelector">[docs]</a>
+<span class="k">class</span> <span class="nc">FeatureValueSelector</span><span class="p">(</span><span class="n">AbstractProcessor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Select data with the specified feature value.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    feature: str</span>
+<span class="sd">        The feature that will be filtered.</span>
+<span class="sd">    value: float</span>
+<span class="sd">        The selected feature value.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The ``FeatureValueSelector`` will not change anything in the upcoming dataset, which means that the value in the</span>
+<span class="sd">    upcoming set may exceed the range you expect. A typical error can be &quot;IndexError: index out of range in self&quot; from</span>
+<span class="sd">    ``torch.embedding`` because of categorical features.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="FeatureValueSelector._required_kwargs">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.FeatureValueSelector._required_kwargs.html#tabensemb.data.dataprocessor.FeatureValueSelector._required_kwargs">[docs]</a>
+    <span class="k">def</span> <span class="nf">_required_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="FeatureValueSelector._fit_transform">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.FeatureValueSelector._fit_transform.html#tabensemb.data.dataprocessor.FeatureValueSelector._fit_transform">[docs]</a>
+    <span class="k">def</span> <span class="nf">_fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+        <span class="n">feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">]</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">datamodule</span><span class="o">.</span><span class="n">select_by_value</span><span class="p">(</span><span class="n">selection</span><span class="o">=</span><span class="p">{</span><span class="n">feature</span><span class="p">:</span> <span class="n">value</span><span class="p">},</span> <span class="n">df</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">indices_retain_order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">])</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices_retain_order</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">feature</span><span class="p">,</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="FeatureValueSelector._transform">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.FeatureValueSelector._transform.html#tabensemb.data.dataprocessor.FeatureValueSelector._transform">[docs]</a>
+    <span class="k">def</span> <span class="nf">_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">datamodule</span><span class="o">.</span><span class="n">select_by_value</span><span class="p">(</span>
+            <span class="n">selection</span><span class="o">=</span><span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">},</span> <span class="n">df</span><span class="o">=</span><span class="n">data</span>
+        <span class="p">)</span>
+        <span class="n">indices_retain_order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">datamodule</span><span class="o">.</span><span class="n">training</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Value </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> not available for feature </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="si">}</span><span class="s2">. Select from </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices_retain_order</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Value </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> not available for feature </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="si">}</span><span class="s2"> selected by &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="IQRRemover">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.IQRRemover.html#tabensemb.data.dataprocessor.IQRRemover">[docs]</a>
+<span class="k">class</span> <span class="nc">IQRRemover</span><span class="p">(</span><span class="n">AbstractProcessor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove outliers using the IQR strategy. Outliers are those</span>
+<span class="sd">    out of the range [25-percentile - 1.5 * IQR, 75-percentile + 1.5 * IQR], where IQR = 75-percentile - 25-percentile.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="IQRRemover._fit_transform">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.IQRRemover._fit_transform.html#tabensemb.data.dataprocessor.IQRRemover._fit_transform">[docs]</a>
+    <span class="k">def</span> <span class="nf">_fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removing outliers by IQR. Original size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">, &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">datamodule</span><span class="o">.</span><span class="n">extract_original_cont_feature_names</span><span class="p">(</span>
+            <span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span>
+        <span class="p">):</span>
+            <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">feature</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All values of </span><span class="si">{</span><span class="n">feature</span><span class="si">}</span><span class="s2"> are NaN.&quot;</span><span class="p">)</span>
+            <span class="n">Q1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="mi">25</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;midpoint&quot;</span><span class="p">)</span>
+            <span class="n">Q3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="mi">75</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;midpoint&quot;</span><span class="p">)</span>
+            <span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+            <span class="k">if</span> <span class="n">IQR</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">upper</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span><span class="p">))[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">lower</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span><span class="p">))[</span><span class="mi">0</span><span class="p">]]</span>
+
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">upper</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">lower</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="IQRRemover._transform">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.IQRRemover._transform.html#tabensemb.data.dataprocessor.IQRRemover._transform">[docs]</a>
+    <span class="k">def</span> <span class="nf">_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="StdRemover">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.StdRemover.html#tabensemb.data.dataprocessor.StdRemover">[docs]</a>
+<span class="k">class</span> <span class="nc">StdRemover</span><span class="p">(</span><span class="n">AbstractProcessor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove outliers using the standard error strategy. Outliers are those out of the range of 3sigma.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="StdRemover._fit_transform">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.StdRemover._fit_transform.html#tabensemb.data.dataprocessor.StdRemover._fit_transform">[docs]</a>
+    <span class="k">def</span> <span class="nf">_fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removing outliers by std. Original size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">, &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">datamodule</span><span class="o">.</span><span class="n">extract_original_cont_feature_names</span><span class="p">(</span>
+            <span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span>
+        <span class="p">):</span>
+            <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">feature</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All values of </span><span class="si">{</span><span class="n">feature</span><span class="si">}</span><span class="s2"> are NaN.&quot;</span><span class="p">)</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+            <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">std</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">upper</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">std</span><span class="p">))[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">lower</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">std</span><span class="p">))[</span><span class="mi">0</span><span class="p">]]</span>
+
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">upper</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">lower</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="StdRemover._transform">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.StdRemover._transform.html#tabensemb.data.dataprocessor.StdRemover._transform">[docs]</a>
+    <span class="k">def</span> <span class="nf">_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="NaNFeatureRemover">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.NaNFeatureRemover.html#tabensemb.data.dataprocessor.NaNFeatureRemover">[docs]</a>
+<span class="k">class</span> <span class="nc">NaNFeatureRemover</span><span class="p">(</span><span class="n">AbstractFeatureSelector</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove features that contain no valid value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="NaNFeatureRemover._get_feature_names_out">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.NaNFeatureRemover._get_feature_names_out.html#tabensemb.data.dataprocessor.NaNFeatureRemover._get_feature_names_out">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_feature_names_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">):</span>
+        <span class="n">retain_features</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">all_missing_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">all_feature_names</span><span class="p">])</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datamodule</span><span class="o">.</span><span class="n">all_feature_names</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_missing_idx</span><span class="p">:</span>
+                <span class="n">retain_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">retain_features</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="RFEFeatureSelector">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.RFEFeatureSelector.html#tabensemb.data.dataprocessor.RFEFeatureSelector">[docs]</a>
+<span class="k">class</span> <span class="nc">RFEFeatureSelector</span><span class="p">(</span><span class="n">AbstractFeatureSelector</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Select features using recursive feature elimination, adapted from the implementation of RFECV in sklearn.</span>
+<span class="sd">    Available arguments:</span>
+
+<span class="sd">    n_estimators: int</span>
+<span class="sd">        The number of trees used in random forests.</span>
+<span class="sd">    step: int</span>
+<span class="sd">        The number of eliminated features at each step.</span>
+<span class="sd">    min_features_to_select: int</span>
+<span class="sd">        The minimum number of features.</span>
+<span class="sd">    method: str</span>
+<span class="sd">        The method of calculating importance. &quot;auto&quot; for default impurity-based method implemented in</span>
+<span class="sd">        RandomForestRegressor, and &quot;shap&quot; for SHAP value (which may slow down the program but is more accurate).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RFEFeatureSelector._defaults">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.RFEFeatureSelector._defaults.html#tabensemb.data.dataprocessor.RFEFeatureSelector._defaults">[docs]</a>
+    <span class="k">def</span> <span class="nf">_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">min_features_to_select</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RFEFeatureSelector._get_feature_names_out">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.RFEFeatureSelector._get_feature_names_out.html#tabensemb.data.dataprocessor.RFEFeatureSelector._get_feature_names_out">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_feature_names_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">tabensemb.utils.processors.rfecv</span> <span class="kn">import</span> <span class="n">ExtendRFECV</span>
+        <span class="kn">import</span> <span class="nn">shap</span>
+
+        <span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">importance_getter</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">selected_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                    <span class="n">size</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                    <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="p">:,</span>
+            <span class="p">]</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">shap</span><span class="o">.</span><span class="n">Explainer</span><span class="p">(</span><span class="n">estimator</span><span class="p">)(</span><span class="n">selected_data</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">),</span>
+                <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">rfecv</span> <span class="o">=</span> <span class="n">ExtendRFECV</span><span class="p">(</span>
+            <span class="c1"># RFECV does not support categorical encoding. The estimator should have `coef_` or `feature_importances_`</span>
+            <span class="c1"># so pipeline is not valid if importance_getter==&quot;auto&quot;. shap can not handle a pipeline either.</span>
+            <span class="n">estimator</span><span class="o">=</span><span class="n">datamodule</span><span class="o">.</span><span class="n">get_base_predictor</span><span class="p">(</span>
+                <span class="n">categorical</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">n_estimators</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">],</span>
+                <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">step</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;step&quot;</span><span class="p">],</span>
+            <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span>
+            <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;neg_root_mean_squared_error&quot;</span><span class="p">,</span>
+            <span class="n">min_features_to_select</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;min_features_to_select&quot;</span><span class="p">],</span>
+            <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;verbose&quot;</span><span class="p">],</span>
+            <span class="n">importance_getter</span><span class="o">=</span><span class="p">(</span>
+                <span class="n">importance_getter</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;shap&quot;</span>
+                <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_name</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Multi-target task is not supported by </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">. Only the first label is used.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+        <span class="n">rfecv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">all_feature_names</span><span class="p">],</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+        <span class="p">)</span>
+        <span class="n">retain_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">rfecv</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">retain_features</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="VarianceFeatureSelector">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.VarianceFeatureSelector.html#tabensemb.data.dataprocessor.VarianceFeatureSelector">[docs]</a>
+<span class="k">class</span> <span class="nc">VarianceFeatureSelector</span><span class="p">(</span><span class="n">AbstractFeatureSelector</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove features that almost (by a certain fraction) contain an identical value.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    thres: float</span>
+<span class="sd">        If more than thres * 100 percent of values are the same, the feature is removed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="VarianceFeatureSelector._defaults">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.VarianceFeatureSelector._defaults.html#tabensemb.data.dataprocessor.VarianceFeatureSelector._defaults">[docs]</a>
+    <span class="k">def</span> <span class="nf">_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">thres</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VarianceFeatureSelector._get_feature_names_out">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.VarianceFeatureSelector._get_feature_names_out.html#tabensemb.data.dataprocessor.VarianceFeatureSelector._get_feature_names_out">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_feature_names_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">):</span>
+        <span class="n">thres</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;thres&quot;</span><span class="p">]</span>
+        <span class="n">sel</span> <span class="o">=</span> <span class="n">VarianceThreshold</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="p">(</span><span class="n">thres</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">thres</span><span class="p">)))</span>
+        <span class="n">sel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">all_feature_names</span><span class="p">],</span>
+            <span class="p">(</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+                <span class="k">else</span> <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+            <span class="p">),</span>  <span class="c1"># Ignored.</span>
+        <span class="p">)</span>
+        <span class="n">retain_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sel</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">retain_features</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CorrFeatureSelector">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.CorrFeatureSelector.html#tabensemb.data.dataprocessor.CorrFeatureSelector">[docs]</a>
+<span class="k">class</span> <span class="nc">CorrFeatureSelector</span><span class="p">(</span><span class="n">AbstractFeatureSelector</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Select features that are not correlated (in the sense of Pearson correlation). Correlated features will be ranked</span>
+<span class="sd">    by SHAP using RandomForestRegressor, and the feature with the highest importance will be selected.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    thres:</span>
+<span class="sd">        The threshold of the Pearson correlation coefficient.</span>
+<span class="sd">    n_estimators:</span>
+<span class="sd">        The number of trees used in random forests.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CorrFeatureSelector._defaults">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.CorrFeatureSelector._defaults.html#tabensemb.data.dataprocessor.CorrFeatureSelector._defaults">[docs]</a>
+    <span class="k">def</span> <span class="nf">_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">thres</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CorrFeatureSelector._get_feature_names_out">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.CorrFeatureSelector._get_feature_names_out.html#tabensemb.data.dataprocessor.CorrFeatureSelector._get_feature_names_out">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_feature_names_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">shap</span>
+
+        <span class="n">abs_corr</span> <span class="o">=</span> <span class="n">datamodule</span><span class="o">.</span><span class="n">cal_corr</span><span class="p">(</span><span class="n">imputed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">features_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
+        <span class="n">where_corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">abs_corr</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;thres&quot;</span><span class="p">])</span>
+        <span class="n">corr_feature</span><span class="p">,</span> <span class="n">corr_sets</span> <span class="o">=</span> <span class="n">get_corr_sets</span><span class="p">(</span>
+            <span class="n">where_corr</span><span class="p">,</span> <span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span>
+        <span class="p">)</span>
+        <span class="n">rf</span> <span class="o">=</span> <span class="n">datamodule</span><span class="o">.</span><span class="n">get_base_predictor</span><span class="p">(</span>
+            <span class="n">categorical</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">n_estimators</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">],</span>
+            <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">all_feature_names</span><span class="p">],</span>
+            <span class="p">(</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+                <span class="k">else</span> <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">Explainer</span><span class="p">(</span><span class="n">rf</span><span class="p">)</span>
+        <span class="n">shap_values</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="nb">min</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)]),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span>
+                <span class="p">),</span>
+                <span class="n">datamodule</span><span class="o">.</span><span class="n">all_feature_names</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="n">retain_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">,</span> <span class="n">corr_feature</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">attr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">shap_values</span><span class="o">.</span><span class="n">values</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Correlated features (Ranked by SHAP):&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">corr_set</span> <span class="ow">in</span> <span class="n">corr_sets</span><span class="p">:</span>
+            <span class="n">set_shap</span> <span class="o">=</span> <span class="p">[</span><span class="n">attr</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">all_feature_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">corr_set</span><span class="p">]</span>
+            <span class="n">max_shap_feature</span> <span class="o">=</span> <span class="n">corr_set</span><span class="p">[</span><span class="n">set_shap</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">set_shap</span><span class="p">))]</span>
+            <span class="n">retain_features</span> <span class="o">+=</span> <span class="p">[</span><span class="n">max_shap_feature</span><span class="p">]</span>
+            <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">set_shap</span><span class="p">)</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+            <span class="n">corr_set_dict</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">order</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">corr_set_dict</span><span class="p">[</span><span class="n">corr_set</span><span class="p">[</span><span class="n">idx</span><span class="p">]]</span> <span class="o">=</span> <span class="n">set_shap</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">pretty</span><span class="p">(</span><span class="n">corr_set_dict</span><span class="p">))</span>
+        <span class="n">retain_features</span> <span class="o">+=</span> <span class="n">datamodule</span><span class="o">.</span><span class="n">cat_feature_names</span>
+        <span class="k">return</span> <span class="n">retain_features</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="StandardScaler">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.StandardScaler.html#tabensemb.data.dataprocessor.StandardScaler">[docs]</a>
+<span class="k">class</span> <span class="nc">StandardScaler</span><span class="p">(</span><span class="n">AbstractScaler</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A standard scaler implemented using StandardScaler from sklearn.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="StandardScaler._fit_transform">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.StandardScaler._fit_transform.html#tabensemb.data.dataprocessor.StandardScaler._fit_transform">[docs]</a>
+    <span class="k">def</span> <span class="nf">_fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+        <span class="n">scaler</span> <span class="o">=</span> <span class="n">skStandardScaler</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span> <span class="o">=</span> <span class="n">scaler</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="StandardScaler._transform">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.StandardScaler._transform.html#tabensemb.data.dataprocessor.StandardScaler._transform">[docs]</a>
+    <span class="k">def</span> <span class="nf">_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CategoricalOrdinalEncoder">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.CategoricalOrdinalEncoder.html#tabensemb.data.dataprocessor.CategoricalOrdinalEncoder">[docs]</a>
+<span class="k">class</span> <span class="nc">CategoricalOrdinalEncoder</span><span class="p">(</span><span class="n">AbstractTransformer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A categorical feature encoder that transforms string values to unique integer values.</span>
+<span class="sd">    See :class:`~tabensemb.data.utils.OrdinalEncoder` for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CategoricalOrdinalEncoder.__init__">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.CategoricalOrdinalEncoder.html#tabensemb.data.dataprocessor.CategoricalOrdinalEncoder.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CategoricalOrdinalEncoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">record_feature_mapping</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="CategoricalOrdinalEncoder._fit_transform">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.CategoricalOrdinalEncoder._fit_transform.html#tabensemb.data.dataprocessor.CategoricalOrdinalEncoder._fit_transform">[docs]</a>
+    <span class="k">def</span> <span class="nf">_fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+        <span class="n">oe</span> <span class="o">=</span> <span class="n">OrdinalEncoder</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">oe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cat_feature_names</span><span class="p">])</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">datamodule</span><span class="o">.</span><span class="n">cat_feature_mapping</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">oe</span><span class="o">.</span><span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span> <span class="o">=</span> <span class="n">oe</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">record_feature_mapping</span> <span class="o">=</span> <span class="n">cp</span><span class="p">(</span><span class="n">datamodule</span><span class="o">.</span><span class="n">cat_feature_mapping</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="CategoricalOrdinalEncoder._transform">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.CategoricalOrdinalEncoder._transform.html#tabensemb.data.dataprocessor.CategoricalOrdinalEncoder._transform">[docs]</a>
+    <span class="k">def</span> <span class="nf">_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">datamodule</span><span class="p">:</span> <span class="n">DataModule</span><span class="p">):</span>
+        <span class="n">datamodule</span><span class="o">.</span><span class="n">cat_feature_mapping</span> <span class="o">=</span> <span class="n">cp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">record_feature_mapping</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="CategoricalOrdinalEncoder.var_slip">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.CategoricalOrdinalEncoder.var_slip.html#tabensemb.data.dataprocessor.CategoricalOrdinalEncoder.var_slip">[docs]</a>
+    <span class="k">def</span> <span class="nf">var_slip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_name</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span></div>
+</div>
+
+
+
+<span class="n">processor_mapping</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">clsmembers</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">],</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">clsmembers</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">AbstractProcessor</span><span class="p">):</span>
+        <span class="n">processor_mapping</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span>
+
+
+<div class="viewcode-block" id="get_data_processor">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.data.dataprocessor.get_data_processor.html#tabensemb.data.dataprocessor.get_data_processor">[docs]</a>
+<span class="k">def</span> <span class="nf">get_data_processor</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">[</span><span class="n">AbstractProcessor</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">processor_mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data processor </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> not implemented.&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">processor_mapping</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">AbstractProcessor</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is not the subclass of AbstractProcessor.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">processor_mapping</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

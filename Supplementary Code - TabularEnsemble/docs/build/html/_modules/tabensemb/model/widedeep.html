@@ -1,0 +1,963 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tabensemb.model.widedeep &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/tabensemb/model/widedeep';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">tabensemb.model.widedeep</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for tabensemb.model.widedeep</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">AbstractWrapper</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">tabensemb.utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">tabensemb.model</span> <span class="kn">import</span> <span class="n">AbstractModel</span>
+<span class="kn">from</span> <span class="nn">skopt.space</span> <span class="kn">import</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Categorical</span><span class="p">,</span> <span class="n">Real</span>
+<span class="kn">from</span> <span class="nn">packaging</span> <span class="kn">import</span> <span class="n">version</span>
+
+<span class="k">if</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;2.0.0&quot;</span><span class="p">):</span>
+    <span class="c1"># From pytorch_widedeep &gt; 1.2.2, it imports LRScheduler instead of _LRScheduler</span>
+    <span class="kn">from</span> <span class="nn">torch.optim.lr_scheduler</span> <span class="kn">import</span> <span class="n">_LRScheduler</span>
+
+    <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">LRScheduler</span> <span class="o">=</span> <span class="n">_LRScheduler</span>
+
+
+<div class="viewcode-block" id="WideDeep">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeep.html#tabensemb.model.WideDeep">[docs]</a>
+<span class="k">class</span> <span class="nc">WideDeep</span><span class="p">(</span><span class="n">AbstractModel</span><span class="p">):</span>
+<div class="viewcode-block" id="WideDeep.__init__">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeep.html#tabensemb.model.WideDeep.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">WideDeep</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">label_name</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;pytorch-widedeep does not support multi-target tasks. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;See https://github.com/jrzaurin/pytorch-widedeep/issues/152&quot;</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="WideDeep._get_program_name">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeep._get_program_name.html#tabensemb.model.WideDeep._get_program_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">_get_program_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;WideDeep&quot;</span></div>
+
+
+<div class="viewcode-block" id="WideDeep._space">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeep._space.html#tabensemb.model.WideDeep._space">[docs]</a>
+    <span class="k">def</span> <span class="nf">_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Spaces are selected around default parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_space_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;TabMlp&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mlp_dropout&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;TabResnet&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mlp_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;blocks_dropout&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;TabTransformer&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mlp_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_dim&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_heads&quot;</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_blocks&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;attn_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ff_dropout&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;TabNet&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_steps&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;step_dim&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;attn_dim&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dropout&quot;</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span>
+                    <span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                    <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_glu_step_dependent&quot;</span><span class="p">,</span>
+                    <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_glu_shared&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;gamma&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;SAINT&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mlp_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_dim&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_heads&quot;</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_blocks&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;attn_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ff_dropout&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;ContextAttentionMLP&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_dim&quot;</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_blocks&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;attn_dropout&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;SelfAttentionMLP&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_dim&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_heads&quot;</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_blocks&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;attn_dropout&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;FTTransformer&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mlp_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_dim&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_heads&quot;</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_blocks&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;attn_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ff_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;kv_compression_factor&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;TabPerceiver&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mlp_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_dim&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_cross_attn_heads&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_latents&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;latent_dim&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_latent_heads&quot;</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span>
+                    <span class="n">low</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_latent_blocks&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span>
+                <span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span>
+                    <span class="n">low</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_perceiver_blocks&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span>
+                <span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;attn_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ff_dropout&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+            <span class="s2">&quot;TabFastFormer&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;mlp_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input_dim&quot;</span><span class="p">),</span>
+                <span class="n">Categorical</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_heads&quot;</span><span class="p">),</span>
+                <span class="n">Integer</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_blocks&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;attn_dropout&quot;</span><span class="p">),</span>
+                <span class="n">Real</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ff_dropout&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">SPACE</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">_space_dict</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="WideDeep._initial_values">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeep._initial_values.html#tabensemb.model.WideDeep._initial_values">[docs]</a>
+    <span class="k">def</span> <span class="nf">_initial_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="n">_value_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;TabMlp&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;mlp_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;TabResnet&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;mlp_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;blocks_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;TabTransformer&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;mlp_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;input_dim&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+                <span class="s2">&quot;n_heads&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                <span class="s2">&quot;n_blocks&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+                <span class="s2">&quot;attn_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;ff_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;TabNet&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;n_steps&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="s2">&quot;step_dim&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                <span class="s2">&quot;attn_dim&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                <span class="s2">&quot;dropout&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s2">&quot;n_glu_step_dependent&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="s2">&quot;n_glu_shared&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="mf">1.3</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;SAINT&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;mlp_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;input_dim&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+                <span class="s2">&quot;n_heads&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="s2">&quot;n_blocks&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="s2">&quot;attn_dropout&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+                <span class="s2">&quot;ff_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;ContextAttentionMLP&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;input_dim&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+                <span class="s2">&quot;n_blocks&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="s2">&quot;attn_dropout&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;SelfAttentionMLP&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;input_dim&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+                <span class="s2">&quot;n_heads&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                <span class="s2">&quot;n_blocks&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="s2">&quot;attn_dropout&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;FTTransformer&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;mlp_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;input_dim&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+                <span class="s2">&quot;n_heads&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                <span class="s2">&quot;n_blocks&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="s2">&quot;attn_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;ff_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;kv_compression_factor&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;TabPerceiver&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;mlp_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;input_dim&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+                <span class="s2">&quot;n_cross_attn_heads&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="s2">&quot;n_latents&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>  <span class="c1"># 16 by default in widedeep.</span>
+                <span class="s2">&quot;latent_dim&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>  <span class="c1"># 128 by default in widedeep.</span>
+                <span class="s2">&quot;n_latent_heads&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="s2">&quot;n_latent_blocks&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="s2">&quot;n_perceiver_blocks&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="s2">&quot;attn_dropout&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+                <span class="s2">&quot;ff_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;TabFastFormer&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;cat_embed_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;mlp_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;input_dim&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+                <span class="s2">&quot;n_heads&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                <span class="s2">&quot;n_blocks&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="s2">&quot;attn_dropout&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+                <span class="s2">&quot;ff_dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">_value_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">_value_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">chosen_params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_value_dict</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="WideDeep._new_model">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeep._new_model.html#tabensemb.model.WideDeep._new_model">[docs]</a>
+    <span class="k">def</span> <span class="nf">_new_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">pytorch_widedeep.models</span> <span class="kn">import</span> <span class="p">(</span>
+            <span class="n">WideDeep</span><span class="p">,</span>
+            <span class="n">TabMlp</span><span class="p">,</span>
+            <span class="n">TabResnet</span><span class="p">,</span>
+            <span class="n">TabTransformer</span><span class="p">,</span>
+            <span class="n">TabNet</span><span class="p">,</span>
+            <span class="n">SAINT</span><span class="p">,</span>
+            <span class="n">ContextAttentionMLP</span><span class="p">,</span>
+            <span class="n">SelfAttentionMLP</span><span class="p">,</span>
+            <span class="n">FTTransformer</span><span class="p">,</span>
+            <span class="n">TabPerceiver</span><span class="p">,</span>
+            <span class="n">TabFastFormer</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">pytorch_widedeep</span> <span class="kn">import</span> <span class="n">Trainer</span> <span class="k">as</span> <span class="n">wd_Trainer</span>
+
+        <span class="n">cont_feature_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span>
+        <span class="n">cat_feature_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">cat_feature_names</span>
+
+        <span class="p">(</span>
+            <span class="n">opt_name</span><span class="p">,</span>
+            <span class="n">opt_params</span><span class="p">,</span>
+            <span class="n">lrs_name</span><span class="p">,</span>
+            <span class="n">lrs_params</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_optimizer_lr_scheduler_params</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">model_args</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="n">value</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;lr&quot;</span><span class="p">,</span> <span class="s2">&quot;batch_size&quot;</span><span class="p">,</span> <span class="s2">&quot;original_batch_size&quot;</span><span class="p">]</span>
+            <span class="ow">and</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">opt_params</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="ow">and</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lrs_params</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">column_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tab_preprocessor</span><span class="o">.</span><span class="n">column_idx</span><span class="p">,</span>
+            <span class="n">continuous_cols</span><span class="o">=</span><span class="n">cont_feature_names</span><span class="p">,</span>
+            <span class="n">cat_embed_input</span><span class="o">=</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tab_preprocessor</span><span class="o">.</span><span class="n">cat_embed_input</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cat_feature_names</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span>
+                <span class="k">else</span> <span class="kc">None</span>
+            <span class="p">),</span>
+            <span class="o">**</span><span class="n">model_args</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;TabTransformer&quot;</span><span class="p">:</span>
+            <span class="n">args</span><span class="p">[</span><span class="s2">&quot;embed_continuous&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cat_feature_names</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">False</span>
+
+        <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;TabMlp&quot;</span><span class="p">:</span> <span class="n">TabMlp</span><span class="p">,</span>
+            <span class="s2">&quot;TabResnet&quot;</span><span class="p">:</span> <span class="n">TabResnet</span><span class="p">,</span>
+            <span class="s2">&quot;TabTransformer&quot;</span><span class="p">:</span> <span class="n">TabTransformer</span><span class="p">,</span>
+            <span class="s2">&quot;TabNet&quot;</span><span class="p">:</span> <span class="n">TabNet</span><span class="p">,</span>
+            <span class="s2">&quot;SAINT&quot;</span><span class="p">:</span> <span class="n">SAINT</span><span class="p">,</span>
+            <span class="s2">&quot;ContextAttentionMLP&quot;</span><span class="p">:</span> <span class="n">ContextAttentionMLP</span><span class="p">,</span>
+            <span class="s2">&quot;SelfAttentionMLP&quot;</span><span class="p">:</span> <span class="n">SelfAttentionMLP</span><span class="p">,</span>
+            <span class="s2">&quot;FTTransformer&quot;</span><span class="p">:</span> <span class="n">FTTransformer</span><span class="p">,</span>
+            <span class="s2">&quot;TabPerceiver&quot;</span><span class="p">:</span> <span class="n">TabPerceiver</span><span class="p">,</span>
+            <span class="s2">&quot;TabFastFormer&quot;</span><span class="p">:</span> <span class="n">TabFastFormer</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">task</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">loss</span>
+        <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span> <span class="ow">and</span> <span class="n">loss</span> <span class="o">==</span> <span class="s2">&quot;cross_entropy&quot;</span><span class="p">:</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="s2">&quot;binary_cross_entropy&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span>
+
+        <span class="n">tab_model</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">model_name</span><span class="p">](</span><span class="o">**</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;multiclass&quot;</span><span class="p">:</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">WideDeep</span><span class="p">(</span>
+                <span class="n">deeptabular</span><span class="o">=</span><span class="n">tab_model</span><span class="p">,</span> <span class="n">pred_dim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">n_classes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">WideDeep</span><span class="p">(</span><span class="n">deeptabular</span><span class="o">=</span><span class="n">tab_model</span><span class="p">)</span>
+
+        <span class="n">optimizer</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="p">,</span> <span class="n">opt_name</span><span class="p">)(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="o">**</span><span class="n">opt_params</span><span class="p">)</span>
+        <span class="n">lr_scheduler</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="p">,</span> <span class="n">lrs_name</span><span class="p">)(</span>
+            <span class="n">optimizer</span><span class="p">,</span> <span class="o">**</span><span class="n">lrs_params</span>
+        <span class="p">)</span>
+
+        <span class="n">wd_trainer</span> <span class="o">=</span> <span class="n">wd_Trainer</span><span class="p">(</span>
+            <span class="n">model</span><span class="p">,</span>
+            <span class="n">objective</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">device</span> <span class="o">==</span> <span class="s2">&quot;cpu&quot;</span> <span class="k">else</span> <span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+            <span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">optimizers</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+            <span class="n">lr_schedulers</span><span class="o">=</span><span class="n">lr_scheduler</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">wd_trainer</span></div>
+
+
+<div class="viewcode-block" id="WideDeep._train_data_preprocess">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeep._train_data_preprocess.html#tabensemb.model.WideDeep._train_data_preprocess">[docs]</a>
+    <span class="k">def</span> <span class="nf">_train_data_preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">pytorch_widedeep</span>
+        <span class="kn">from</span> <span class="nn">pytorch_widedeep.preprocessing</span> <span class="kn">import</span> <span class="n">TabPreprocessor</span>
+        <span class="kn">from</span> <span class="nn">pandas._config</span> <span class="kn">import</span> <span class="n">option_context</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span>
+        <span class="n">cont_feature_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span>
+        <span class="n">cat_feature_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">cat_feature_names</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">warm_start</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">pytorch_widedeep</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;1.2.3&quot;</span><span class="p">):</span>
+                <span class="n">tab_preprocessor</span> <span class="o">=</span> <span class="n">TabPreprocessor</span><span class="p">(</span>
+                    <span class="n">continuous_cols</span><span class="o">=</span><span class="n">cont_feature_names</span><span class="p">,</span>
+                    <span class="n">cat_embed_cols</span><span class="o">=</span><span class="p">(</span>
+                        <span class="n">cat_feature_names</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cat_feature_names</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+                    <span class="p">),</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># https://github.com/jrzaurin/pytorch-widedeep/commit/cc0d1ad59c447dabd29072a552194ece12173778#diff-2f6e79eedee796c7edeac4fffc29ef35ecbfb8c234ff63313509e412a8d3ed42L108</span>
+                <span class="n">tab_preprocessor</span> <span class="o">=</span> <span class="n">TabPreprocessor</span><span class="p">(</span>
+                    <span class="n">continuous_cols</span><span class="o">=</span><span class="n">cont_feature_names</span><span class="p">,</span>
+                    <span class="n">cat_embed_cols</span><span class="o">=</span><span class="p">(</span>
+                        <span class="n">cat_feature_names</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cat_feature_names</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+                    <span class="p">),</span>
+                    <span class="n">cols_to_scale</span><span class="o">=</span><span class="n">cont_feature_names</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">with</span> <span class="n">option_context</span><span class="p">(</span><span class="s2">&quot;mode.chained_assignment&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+                <span class="n">X_tab_train</span> <span class="o">=</span> <span class="n">tab_preprocessor</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">X_train</span><span class="p">)</span>
+                <span class="n">X_tab_val</span> <span class="o">=</span> <span class="n">tab_preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">X_val</span><span class="p">)</span>
+                <span class="n">X_tab_test</span> <span class="o">=</span> <span class="n">tab_preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">X_test</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tab_preprocessor</span> <span class="o">=</span> <span class="n">tab_preprocessor</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">option_context</span><span class="p">(</span><span class="s2">&quot;mode.chained_assignment&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+                <span class="n">X_tab_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tab_preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">X_train</span><span class="p">)</span>
+                <span class="n">X_tab_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tab_preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">X_val</span><span class="p">)</span>
+                <span class="n">X_tab_test</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tab_preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">X_test</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;X_train&quot;</span><span class="p">:</span> <span class="n">X_tab_train</span><span class="p">,</span>
+            <span class="s2">&quot;y_train&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">y_train</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+            <span class="s2">&quot;X_val&quot;</span><span class="p">:</span> <span class="n">X_tab_val</span><span class="p">,</span>
+            <span class="s2">&quot;y_val&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">y_val</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+            <span class="s2">&quot;X_test&quot;</span><span class="p">:</span> <span class="n">X_tab_test</span><span class="p">,</span>
+            <span class="s2">&quot;y_test&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">y_test</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="WideDeep._train_single_model">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeep._train_single_model.html#tabensemb.model.WideDeep._train_single_model">[docs]</a>
+    <span class="k">def</span> <span class="nf">_train_single_model</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="p">,</span>
+        <span class="n">epoch</span><span class="p">,</span>
+        <span class="n">X_train</span><span class="p">,</span>
+        <span class="n">y_train</span><span class="p">,</span>
+        <span class="n">X_val</span><span class="p">,</span>
+        <span class="n">y_val</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">,</span>
+        <span class="n">warm_start</span><span class="p">,</span>
+        <span class="n">in_bayes_opt</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        pytorch_widedeep uses an approximated loss calculation procedure that calculates the average loss</span>
+<span class="sd">        across batches, which is not what we do (in a precise way for MSE) at the end of training and makes</span>
+<span class="sd">        results from the callback differ from our final metrics.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">._widedeep.widedeep_callback</span> <span class="kn">import</span> <span class="n">WideDeepCallback</span><span class="p">,</span> <span class="n">EarlyStopping</span>
+
+        <span class="n">es_callback</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span>
+            <span class="n">patience</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">static_params</span><span class="p">[</span><span class="s2">&quot;patience&quot;</span><span class="p">],</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span> <span class="k">if</span> <span class="n">verbose</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="n">restore_best_weights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">_set_callbacks_and_metrics</span><span class="p">(</span>
+            <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">es_callback</span><span class="p">,</span>
+                <span class="n">WideDeepCallback</span><span class="p">(</span><span class="n">total_epoch</span><span class="o">=</span><span class="n">epoch</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">),</span>
+            <span class="p">],</span>
+            <span class="n">metrics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">warm_start</span><span class="p">:</span>
+            <span class="c1"># The model is stored in cpu after loaded from disk. And widedeep does not make model and data on the</span>
+            <span class="c1"># same device. Also note that when _finetune and cuda is available, data.cuda() is called.</span>
+            <span class="kn">from</span> <span class="nn">pytorch_widedeep.training</span> <span class="kn">import</span> <span class="n">_finetune</span>
+
+            <span class="n">_finetune</span><span class="o">.</span><span class="n">use_cuda</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">==</span> <span class="s2">&quot;cuda&quot;</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">X_train</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;X_tab&quot;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="n">y_train</span><span class="p">},</span>
+            <span class="n">X_val</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;X_tab&quot;</span><span class="p">:</span> <span class="n">X_val</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="n">y_val</span><span class="p">},</span>
+            <span class="n">n_epochs</span><span class="o">=</span><span class="n">epoch</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">warm_start</span> <span class="k">else</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;batch_size&quot;</span><span class="p">]),</span>
+            <span class="n">finetune</span><span class="o">=</span><span class="n">warm_start</span><span class="p">,</span>
+            <span class="n">finetune_epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_losses</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;train_loss&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val_losses</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">restored_epochs</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">es_callback</span><span class="o">.</span><span class="n">best_epoch</span></div>
+
+
+<div class="viewcode-block" id="WideDeep._pred_single_model">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeep._pred_single_model.html#tabensemb.model.WideDeep._pred_single_model">[docs]</a>
+    <span class="k">def</span> <span class="nf">_pred_single_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">original_batch_size</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">batch_size</span>
+        <span class="nb">delattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;batch_size&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;regression&quot;</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_tab</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_tab</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))[</span>
+                <span class="p">:,</span> <span class="mi">1</span>
+            <span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_tab</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;batch_size&quot;</span><span class="p">,</span> <span class="n">original_batch_size</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="WideDeep._data_preprocess">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeep._data_preprocess.html#tabensemb.model.WideDeep._data_preprocess">[docs]</a>
+    <span class="k">def</span> <span class="nf">_data_preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">derived_data</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+        <span class="c1"># SettingWithCopyWarning in TabPreprocessor.transform</span>
+        <span class="c1"># i.e. df_cont[self.standardize_cols] = self.scaler.transform(df_std.values)</span>
+        <span class="kn">from</span> <span class="nn">pandas._config</span> <span class="kn">import</span> <span class="n">option_context</span>
+
+        <span class="k">with</span> <span class="n">option_context</span><span class="p">(</span><span class="s2">&quot;mode.chained_assignment&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">X_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tab_preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">X_df</span></div>
+
+
+<div class="viewcode-block" id="WideDeep._get_model_names">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeep._get_model_names.html#tabensemb.model.WideDeep._get_model_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_model_names</span><span class="p">():</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s2">&quot;TabMlp&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;TabResnet&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;TabTransformer&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;TabNet&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;SAINT&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ContextAttentionMLP&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;SelfAttentionMLP&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FTTransformer&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;TabPerceiver&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;TabFastFormer&quot;</span><span class="p">,</span>
+        <span class="p">]</span></div>
+</div>
+
+
+
+<span class="k">def</span> <span class="nf">widedeep_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is the forward of nn.Sequential because WideDeep model is a nn.Module and WideDeep.deeptabular is a</span>
+<span class="sd">    nn.Sequential where the last module is a linear layer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">module</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_hidden_representation&quot;</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">input</span>
+
+
+<div class="viewcode-block" id="WideDeepWrapper">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeepWrapper.html#tabensemb.model.WideDeepWrapper">[docs]</a>
+<span class="k">class</span> <span class="nc">WideDeepWrapper</span><span class="p">(</span><span class="n">AbstractWrapper</span><span class="p">):</span>
+<div class="viewcode-block" id="WideDeepWrapper.__init__">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeepWrapper.html#tabensemb.model.WideDeepWrapper.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">WideDeep</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">WideDeepWrapper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;TabNet&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wrapping TabNet is not supported.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="WideDeepWrapper.wrap_forward">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeepWrapper.wrap_forward.html#tabensemb.model.WideDeepWrapper.wrap_forward">[docs]</a>
+    <span class="k">def</span> <span class="nf">wrap_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">component</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrapped_model</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">]</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deeptabular</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">original_forward</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">forward</span>
+        <span class="n">component</span><span class="o">.</span><span class="n">forward</span> <span class="o">=</span> <span class="n">widedeep_forward</span><span class="o">.</span><span class="fm">__get__</span><span class="p">(</span><span class="n">component</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="WideDeepWrapper.reset_forward">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.model.WideDeepWrapper.reset_forward.html#tabensemb.model.WideDeepWrapper.reset_forward">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">component</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrapped_model</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">]</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deeptabular</span>
+        <span class="n">component</span><span class="o">.</span><span class="n">forward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_forward</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">hidden_rep_dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        In pytorch_widedeep.models.wide_deep, see WideDeep_add_pred_layer()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">component</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrapped_model</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">]</span><span class="o">.</span><span class="n">model</span>
+        <span class="k">if</span> <span class="n">component</span><span class="o">.</span><span class="n">deeptext</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">component</span><span class="o">.</span><span class="n">deepimage</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The WideDeep model has deeptext or deepimage component, which is not supported for &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;hidden representation extraction.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">component</span><span class="o">.</span><span class="n">deeptabular</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">output_dim</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">hidden_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">component</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrapped_model</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">]</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">deeptabular</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">component</span><span class="p">,</span> <span class="s2">&quot;_hidden_representation&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

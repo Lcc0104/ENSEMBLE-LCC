@@ -1,0 +1,839 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>tabensemb.model.AbstractModel &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/generated/tabensemb.model.AbstractModel';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="tabensemb.model.TorchModel" href="tabensemb.model.TorchModel.html" />
+    <link rel="prev" title="tabensemb.model" href="../model.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../examples/get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../examples/advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../examples/get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../examples/advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">API references</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trainer.html">tabensemb.trainer</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.trainer.Trainer.html">tabensemb.trainer.Trainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.trainer.load_trainer.html">tabensemb.trainer.load_trainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.trainer.save_trainer.html">tabensemb.trainer.save_trainer</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../model.html">tabensemb.model</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">tabensemb.model.AbstractModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.model.TorchModel.html">tabensemb.model.TorchModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.model.AbstractNN.html">tabensemb.model.AbstractNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.model.AutoGluon.html">tabensemb.model.AutoGluon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.model.WideDeep.html">tabensemb.model.WideDeep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.model.PytorchTabular.html">tabensemb.model.PytorchTabular</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.model.CatEmbed.html">tabensemb.model.CatEmbed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.model.AbstractWrapper.html">tabensemb.model.AbstractWrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.model.TorchModelWrapper.html">tabensemb.model.TorchModelWrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.model.WideDeepWrapper.html">tabensemb.model.WideDeepWrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.model.PytorchTabularWrapper.html">tabensemb.model.PytorchTabularWrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.model.RFE.html">tabensemb.model.RFE</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data.html">tabensemb.data</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.data.base.AbstractDataStep.html">tabensemb.data.base.AbstractDataStep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.data.datamodule.DataModule.html">tabensemb.data.datamodule.DataModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.data.AbstractDeriver.html">tabensemb.data.AbstractDeriver</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tabensemb.data.dataderiver.html">tabensemb.data.dataderiver</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataderiver.get_data_deriver.html">tabensemb.data.dataderiver.get_data_deriver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataderiver.RelativeDeriver.html">tabensemb.data.dataderiver.RelativeDeriver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataderiver.SampleWeightDeriver.html">tabensemb.data.dataderiver.SampleWeightDeriver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataderiver.UnscaledDataDeriver.html">tabensemb.data.dataderiver.UnscaledDataDeriver</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.data.AbstractImputer.html">tabensemb.data.AbstractImputer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.data.AbstractSklearnImputer.html">tabensemb.data.AbstractSklearnImputer</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tabensemb.data.dataimputer.html">tabensemb.data.dataimputer</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataimputer.get_data_imputer.html">tabensemb.data.dataimputer.get_data_imputer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataimputer.GainImputer.html">tabensemb.data.dataimputer.GainImputer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataimputer.MeanImputer.html">tabensemb.data.dataimputer.MeanImputer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataimputer.MedianImputer.html">tabensemb.data.dataimputer.MedianImputer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataimputer.MiceImputer.html">tabensemb.data.dataimputer.MiceImputer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataimputer.MiceLightgbmImputer.html">tabensemb.data.dataimputer.MiceLightgbmImputer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataimputer.MissForestImputer.html">tabensemb.data.dataimputer.MissForestImputer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataimputer.ModeImputer.html">tabensemb.data.dataimputer.ModeImputer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.data.AbstractProcessor.html">tabensemb.data.AbstractProcessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.data.AbstractAugmenter.html">tabensemb.data.AbstractAugmenter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.data.AbstractTransformer.html">tabensemb.data.AbstractTransformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.data.AbstractFeatureSelector.html">tabensemb.data.AbstractFeatureSelector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.data.AbstractScaler.html">tabensemb.data.AbstractScaler</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tabensemb.data.dataprocessor.html">tabensemb.data.dataprocessor</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataprocessor.get_data_processor.html">tabensemb.data.dataprocessor.get_data_processor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataprocessor.CategoricalOrdinalEncoder.html">tabensemb.data.dataprocessor.CategoricalOrdinalEncoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataprocessor.CorrFeatureSelector.html">tabensemb.data.dataprocessor.CorrFeatureSelector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataprocessor.FeatureValueSelector.html">tabensemb.data.dataprocessor.FeatureValueSelector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataprocessor.IQRRemover.html">tabensemb.data.dataprocessor.IQRRemover</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataprocessor.NaNFeatureRemover.html">tabensemb.data.dataprocessor.NaNFeatureRemover</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataprocessor.RFEFeatureSelector.html">tabensemb.data.dataprocessor.RFEFeatureSelector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataprocessor.SampleDataAugmenter.html">tabensemb.data.dataprocessor.SampleDataAugmenter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataprocessor.StandardScaler.html">tabensemb.data.dataprocessor.StandardScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataprocessor.StdRemover.html">tabensemb.data.dataprocessor.StdRemover</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.dataprocessor.VarianceFeatureSelector.html">tabensemb.data.dataprocessor.VarianceFeatureSelector</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.data.AbstractSplitter.html">tabensemb.data.AbstractSplitter</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tabensemb.data.datasplitter.html">tabensemb.data.datasplitter</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.datasplitter.get_data_splitter.html">tabensemb.data.datasplitter.get_data_splitter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.datasplitter.RandomSplitter.html">tabensemb.data.datasplitter.RandomSplitter</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tabensemb.data.utils.html">tabensemb.data.utils</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.utils.fill_cat_nan.html">tabensemb.data.utils.fill_cat_nan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.utils.get_corr_sets.html">tabensemb.data.utils.get_corr_sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.utils.get_imputed_dtype.html">tabensemb.data.utils.get_imputed_dtype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.utils.get_unknown_value.html">tabensemb.data.utils.get_unknown_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.data.utils.OrdinalEncoder.html">tabensemb.data.utils.OrdinalEncoder</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../config.html">tabensemb.config</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="tabensemb.config.UserConfig.html">tabensemb.config.UserConfig</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utility.html">tabensemb.utils</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tabensemb.utils.utils.html">tabensemb.utils.utils</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.add_postfix.html">tabensemb.utils.utils.add_postfix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.auto_metric_sklearn.html">tabensemb.utils.utils.auto_metric_sklearn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.check_stream.html">tabensemb.utils.utils.check_stream</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.convert_proba_to_target.html">tabensemb.utils.utils.convert_proba_to_target</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.convert_target_to_indicator.html">tabensemb.utils.utils.convert_target_to_indicator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.debugger_is_active.html">tabensemb.utils.utils.debugger_is_active</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.get_figsize.html">tabensemb.utils.utils.get_figsize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.gini.html">tabensemb.utils.utils.gini</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.is_notebook.html">tabensemb.utils.utils.is_notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.metric_sklearn.html">tabensemb.utils.utils.metric_sklearn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.pretty.html">tabensemb.utils.utils.pretty</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.reload_module.html">tabensemb.utils.utils.reload_module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.safe_mkdir.html">tabensemb.utils.utils.safe_mkdir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.seed_worker.html">tabensemb.utils.utils.seed_worker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.set_random_seed.html">tabensemb.utils.utils.set_random_seed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.set_torch.html">tabensemb.utils.utils.set_torch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.str_to_dataframe.html">tabensemb.utils.utils.str_to_dataframe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.update_defaults_by_kwargs.html">tabensemb.utils.utils.update_defaults_by_kwargs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.HiddenPltShow.html">tabensemb.utils.utils.HiddenPltShow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.HiddenPrints.html">tabensemb.utils.utils.HiddenPrints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.Logger.html">tabensemb.utils.utils.Logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.Logging.html">tabensemb.utils.utils.Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.PickleAbleGenerator.html">tabensemb.utils.utils.PickleAbleGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.PlainText.html">tabensemb.utils.utils.PlainText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.TqdmController.html">tabensemb.utils.utils.TqdmController</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.global_setting.html">tabensemb.utils.utils.global_setting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.utils.torch_with_grad.html">tabensemb.utils.utils.torch_with_grad</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tabensemb.utils.ranking.html">tabensemb.utils.ranking</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.ranking.avg_rank.html">tabensemb.utils.ranking.avg_rank</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.ranking.merge_leaderboards.html">tabensemb.utils.ranking.merge_leaderboards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.ranking.merge_to_excel.html">tabensemb.utils.ranking.merge_to_excel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabensemb.utils.ranking.read_lbs.html">tabensemb.utils.ranking.read_lbs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api.html" class="nav-link">API references</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../model.html" class="nav-link">tabensemb.model</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">tabensemb.model.AbstractModel</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="tabensemb-model-abstractmodel">
+<h1>tabensemb.model.AbstractModel<a class="headerlink" href="#tabensemb-model-abstractmodel" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="tabensemb.model.AbstractModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tabensemb.model.</span></span><span class="sig-name descname"><span class="pre">AbstractModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="tabensemb.trainer.Trainer.html#tabensemb.trainer.Trainer" title="tabensemb.trainer.trainer.Trainer"><span class="pre">Trainer</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">program</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_in_harddisk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr_schedulers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tabensemb/model/base.html#AbstractModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tabensemb.model.AbstractModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The base class for all model bases.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>exclude_models</strong></dt><dd><p>The names of models that should not be trained.</p>
+</dd>
+<dt><strong>init_params</strong></dt><dd><p>Arguments passed to <a class="reference internal" href="#tabensemb.model.AbstractModel.__init__" title="tabensemb.model.AbstractModel.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>. See <a class="reference internal" href="tabensemb.model.AbstractModel.save_kwargs.html#tabensemb.model.AbstractModel.save_kwargs" title="tabensemb.model.AbstractModel.save_kwargs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save_kwargs()</span></code></a>.</p>
+</dd>
+<dt><strong>limit_batch_size</strong></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">batch_size</span> <span class="pre">//</span> <span class="pre">len(training</span> <span class="pre">set)</span> <span class="pre">&lt;</span> <span class="pre">limit_batch_size</span></code>, the <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> is forced to be
+<code class="docutils literal notranslate"><span class="pre">len(training</span> <span class="pre">set)</span></code> to avoid potential numerical issues. For Tabnet, this is extremely important because a
+small batch may cause NaNs and further CUDA device-side assert in the sparsemax function. Set to -1 to turn off
+this check (NOT RECOMMENDED!!). Note: Setting <code class="docutils literal notranslate"><span class="pre">drop_last=True</span></code> for <code class="docutils literal notranslate"><span class="pre">torch.utils.data.DataLoader</span></code> is fine,
+but I think (i) having access to all data points in one epoch is beneficial for some models, (ii) If using a
+large dataset and a large <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>, it is possible that the last batch is so large that contains
+essential information, (iii) the user should have full control for this. If you want to use <code class="docutils literal notranslate"><span class="pre">drop_last</span></code> in
+your code, use the <code class="docutils literal notranslate"><span class="pre">original_batch_size</span></code> in <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> passed to <a class="reference internal" href="#tabensemb.model.AbstractModel" title="tabensemb.model.AbstractModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractModel</span></code></a> methods.</p>
+</dd>
+<dt><strong>train_losses</strong></dt><dd><p>The training loss during training of each model.</p>
+</dd>
+<dt><strong>val_losses</strong></dt><dd><p>The validation loss during training of each model.</p>
+</dd>
+<dt><strong>restored_epochs</strong></dt><dd><p>The best epoch from where the model is restored after training.</p>
+</dd>
+<dt><strong>model</strong></dt><dd><p>A dictionary of models.</p>
+</dd>
+<dt><strong>model_params</strong></dt><dd><p>Hyperparameters that contain all keys in <a class="reference internal" href="tabensemb.model.AbstractModel._initial_values.html#tabensemb.model.AbstractModel._initial_values" title="tabensemb.model.AbstractModel._initial_values"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_initial_values()</span></code></a> for each model. In cross validation runs, the
+parameters in the previous run will be loaded for the current run.</p>
+</dd>
+<dt><strong>model_subset</strong></dt><dd><p>The names of models selected to be trained in the model base.</p>
+</dd>
+<dt><strong>program</strong></dt><dd><p>The name of the model base.</p>
+</dd>
+<dt><strong>root</strong></dt><dd><p>The place where all files of the model base are stored.</p>
+</dd>
+<dt><strong>store_in_harddisk</strong></dt><dd><p>Whether to save models in the hard disk.</p>
+</dd>
+<dt><strong>trainer</strong></dt><dd><p>A <a class="reference internal" href="tabensemb.trainer.Trainer.html#tabensemb.trainer.Trainer" title="tabensemb.trainer.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">tabensemb.trainer.Trainer</span></code></a> instance.</p>
+</dd>
+<dt><strong>optimizers</strong></dt><dd><p>A dictionary of optimizer names (choose from those in <code class="docutils literal notranslate"><span class="pre">torch.optim</span></code>) and their hyperparameters for each
+model. Remember to change <a class="reference internal" href="tabensemb.model.AbstractModel._initial_values.html#tabensemb.model.AbstractModel._initial_values" title="tabensemb.model.AbstractModel._initial_values"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_initial_values()</span></code></a> and <a class="reference internal" href="tabensemb.model.AbstractModel._space.html#tabensemb.model.AbstractModel._space" title="tabensemb.model.AbstractModel._space"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_space()</span></code></a> to optimize its hyperparameters.</p>
+</dd>
+<dt><strong>lr_schedulers</strong></dt><dd><p>A dictionary of lr scheduler names (choose from those in <code class="docutils literal notranslate"><span class="pre">torch.optim.lr_scheduler</span></code>) and their
+hyperparameters for each model. Remember to change <a class="reference internal" href="tabensemb.model.AbstractModel._initial_values.html#tabensemb.model.AbstractModel._initial_values" title="tabensemb.model.AbstractModel._initial_values"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_initial_values()</span></code></a> and <a class="reference internal" href="tabensemb.model.AbstractModel._space.html#tabensemb.model.AbstractModel._space" title="tabensemb.model.AbstractModel._space"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_space()</span></code></a> to optimize
+its hyperparameters.</p>
+</dd>
+<dt><a class="reference internal" href="tabensemb.model.AbstractModel.device.html#tabensemb.model.AbstractModel.device" title="tabensemb.model.AbstractModel.device"><code class="xref py py-obj docutils literal notranslate"><span class="pre">device</span></code></a></dt><dd><p>The device set in the linked <a class="reference internal" href="tabensemb.trainer.Trainer.html#tabensemb.trainer.Trainer" title="tabensemb.trainer.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code></a>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tabensemb.model.AbstractModel.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="tabensemb.trainer.Trainer.html#tabensemb.trainer.Trainer" title="tabensemb.trainer.trainer.Trainer"><span class="pre">Trainer</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">program</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_in_harddisk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr_schedulers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tabensemb/model/base.html#AbstractModel.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tabensemb.model.AbstractModel.__init__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>trainer:</strong></dt><dd><p>A <a class="reference internal" href="tabensemb.trainer.Trainer.html#tabensemb.trainer.Trainer" title="tabensemb.trainer.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code></a> instance that contains all information and datasets and will be
+linked to the model base. The trainer has loaded configs and data.</p>
+</dd>
+<dt><strong>program:</strong></dt><dd><p>The name of the model base. If None, the name from <a class="reference internal" href="tabensemb.model.AbstractModel._get_program_name.html#tabensemb.model.AbstractModel._get_program_name" title="tabensemb.model.AbstractModel._get_program_name"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_get_program_name()</span></code></a> is used.</p>
+</dd>
+<dt><strong>model_subset:</strong></dt><dd><p>The names of models selected to be trained in the model base.</p>
+</dd>
+<dt><strong>exclude_models:</strong></dt><dd><p>The names of models that should not be trained. Only one of <code class="docutils literal notranslate"><span class="pre">model_subset</span></code> and <code class="docutils literal notranslate"><span class="pre">exclude_models</span></code> can
+be specified.</p>
+</dd>
+<dt><strong>store_in_harddisk:</strong></dt><dd><p>Whether to save models in the hard disk. If the global setting
+<code class="docutils literal notranslate"><span class="pre">tabensemb.setting[&quot;low_memory&quot;]</span></code> is True, True is used.</p>
+</dd>
+<dt><strong>optimizers</strong></dt><dd><p>A dictionary of optimizer names (choose from those in <code class="docutils literal notranslate"><span class="pre">torch.optim</span></code>) and their hyperparameters for each
+model. Remember to change <a class="reference internal" href="tabensemb.model.AbstractModel._initial_values.html#tabensemb.model.AbstractModel._initial_values" title="tabensemb.model.AbstractModel._initial_values"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_initial_values()</span></code></a> and <a class="reference internal" href="tabensemb.model.AbstractModel._space.html#tabensemb.model.AbstractModel._space" title="tabensemb.model.AbstractModel._space"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_space()</span></code></a> to optimize its hyperparameters.</p>
+</dd>
+<dt><strong>lr_schedulers</strong></dt><dd><p>A dictionary of lr scheduler names (choose from those in <code class="docutils literal notranslate"><span class="pre">torch.optim.lr_scheduler</span></code>) and their
+hyperparameters for each model. Remember to change <a class="reference internal" href="tabensemb.model.AbstractModel._initial_values.html#tabensemb.model.AbstractModel._initial_values" title="tabensemb.model.AbstractModel._initial_values"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_initial_values()</span></code></a> and <a class="reference internal" href="tabensemb.model.AbstractModel._space.html#tabensemb.model.AbstractModel._space" title="tabensemb.model.AbstractModel._space"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_space()</span></code></a> to optimize
+its hyperparameters.</p>
+</dd>
+<dt><strong>**kwargs:</strong></dt><dd><p>Ignored.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.cal_feature_importance.html#tabensemb.model.AbstractModel.cal_feature_importance" title="tabensemb.model.AbstractModel.cal_feature_importance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cal_feature_importance</span></code></a>(model_name, method[, ...])</p></td>
+<td><p>Calculate feature importance using a specified model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.cal_shap.html#tabensemb.model.AbstractModel.cal_shap" title="tabensemb.model.AbstractModel.cal_shap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cal_shap</span></code></a>(model_name[, return_importance, ...])</p></td>
+<td><p>Calculate SHAP values using a specified model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.detach_model.html#tabensemb.model.AbstractModel.detach_model" title="tabensemb.model.AbstractModel.detach_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detach_model</span></code></a>(model_name[, program])</p></td>
+<td><p>Detach the chosen model to a separate model base with the same linked <a class="reference internal" href="tabensemb.trainer.Trainer.html#tabensemb.trainer.Trainer" title="tabensemb.trainer.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.fit.html#tabensemb.model.AbstractModel.fit" title="tabensemb.model.AbstractModel.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(df, cont_feature_names, ...[, ...])</p></td>
+<td><p>Fit all models using a tabular dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.get_model_names.html#tabensemb.model.AbstractModel.get_model_names" title="tabensemb.model.AbstractModel.get_model_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_model_names</span></code></a>()</p></td>
+<td><p>Get names of available models based on <a class="reference internal" href="tabensemb.model.AbstractModel._get_model_names.html#tabensemb.model.AbstractModel._get_model_names" title="tabensemb.model.AbstractModel._get_model_names"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_get_model_names()</span></code></a> and the arguments <code class="docutils literal notranslate"><span class="pre">model_subset</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_models</span></code> of <a class="reference internal" href="#tabensemb.model.AbstractModel.__init__" title="tabensemb.model.AbstractModel.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.inspect_attr.html#tabensemb.model.AbstractModel.inspect_attr" title="tabensemb.model.AbstractModel.inspect_attr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inspect_attr</span></code></a>(model_name, attributes[, df, ...])</p></td>
+<td><p>Get attributes of the model after evaluating the model on training, validation, and testing sets respectively.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.new_model.html#tabensemb.model.AbstractModel.new_model" title="tabensemb.model.AbstractModel.new_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">new_model</span></code></a>(model_name, verbose, **kwargs)</p></td>
+<td><p>A wrapper method to generate a new model while keeping the random seed constant.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.predict.html#tabensemb.model.AbstractModel.predict" title="tabensemb.model.AbstractModel.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code></a>(df, model_name[, model, ...])</p></td>
+<td><p>Make inferences on a new dataset using the selected model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.predict_proba.html#tabensemb.model.AbstractModel.predict_proba" title="tabensemb.model.AbstractModel.predict_proba"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_proba</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Predict probabilities of each class.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.required_models.html#tabensemb.model.AbstractModel.required_models" title="tabensemb.model.AbstractModel.required_models"><code class="xref py py-obj docutils literal notranslate"><span class="pre">required_models</span></code></a>(model_name)</p></td>
+<td><p>The names of models required by the requested model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.reset.html#tabensemb.model.AbstractModel.reset" title="tabensemb.model.AbstractModel.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a>()</p></td>
+<td><p>Reset the model base by calling __init__ with the recorded kwargs from <a class="reference internal" href="tabensemb.model.AbstractModel.save_kwargs.html#tabensemb.model.AbstractModel.save_kwargs" title="tabensemb.model.AbstractModel.save_kwargs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save_kwargs()</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.save_kwargs.html#tabensemb.model.AbstractModel.save_kwargs" title="tabensemb.model.AbstractModel.save_kwargs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_kwargs</span></code></a>([d, ignore])</p></td>
+<td><p>Save all args and kwargs of the caller except for those in <code class="docutils literal notranslate"><span class="pre">ignore</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.set_path.html#tabensemb.model.AbstractModel.set_path" title="tabensemb.model.AbstractModel.set_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_path</span></code></a>(path)</p></td>
+<td><p>Set the path of the model base (usually a trained one), including the paths of its models.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel.train.html#tabensemb.model.AbstractModel.train" title="tabensemb.model.AbstractModel.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>(*args[, stderr_to_stdout])</p></td>
+<td><p>Train the model base using the dataset in the linked <a class="reference internal" href="tabensemb.trainer.Trainer.html#tabensemb.trainer.Trainer" title="tabensemb.trainer.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code></a> directly.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._bayes_eval.html#tabensemb.model.AbstractModel._bayes_eval" title="tabensemb.model.AbstractModel._bayes_eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_bayes_eval</span></code></a>(model, X_train, y_train, X_val, ...)</p></td>
+<td><p>Evaluate the model for Bayesian optimization iterations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._check_params.html#tabensemb.model.AbstractModel._check_params" title="tabensemb.model.AbstractModel._check_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_check_params</span></code></a>(model_name, **kwargs)</p></td>
+<td><p>Check the validity of hyperparameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._check_space.html#tabensemb.model.AbstractModel._check_space" title="tabensemb.model.AbstractModel._check_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_check_space</span></code></a>()</p></td>
+<td><p>Check if all parameters defined in <a class="reference internal" href="tabensemb.model.AbstractModel._initial_values.html#tabensemb.model.AbstractModel._initial_values" title="tabensemb.model.AbstractModel._initial_values"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_initial_values()</span></code></a> have corresponding search spaces defined in <a class="reference internal" href="tabensemb.model.AbstractModel._space.html#tabensemb.model.AbstractModel._space" title="tabensemb.model.AbstractModel._space"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_space()</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._check_train_status.html#tabensemb.model.AbstractModel._check_train_status" title="tabensemb.model.AbstractModel._check_train_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_check_train_status</span></code></a>()</p></td>
+<td><p>Raise exception if _predict is called and the model base is not trained.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._conditional_validity.html#tabensemb.model.AbstractModel._conditional_validity" title="tabensemb.model.AbstractModel._conditional_validity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_conditional_validity</span></code></a>(model_name)</p></td>
+<td><p>Check the validity of a model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._custom_training_params.html#tabensemb.model.AbstractModel._custom_training_params" title="tabensemb.model.AbstractModel._custom_training_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_custom_training_params</span></code></a>(model_name)</p></td>
+<td><p>Customized training settings to override settings in the configuration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._data_preprocess.html#tabensemb.model.AbstractModel._data_preprocess" title="tabensemb.model.AbstractModel._data_preprocess"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_data_preprocess</span></code></a>(df, derived_data, model_name)</p></td>
+<td><p>Perform the same preprocessing as in <a class="reference internal" href="tabensemb.model.AbstractModel._train_data_preprocess.html#tabensemb.model.AbstractModel._train_data_preprocess" title="tabensemb.model.AbstractModel._train_data_preprocess"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_train_data_preprocess()</span></code></a> on a new dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._default_metric_sklearn.html#tabensemb.model.AbstractModel._default_metric_sklearn" title="tabensemb.model.AbstractModel._default_metric_sklearn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_default_metric_sklearn</span></code></a>(y_true, y_pred)</p></td>
+<td><p>Calculate MSE loss for regression tasks and log loss for classification tasks using sklearn APIs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._get_model_names.html#tabensemb.model.AbstractModel._get_model_names" title="tabensemb.model.AbstractModel._get_model_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_get_model_names</span></code></a>()</p></td>
+<td><p>Get names of all available models implemented in the model base.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._get_params.html#tabensemb.model.AbstractModel._get_params" title="tabensemb.model.AbstractModel._get_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_get_params</span></code></a>(model_name[, verbose])</p></td>
+<td><p>Load default parameters or optimized parameters (if Bayesian optimization is performed) of the selected model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._get_program_name.html#tabensemb.model.AbstractModel._get_program_name" title="tabensemb.model.AbstractModel._get_program_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_get_program_name</span></code></a>()</p></td>
+<td><p>Get the default name of the model base.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._get_required_models.html#tabensemb.model.AbstractModel._get_required_models" title="tabensemb.model.AbstractModel._get_required_models"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_get_required_models</span></code></a>(model_name)</p></td>
+<td><p>Extract models specified in <a class="reference internal" href="tabensemb.model.AbstractModel.required_models.html#tabensemb.model.AbstractModel.required_models" title="tabensemb.model.AbstractModel.required_models"><code class="xref py py-meth docutils literal notranslate"><span class="pre">required_models()</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._initial_values.html#tabensemb.model.AbstractModel._initial_values" title="tabensemb.model.AbstractModel._initial_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_initial_values</span></code></a>(model_name)</p></td>
+<td><p>Initial values of hyperparameters to be optimized.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._mkdir.html#tabensemb.model.AbstractModel._mkdir" title="tabensemb.model.AbstractModel._mkdir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_mkdir</span></code></a>()</p></td>
+<td><p>Create a directory for the model base under the root of the linked <a class="reference internal" href="tabensemb.trainer.Trainer.html#tabensemb.trainer.Trainer" title="tabensemb.trainer.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._new_model.html#tabensemb.model.AbstractModel._new_model" title="tabensemb.model.AbstractModel._new_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_new_model</span></code></a>(model_name, verbose, **kwargs)</p></td>
+<td><p>Generate a new selected model based on kwargs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._pred_single_model.html#tabensemb.model.AbstractModel._pred_single_model" title="tabensemb.model.AbstractModel._pred_single_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_pred_single_model</span></code></a>(model, X_test, verbose, ...)</p></td>
+<td><p>Predict using the model trained in <a class="reference internal" href="tabensemb.model.AbstractModel._train_single_model.html#tabensemb.model.AbstractModel._train_single_model" title="tabensemb.model.AbstractModel._train_single_model"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_train_single_model()</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._predict.html#tabensemb.model.AbstractModel._predict" title="tabensemb.model.AbstractModel._predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_predict</span></code></a>(df, model_name[, derived_data, model])</p></td>
+<td><p>Make prediction based on a tabular dataset using the selected model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._predict_all.html#tabensemb.model.AbstractModel._predict_all" title="tabensemb.model.AbstractModel._predict_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_predict_all</span></code></a>([verbose, test_data_only])</p></td>
+<td><p>Make inferences on training/validation/testing datasets to evaluate the performance of all models.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._predict_model.html#tabensemb.model.AbstractModel._predict_model" title="tabensemb.model.AbstractModel._predict_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_predict_model</span></code></a>(model_name[, test_data_only])</p></td>
+<td><p>Get predictions of a model on all partitions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._predict_model_on_partition.html#tabensemb.model.AbstractModel._predict_model_on_partition" title="tabensemb.model.AbstractModel._predict_model_on_partition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_predict_model_on_partition</span></code></a>(model_name, ...)</p></td>
+<td><p>Get predictions of a model on the selected partition.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._space.html#tabensemb.model.AbstractModel._space" title="tabensemb.model.AbstractModel._space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_space</span></code></a>(model_name)</p></td>
+<td><p>A list of <code class="docutils literal notranslate"><span class="pre">scikit-optimize</span></code> search spaces for the selected model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._train.html#tabensemb.model.AbstractModel._train" title="tabensemb.model.AbstractModel._train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_train</span></code></a>([model_subset, dump_trainer, ...])</p></td>
+<td><p>The basic framework of training models, including processing the dataset, training each model (with/without bayesian hyperparameter optimization), and evaluating them on the dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._train_data_preprocess.html#tabensemb.model.AbstractModel._train_data_preprocess" title="tabensemb.model.AbstractModel._train_data_preprocess"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_train_data_preprocess</span></code></a>(model_name[, warm_start])</p></td>
+<td><p>Processing the data from <code class="docutils literal notranslate"><span class="pre">self.trainer.datamodule</span></code> for training.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._train_single_model.html#tabensemb.model.AbstractModel._train_single_model" title="tabensemb.model.AbstractModel._train_single_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_train_single_model</span></code></a>(model, model_name, ...)</p></td>
+<td><p>Training the model (initialized in <a class="reference internal" href="tabensemb.model.AbstractModel._new_model.html#tabensemb.model.AbstractModel._new_model" title="tabensemb.model.AbstractModel._new_model"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_new_model()</span></code></a>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tabensemb.model.AbstractModel._update_optimizer_lr_scheduler_params.html#tabensemb.model.AbstractModel._update_optimizer_lr_scheduler_params" title="tabensemb.model.AbstractModel._update_optimizer_lr_scheduler_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_update_optimizer_lr_scheduler_params</span></code></a>(...)</p></td>
+<td><p>Update parameters of the optimizer and the lr_scheduler according to the input hyperparameters when initializing a model.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../model.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">tabensemb.model</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tabensemb.model.TorchModel.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">tabensemb.model.TorchModel</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabensemb.model.AbstractModel"><code class="docutils literal notranslate"><span class="pre">AbstractModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabensemb.model.AbstractModel.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractModel.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ANONYMOUS/tabular_ensemble/edit/main/docs/source/api/generated/tabensemb.model.AbstractModel.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/api/generated/tabensemb.model.AbstractModel.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

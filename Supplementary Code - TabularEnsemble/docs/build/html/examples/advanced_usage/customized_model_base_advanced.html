@@ -1,0 +1,672 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Advanced customized model base &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/advanced_usage/customized_model_base_advanced';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Change optimizers and lr shedulers" href="set_optimizers_lrschedulers.html" />
+    <link rel="prev" title="Customized model base" href="customized_model_base.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="customized_model_base.html">Customized model base</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Advanced customized model base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set_optimizers_lrschedulers.html">Change optimizers and lr shedulers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_model_upon_others.html">Build your own model upon others</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_splitters.html">New data splitters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_derivers.html">New data derivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_imputers.html">New data imputers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_data_processors.html">New data processors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image_classification.html">Multimodal data: Image classification as an example</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../advanced_usage.html" class="nav-link">Advanced Usage</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Advanced customized model base</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Advanced-customized-model-base">
+<h1>Advanced customized model base<a class="headerlink" href="#Advanced-customized-model-base" title="Link to this heading">#</a></h1>
+<p>Some low-level methods are provided within <code class="docutils literal notranslate"><span class="pre">AbstractModel</span></code> and <code class="docutils literal notranslate"><span class="pre">TorchModel</span></code>, and offer more flexibility for training and testing customization.</p>
+<section id="Advanced-customizations-of-AbstractModel">
+<h2>Advanced customizations of <code class="docutils literal notranslate"><span class="pre">AbstractModel</span></code><a class="headerlink" href="#Advanced-customizations-of-AbstractModel" title="Link to this heading">#</a></h2>
+<p>Assume that a model base <code class="docutils literal notranslate"><span class="pre">TabNetFromAbstractInherited</span></code> is built upon <code class="docutils literal notranslate"><span class="pre">TabNetFromAbstract</span></code> introduced in “Customized model base”.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TabNetFromAbstractInherited</span><span class="p">(</span><span class="n">TabNetFromAbstract</span><span class="p">):</span>
+</pre></div>
+</div>
+<section id="Training-parameters">
+<h3>Training parameters<a class="headerlink" href="#Training-parameters" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">_custom_training_params</span></code> returns a dictionary containing items that override settings in the configuration file for the model base. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_custom_training_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;epoch&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="Bayesian-optimization-criterion">
+<h3>Bayesian optimization criterion<a class="headerlink" href="#Bayesian-optimization-criterion" title="Link to this heading">#</a></h3>
+<p>During Bayesian hyperparameter optimization, the objective might be the validation loss, the training loss, or something else. By default, the larger one of the validation loss and the training loss will be returned (The former is usually higher, but randomization may sometimes make the latter higher). For example, the following code returns the validation loss</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_bayes_eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">):</span>
+    <span class="n">y_val_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pred_single_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">val_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_metric_sklearn</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_val_pred</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">val_loss</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">_default_metric_sklearn</span></code> returns MSE loss for regression tasks and log loss for classification tasks.</p>
+</section>
+<section id="Validity-of-a-model">
+<h3>Validity of a model<a class="headerlink" href="#Validity-of-a-model" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">_conditional_validity</span></code> is used to check the validity of a model under certain circumstances. For example, some models might be invalid if a certain feature <code class="docutils literal notranslate"><span class="pre">A_FEATURE</span></code> is not provided:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_conditional_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;SOME_MODEL&quot;</span> <span class="ow">and</span> <span class="s2">&quot;A_FEATURE&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p><strong>Remark</strong>: We do not recommend modifying other methods in <code class="docutils literal notranslate"><span class="pre">AbstractModel</span></code> except for those introduced in this part and in “Customized model base” unless you know what you are doing.</p>
+</section>
+</section>
+<section id="Advanced-customizations-of-TorchModel">
+<h2>Advanced customizations of <code class="docutils literal notranslate"><span class="pre">TorchModel</span></code><a class="headerlink" href="#Advanced-customizations-of-TorchModel" title="Link to this heading">#</a></h2>
+<p>The above customizations of <code class="docutils literal notranslate"><span class="pre">AbstractModel</span></code> can also be applied to <code class="docutils literal notranslate"><span class="pre">TorchModel</span></code>. <code class="docutils literal notranslate"><span class="pre">TorchModel</span></code> is restricted by a narrower framework, but provides more APIs for flexibility considerations. Some customizations are provided in <code class="docutils literal notranslate"><span class="pre">AbstractNN</span></code> at a lower and more specific level.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TabNetFromTorchInherited</span><span class="p">(</span><span class="n">TabNetFromTorch</span><span class="p">):</span>
+</pre></div>
+</div>
+<section id="Customized-data-processing">
+<h3>Customized data processing<a class="headerlink" href="#Customized-data-processing" title="Link to this heading">#</a></h3>
+<p>In <code class="docutils literal notranslate"><span class="pre">TorchModel._train_data_preprocess</span></code>, a model base processes tabular or multimodal datasets for itself. The method <code class="docutils literal notranslate"><span class="pre">_prepare_custom_datamodule</span></code> is called at the beginning and should return a <code class="docutils literal notranslate"><span class="pre">DataModule</span></code> instance (<code class="docutils literal notranslate"><span class="pre">self.trainer.datamodule</span></code> by default), which is used to generate final datasets (<code class="docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code> instances) and provides other information. For example, the following code builds a <code class="docutils literal notranslate"><span class="pre">Datamodule</span></code> that additionally records unscaled data as an item of derived data
+(multimodal data) by using <code class="docutils literal notranslate"><span class="pre">UnscaledDataDeriver</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">warm_start</span></code> should be considered here, otherwise when new data is fed to <code class="docutils literal notranslate"><span class="pre">fit</span></code> with <code class="docutils literal notranslate"><span class="pre">warm_start=True</span></code>, the <code class="docutils literal notranslate"><span class="pre">Datamodule</span></code> will be reset.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_prepare_custom_datamodule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">tabensemb.data</span> <span class="kn">import</span> <span class="n">DataModule</span>
+
+    <span class="n">base</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">warm_start</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;datamodule&quot;</span><span class="p">):</span>
+        <span class="n">datamodule</span> <span class="o">=</span> <span class="n">DataModule</span><span class="p">(</span>
+            <span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">initialize</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="n">datamodule</span><span class="o">.</span><span class="n">set_data_imputer</span><span class="p">(</span><span class="s2">&quot;MeanImputer&quot;</span><span class="p">)</span>
+        <span class="n">datamodule</span><span class="o">.</span><span class="n">set_data_derivers</span><span class="p">(</span>
+            <span class="p">[(</span><span class="s2">&quot;UnscaledDataDeriver&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;derived_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Unscaled&quot;</span><span class="p">})]</span>
+        <span class="p">)</span>
+        <span class="n">datamodule</span><span class="o">.</span><span class="n">set_data_processors</span><span class="p">(</span>
+            <span class="p">[(</span><span class="s2">&quot;CategoricalOrdinalEncoder&quot;</span><span class="p">,</span> <span class="p">{}),</span> <span class="p">(</span><span class="s2">&quot;StandardScaler&quot;</span><span class="p">,</span> <span class="p">{})]</span>
+        <span class="p">)</span>
+        <span class="n">warm_start</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">datamodule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">datamodule</span>
+    <span class="n">datamodule</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span>
+        <span class="n">base</span><span class="o">.</span><span class="n">categories_inverse_transform</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">df</span><span class="p">),</span>
+        <span class="n">cont_feature_names</span><span class="o">=</span><span class="n">base</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">,</span>
+        <span class="n">cat_feature_names</span><span class="o">=</span><span class="n">base</span><span class="o">.</span><span class="n">cat_feature_names</span><span class="p">,</span>
+        <span class="n">label_name</span><span class="o">=</span><span class="n">base</span><span class="o">.</span><span class="n">label_name</span><span class="p">,</span>
+        <span class="n">train_indices</span><span class="o">=</span><span class="n">base</span><span class="o">.</span><span class="n">train_indices</span><span class="p">,</span>
+        <span class="n">val_indices</span><span class="o">=</span><span class="n">base</span><span class="o">.</span><span class="n">val_indices</span><span class="p">,</span>
+        <span class="n">test_indices</span><span class="o">=</span><span class="n">base</span><span class="o">.</span><span class="n">test_indices</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">warm_start</span><span class="o">=</span><span class="n">warm_start</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">tmp_derived_data</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">derived_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">tmp_derived_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">datamodule</span><span class="o">.</span><span class="n">derived_data</span><span class="p">)</span>
+    <span class="n">datamodule</span><span class="o">.</span><span class="n">derived_data</span> <span class="o">=</span> <span class="n">tmp_derived_data</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">datamodule</span> <span class="o">=</span> <span class="n">datamodule</span>
+    <span class="k">return</span> <span class="n">datamodule</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">TorchModel._data_preprocess</span></code>, <code class="docutils literal notranslate"><span class="pre">_run_custom_data_module</span></code> is called first to transform the incoming data into a consistent form. A common implementation is as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_run_custom_data_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">derived_data</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">my_derived_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">prepare_new_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">ignore_absence</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">derived_data</span> <span class="o">=</span> <span class="n">derived_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">derived_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">my_derived_data</span><span class="p">)</span>
+    <span class="n">derived_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">sort_derived_data</span><span class="p">(</span><span class="n">derived_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">derived_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">datamodule</span>
+</pre></div>
+</div>
+</section>
+<section id="Output-normalization">
+<h3>Output normalization<a class="headerlink" href="#Output-normalization" title="Link to this heading">#</a></h3>
+<p>The functionality is provided in <code class="docutils literal notranslate"><span class="pre">AbstractNN</span></code>. Different normalizations are used for different tasks: <code class="docutils literal notranslate"><span class="pre">torch.nn.Identity()</span></code> for regression so that nothing is done on the output, and <code class="docutils literal notranslate"><span class="pre">torch.nn.Softmax(dim=-1)</span></code> for multi-class classification and <code class="docutils literal notranslate"><span class="pre">torch.nn.Sigmoid()</span></code> for binary classification to calculate probabilities from logits. For example, a model will always return positive predictions using the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TabNetNNInherited</span><span class="p">(</span><span class="n">TabNetNN</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">output_norm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Remark</strong>: Normalization is not related to the calculation of the loss function.</p>
+</section>
+<section id="Loss-function">
+<h3>Loss function<a class="headerlink" href="#Loss-function" title="Link to this heading">#</a></h3>
+<p>The functionality is provided in <code class="docutils literal notranslate"><span class="pre">AbstractNN</span></code>. By default, <code class="docutils literal notranslate"><span class="pre">torch.nn.BCEWithLogitsLoss()</span></code> is used for binary classification; <code class="docutils literal notranslate"><span class="pre">torch.nn.CrossEntropyLoss()</span></code> is used for multi-class classification; <code class="docutils literal notranslate"><span class="pre">torch.nn.MSELoss()</span></code> (<code class="docutils literal notranslate"><span class="pre">loss==&quot;mse&quot;</span></code>) or <code class="docutils literal notranslate"><span class="pre">torch.nn.L1Loss()</span></code> (<code class="docutils literal notranslate"><span class="pre">loss==&quot;mae&quot;</span></code>) is used for regression. For example, a model with the following code uses <code class="docutils literal notranslate"><span class="pre">torch.nn.SmoothL1Loss</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TabNetNNInherited</span><span class="p">(</span><span class="n">TabNetNN</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">loss_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">SmoothL1Loss</span><span class="p">()(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_true</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">before_loss_fn</span></code> is called before calling <code class="docutils literal notranslate"><span class="pre">loss_fn</span></code> to transform the output (from <code class="docutils literal notranslate"><span class="pre">forward</span></code>) and the target to the desired format. Correspondingly to the default <code class="docutils literal notranslate"><span class="pre">loss_fn</span></code> (<code class="docutils literal notranslate"><span class="pre">self.default_loss_fn</span></code> returned by <code class="docutils literal notranslate"><span class="pre">AbstractNN.get_loss_fn</span></code>), a common implementation of <code class="docutils literal notranslate"><span class="pre">before_loss_fn</span></code> is as follows to meet the need of <code class="docutils literal notranslate"><span class="pre">torch.nn.BCEWithLogitsLoss()</span></code> and <code class="docutils literal notranslate"><span class="pre">torch.nn.CrossEntropyLoss()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TabNetNNInherited</span><span class="p">(</span><span class="n">TabNetNN</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">before_loss_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;binary&quot;</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">yhat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">yhat</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;multiclass&quot;</span><span class="p">:</span>
+            <span class="n">yhat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">yhat</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">yhat</span>
+</pre></div>
+</div>
+</section>
+<section id="pytorch_lighting-functionalities">
+<h3><code class="docutils literal notranslate"><span class="pre">pytorch_lighting</span></code> functionalities<a class="headerlink" href="#pytorch_lighting-functionalities" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">AbstractNN</span></code> is based on <code class="docutils literal notranslate"><span class="pre">pytorch_lightning.LightningModule</span></code>, so most methods of <code class="docutils literal notranslate"><span class="pre">LightningModule</span></code> can be directly used for <code class="docutils literal notranslate"><span class="pre">AbstractNN</span></code>. Note that some of those methods are already implemented, like <code class="docutils literal notranslate"><span class="pre">training_step</span></code>, <code class="docutils literal notranslate"><span class="pre">validation_step</span></code>, and <code class="docutils literal notranslate"><span class="pre">configure_optimizers</span></code>. Others like <code class="docutils literal notranslate"><span class="pre">on_train_start</span></code>, <code class="docutils literal notranslate"><span class="pre">on_train_epoch_end</span></code>, etc. will be automatically called by <code class="docutils literal notranslate"><span class="pre">pytorch_lightning.Trainer</span></code>. See the original <a class="reference external" href="https://lightning.ai/docs/pytorch/stable/">instructions</a> for advanced usage.</p>
+</section>
+<section id="Backward-propagation">
+<h3>Backward propagation<a class="headerlink" href="#Backward-propagation" title="Link to this heading">#</a></h3>
+<p>The functionality is provided in <code class="docutils literal notranslate"><span class="pre">AbstractNN</span></code>. With the loss value returned by <code class="docutils literal notranslate"><span class="pre">loss_fn</span></code> (or registered attributes during calling <code class="docutils literal notranslate"><span class="pre">loss_fn</span></code>) and optimizers returned by <code class="docutils literal notranslate"><span class="pre">configure_optimizers</span></code>, backward propagation and optimization are performed. The default implementation is as follows where only one optimizer and one loss item are used:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TabNetNNInherited</span><span class="p">(</span><span class="n">TabNetNN</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">cal_backward_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loss</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">manual_backward</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+        <span class="n">opt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizers</span><span class="p">()</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">self.manual_backward</span></code> should be used instead of <code class="docutils literal notranslate"><span class="pre">loss.backward</span></code> due to the requirement of <code class="docutils literal notranslate"><span class="pre">LightningModule</span></code>.</p>
+</section>
+<section id="Early-stopping-criterion">
+<h3>Early stopping criterion<a class="headerlink" href="#Early-stopping-criterion" title="Link to this heading">#</a></h3>
+<p>The functionality is provided in <code class="docutils literal notranslate"><span class="pre">AbstractNN</span></code>. Early stopping is used to reduce over-fitting risks. <code class="docutils literal notranslate"><span class="pre">_early_stopping_eval</span></code> returns the monitored value of early stopping. By default, the validation loss is returned:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TabNetNNInherited</span><span class="p">(</span><span class="n">TabNetNN</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_early_stopping_eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_loss</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">val_loss</span> <span class="o">+</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">train_loss</span>
+</pre></div>
+</div>
+<p>The second term is used to identify NaN in the training loss.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="customized_model_base.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Customized model base</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="set_optimizers_lrschedulers.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Change optimizers and lr shedulers</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Advanced-customizations-of-AbstractModel">Advanced customizations of <code class="docutils literal notranslate"><span class="pre">AbstractModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Training-parameters">Training parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Bayesian-optimization-criterion">Bayesian optimization criterion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Validity-of-a-model">Validity of a model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Advanced-customizations-of-TorchModel">Advanced customizations of <code class="docutils literal notranslate"><span class="pre">TorchModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Customized-data-processing">Customized data processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Output-normalization">Output normalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Loss-function">Loss function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch_lighting-functionalities"><code class="docutils literal notranslate"><span class="pre">pytorch_lighting</span></code> functionalities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Backward-propagation">Backward propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Early-stopping-criterion">Early stopping criterion</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ANONYMOUS/tabular_ensemble/edit/main/docs/source/examples/advanced_usage/customized_model_base_advanced.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/examples/advanced_usage/customized_model_base_advanced.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

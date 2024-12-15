@@ -1,0 +1,16 @@
+###########
+Get Started
+###########
+
+.. toctree::
+    :maxdepth: 2
+
+    get_started/installation
+    get_started/quick_start
+    get_started/run_sample
+    get_started/new_dataset
+    get_started/inference
+    get_started/use_data_functionalities
+    get_started/bayes
+    get_started/cross_validation
+    get_started/plotting

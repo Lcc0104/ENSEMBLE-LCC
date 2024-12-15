@@ -1,0 +1,1404 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Inference on an upcoming dataset &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/get_started/inference';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using data functionalities" href="use_data_functionalities.html" />
+    <link rel="prev" title="Dataset and configuration" href="new_dataset.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run_sample.html">Basics of running benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_dataset.html">Dataset and configuration</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Inference on an upcoming dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_data_functionalities.html">Using data functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">Bayesian hyperparameter optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross_validation.html">Cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../get_started.html" class="nav-link">Get Started</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Inference on an upcoming dataset</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Inference-on-an-upcoming-dataset">
+<h1>Inference on an upcoming dataset<a class="headerlink" href="#Inference-on-an-upcoming-dataset" title="Link to this heading">#</a></h1>
+<p>In this part, we will simulate the real deployment of the package and make inferences on an upcoming dataset. We use the Adult dataset from UCI datasets which has an individual testing set.</p>
+<section id="Training-models">
+<h2>Training models<a class="headerlink" href="#Training-models" title="Link to this heading">#</a></h2>
+<p>Similar to the first example, we initialize a <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> and model bases, then train all models.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">tabensemb.trainer</span> <span class="kn">import</span> <span class="n">Trainer</span>
+<span class="kn">from</span> <span class="nn">tabensemb.model</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">tabensemb</span>
+<span class="kn">from</span> <span class="nn">tabensemb.config</span> <span class="kn">import</span> <span class="n">UserConfig</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+
+<span class="n">temp_path</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">()</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_output_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_config_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;configs&quot;</span><span class="p">)</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_data_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using </span><span class="si">{}</span><span class="s2"> device&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">adult_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;age&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;workclass&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fnlwgt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;education&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;education-num&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;marital-status&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;occupation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;relationship&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;race&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sex&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;capital-gain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;capital-loss&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hours-per-week&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;native-country&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;income&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="o">.</span><span class="n">from_uci</span><span class="p">(</span><span class="s2">&quot;Adult&quot;</span><span class="p">,</span> <span class="n">column_names</span><span class="o">=</span><span class="n">adult_columns</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">PytorchTabular</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">]),</span>
+    <span class="n">WideDeep</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;TabMlp&quot;</span><span class="p">]),</span>
+    <span class="n">AutoGluon</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">]),</span>
+<span class="p">]</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">add_modelbases</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">stderr_to_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">get_leaderboard</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Using cuda device
+Downloading https://archive.ics.uci.edu/static/public/2/adult.zip to /tmp/tmpkc_l71f1/data/Adult.zip
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/xlluo/hdd/tabular_ensemble/tabensemb/config/user_config.py:292: UserWarning: There exists .test file(s) [&#39;adult.test&#39;] which should be used for final metrics. The .zip file is left for the user to process.
+  warnings.warn(
+/home/xlluo/hdd/tabular_ensemble/tabensemb/utils/utils.py:464: ParserWarning: Falling back to the &#39;python&#39; engine because the &#39;c&#39; engine does not support regex separators (separators &gt; 1 char and different from &#39;\s+&#39; are interpreted as regex); you can avoid this warning by specifying engine=&#39;python&#39;.
+  df = pd.read_csv(StringIO(s), names=names, sep=sep)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+age is Integer and will be treated as a continuous feature.
+fnlwgt is Integer and will be treated as a continuous feature.
+education-num is Integer and will be treated as a continuous feature.
+capital-gain is Integer and will be treated as a continuous feature.
+capital-loss is Integer and will be treated as a continuous feature.
+hours-per-week is Integer and will be treated as a continuous feature.
+The project will be saved to /tmp/tmpkc_l71f1/output/adult/2023-09-23-20-34-58-0_UserInputConfig
+Dataset size: 19536 6512 6513
+Data saved to /tmp/tmpkc_l71f1/output/adult/2023-09-23-20-34-58-0_UserInputConfig (data.csv and tabular_data.csv).
+
+-------------Run PytorchTabular-------------
+
+Training Category Embedding
+Global seed set to 42
+2023-09-23 20:35:00,222 - {pytorch_tabular.tabular_model:473} - INFO - Preparing the DataLoaders
+2023-09-23 20:35:00,223 - {pytorch_tabular.tabular_datamodule:290} - INFO - Setting up the datamodule for classification task
+2023-09-23 20:35:00,288 - {pytorch_tabular.tabular_model:521} - INFO - Preparing the Model: CategoryEmbeddingModel
+2023-09-23 20:35:00,307 - {pytorch_tabular.tabular_model:268} - INFO - Preparing the Trainer
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/trainer/connectors/accelerator_connector.py:589: LightningDeprecationWarning: The Trainer argument `auto_select_gpus` has been deprecated in v1.9.0 and will be removed in v2.0.0. Please use the function `pytorch_lightning.accelerators.find_usable_cuda_devices` instead.
+  rank_zero_deprecation(
+Auto select gpus: [0]
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+2023-09-23 20:35:01,129 - {pytorch_tabular.tabular_model:582} - INFO - Training Started
+You are using a CUDA device (&#39;NVIDIA GeForce RTX 3090&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name             | Type                      | Params
+---------------------------------------------------------------
+0 | _backbone        | CategoryEmbeddingBackbone | 18.5 K
+1 | _embedding_layer | Embedding1dLayer          | 1.4 K
+2 | head             | LinearHead                | 66
+3 | loss             | CrossEntropyLoss          | 0
+---------------------------------------------------------------
+20.0 K    Trainable params
+0         Non-trainable params
+20.0 K    Total params
+0.080     Total estimated model params size (MB)
+Epoch: 1/300, Train loss: 0.4666, Val loss: 0.3794, Min val loss: 0.3794, Epoch time: 0.376s.
+Epoch: 20/300, Train loss: 0.3112, Val loss: 0.3184, Min val loss: 0.3177, Epoch time: 0.406s.
+Epoch: 40/300, Train loss: 0.2972, Val loss: 0.3213, Min val loss: 0.3162, Epoch time: 0.326s.
+Epoch: 60/300, Train loss: 0.2864, Val loss: 0.3248, Min val loss: 0.3162, Epoch time: 0.330s.
+Epoch: 80/300, Train loss: 0.2766, Val loss: 0.3323, Min val loss: 0.3162, Epoch time: 0.386s.
+Epoch: 100/300, Train loss: 0.2677, Val loss: 0.3416, Min val loss: 0.3162, Epoch time: 0.540s.
+Epoch: 120/300, Train loss: 0.2602, Val loss: 0.3484, Min val loss: 0.3162, Epoch time: 0.357s.
+2023-09-23 20:35:50,914 - {pytorch_tabular.tabular_model:584} - INFO - Training the model completed
+2023-09-23 20:35:50,915 - {pytorch_tabular.tabular_model:1258} - INFO - Loading the best model
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/utilities/cloud_io.py:33: LightningDeprecationWarning: `pytorch_lightning.utilities.cloud_io.get_filesystem` has been deprecated in v1.8.0 and will be removed in v2.0.0. Please use `lightning_fabric.utilities.cloud_io.get_filesystem` instead.
+  rank_zero_deprecation(
+Training log_loss loss: 0.28862
+Validation log_loss loss: 0.31619
+Testing log_loss loss: 0.31114
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpkc_l71f1/output/adult/2023-09-23-20-34-58-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------PytorchTabular End-------------
+
+
+-------------Run WideDeep-------------
+
+Training TabMlp
+Epoch: 1/300, Train loss: 0.5206, Val loss: 0.4274, Min val loss: 0.4274
+Epoch: 21/300, Train loss: 0.3145, Val loss: 0.3161, Min val loss: 0.3161
+Epoch: 41/300, Train loss: 0.3063, Val loss: 0.3192, Min val loss: 0.3161
+Epoch: 61/300, Train loss: 0.2984, Val loss: 0.3209, Min val loss: 0.3161
+Epoch: 81/300, Train loss: 0.2905, Val loss: 0.3227, Min val loss: 0.3161
+Epoch: 101/300, Train loss: 0.2819, Val loss: 0.3266, Min val loss: 0.3161
+Epoch: 121/300, Train loss: 0.2754, Val loss: 0.3293, Min val loss: 0.3161
+Epoch 00121: early stopping
+Restoring model weights from the end of the best epoch
+Training log_loss loss: 0.30084
+Validation log_loss loss: 0.31729
+Testing log_loss loss: 0.31133
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpkc_l71f1/output/adult/2023-09-23-20-34-58-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------WideDeep End-------------
+
+
+-------------Run AutoGluon-------------
+
+Training Random Forest
+Presets specified: [&#39;best_quality&#39;]
+Warning: hyperparameter tuning is currently experimental and may cause the process to hang.
+Stack configuration (auto_stack=True): num_stack_levels=0, num_bag_folds=8, num_bag_sets=1
+Beginning AutoGluon training ...
+AutoGluon will save models to &#34;/tmp/tmpkc_l71f1/output/adult/2023-09-23-20-34-58-0_UserInputConfig/AutoGluon/Random Forest/&#34;
+AutoGluon Version:  0.8.2
+Python Version:     3.10.12
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #1 SMP Mon Dec 13 20:27:58 CST 2021
+Disk Space Avail:   149.26 GB / 502.47 GB (29.7%)
+Train Data Rows:    19536
+Train Data Columns: 14
+Tuning Data Rows:    6512
+Tuning Data Columns: 14
+Label Column: income
+Preprocessing data ...
+Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
+Using Feature Generators to preprocess the data ...
+Fitting PipelineFeatureGenerator...
+        Available Memory:                    12442.89 MB
+        Train Data (Original)  Memory Usage: 15.07 MB (0.1% of available memory)
+        Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+        Stage 1 Generators:
+                Fitting AsTypeFeatureGenerator...
+                        Note: Converting 1 features to boolean dtype as they only contain 2 unique values.
+        Stage 2 Generators:
+                Fitting FillNaFeatureGenerator...
+        Stage 3 Generators:
+                Fitting IdentityFeatureGenerator...
+                        Warning: feature_metadata_in passed as input to fit_transform, but self.feature_metadata_in was already set. Ignoring feature_metadata_in.
+                Fitting CategoryFeatureGenerator...
+                        Warning: feature_metadata_in passed as input to fit_transform, but self.feature_metadata_in was already set. Ignoring feature_metadata_in.
+                        Fitting CategoryMemoryMinimizeFeatureGenerator...
+        Stage 4 Generators:
+                Fitting DropUniqueFeatureGenerator...
+        Stage 5 Generators:
+                Fitting DropDuplicatesFeatureGenerator...
+        Types of features in original data (raw dtype, special dtypes):
+                (&#39;int&#39;, [])    : 6 | [&#39;age&#39;, &#39;fnlwgt&#39;, &#39;education-num&#39;, &#39;capital-gain&#39;, &#39;capital-loss&#39;, ...]
+                (&#39;object&#39;, []) : 8 | [&#39;education&#39;, &#39;marital-status&#39;, &#39;native-country&#39;, &#39;occupation&#39;, &#39;race&#39;, ...]
+        Types of features in processed data (raw dtype, special dtypes):
+                (&#39;category&#39;, []) : 8 | [&#39;education&#39;, &#39;marital-status&#39;, &#39;native-country&#39;, &#39;occupation&#39;, &#39;race&#39;, ...]
+                (&#39;int&#39;, [])      : 6 | [&#39;age&#39;, &#39;fnlwgt&#39;, &#39;education-num&#39;, &#39;capital-gain&#39;, &#39;capital-loss&#39;, ...]
+        0.1s = Fit runtime
+        14 features in original data used to generate 14 features in processed data.
+        Train Data (Processed) Memory Usage: 1.46 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.15s ...
+AutoGluon will gauge predictive performance using evaluation metric: &#39;accuracy&#39;
+        To change this, specify the eval_metric parameter of Predictor()
+use_bag_holdout=True, will use tuning_data as holdout (will not be used for early stopping).
+User-specified model hyperparameters to be fit:
+{
+        &#39;RF&#39;: {},
+}
+Fitting 1 L1 models ...
+Hyperparameter tuning model: RandomForest_BAG_L1 ...
+        No hyperparameter search space specified for RandomForest_BAG_L1. Skipping HPO. Will train one model based on the provided hyperparameters.
+Fitted model: RandomForest_BAG_L1 ...
+        0.8543   = Validation score   (accuracy)
+        1.19s    = Training   runtime
+        0.0s     = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+        0.8538   = Validation score   (accuracy)
+        0.0s     = Training   runtime
+        0.01s    = Validation runtime
+AutoGluon training complete, total runtime = 1.54s ... Best model: &#34;WeightedEnsemble_L2&#34;
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load(&#34;/tmp/tmpkc_l71f1/output/adult/2023-09-23-20-34-58-0_UserInputConfig/AutoGluon/Random Forest/&#34;)
+Training log_loss loss: 0.08021
+Validation log_loss loss: 0.31802
+Testing log_loss loss: 0.31261
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpkc_l71f1/output/adult/2023-09-23-20-34-58-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------AutoGluon End-------------
+
+PytorchTabular metrics
+Category Embedding 1/1
+WideDeep metrics
+TabMlp 1/1
+AutoGluon metrics
+Random Forest 1/1
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpkc_l71f1/output/adult/2023-09-23-20-34-58-0_UserInputConfig/trainer.pkl&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Program</th>
+      <th>Model</th>
+      <th>Training F1_SCORE</th>
+      <th>Training PRECISION_SCORE</th>
+      <th>Training RECALL_SCORE</th>
+      <th>Training JACCARD_SCORE</th>
+      <th>Training ACCURACY_SCORE</th>
+      <th>Training BALANCED_ACCURACY_SCORE</th>
+      <th>Training COHEN_KAPPA_SCORE</th>
+      <th>Training HAMMING_LOSS</th>
+      <th>...</th>
+      <th>Validation ACCURACY_SCORE</th>
+      <th>Validation BALANCED_ACCURACY_SCORE</th>
+      <th>Validation COHEN_KAPPA_SCORE</th>
+      <th>Validation HAMMING_LOSS</th>
+      <th>Validation MATTHEWS_CORRCOEF</th>
+      <th>Validation ZERO_ONE_LOSS</th>
+      <th>Validation ROC_AUC_SCORE</th>
+      <th>Validation LOG_LOSS</th>
+      <th>Validation BRIER_SCORE_LOSS</th>
+      <th>Validation AVERAGE_PRECISION_SCORE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>WideDeep</td>
+      <td>TabMlp</td>
+      <td>0.694200</td>
+      <td>0.728505</td>
+      <td>0.662981</td>
+      <td>0.531628</td>
+      <td>0.859388</td>
+      <td>0.792321</td>
+      <td>0.603167</td>
+      <td>0.140612</td>
+      <td>...</td>
+      <td>0.852426</td>
+      <td>0.784474</td>
+      <td>0.584884</td>
+      <td>0.147574</td>
+      <td>0.585738</td>
+      <td>0.147574</td>
+      <td>0.908951</td>
+      <td>0.317288</td>
+      <td>0.101612</td>
+      <td>0.868420</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AutoGluon</td>
+      <td>Random Forest</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.853808</td>
+      <td>0.776665</td>
+      <td>0.580404</td>
+      <td>0.146192</td>
+      <td>0.583003</td>
+      <td>0.146192</td>
+      <td>0.907010</td>
+      <td>0.318016</td>
+      <td>0.100486</td>
+      <td>0.875084</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PytorchTabular</td>
+      <td>Category Embedding</td>
+      <td>0.709806</td>
+      <td>0.738341</td>
+      <td>0.683394</td>
+      <td>0.550154</td>
+      <td>0.865479</td>
+      <td>0.803303</td>
+      <td>0.622423</td>
+      <td>0.134521</td>
+      <td>...</td>
+      <td>0.850430</td>
+      <td>0.784467</td>
+      <td>0.581612</td>
+      <td>0.149570</td>
+      <td>0.582150</td>
+      <td>0.149570</td>
+      <td>0.909318</td>
+      <td>0.316194</td>
+      <td>0.101722</td>
+      <td>0.868410</td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 44 columns</p>
+</div></div>
+</div>
+</section>
+<section id="Selecting-and-storing-a-model">
+<h2>Selecting and storing a model<a class="headerlink" href="#Selecting-and-storing-a-model" title="Link to this heading">#</a></h2>
+<p>From the leaderboard, we can check the performance of each model and select one of the models for deployment. Say we want to choose <code class="docutils literal notranslate"><span class="pre">Random</span> <span class="pre">Forest</span></code> from <code class="docutils literal notranslate"><span class="pre">AutoGluon</span></code>, we detach the model from the heavy <code class="docutils literal notranslate"><span class="pre">trainer</span></code>. It is stored locally in a separate directory.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer_of_one_model</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">detach_model</span><span class="p">(</span><span class="n">program</span><span class="o">=</span><span class="s2">&quot;AutoGluon&quot;</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmpkc_l71f1/output/adult/2023-09-23-20-34-58-0_UserInputConfig-I1/trainer.pkl&#39;)
+</pre></div></div>
+</div>
+<p>The detached trainer now has only one model base.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model bases of the detached trainer</span>
+<span class="n">trainer_of_one_model</span><span class="o">.</span><span class="n">modelbases</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;tabensemb.model.autogluon.AutoGluon at 0x7f581fc3bd00&gt;]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The model in the model base</span>
+<span class="n">trainer_of_one_model</span><span class="o">.</span><span class="n">get_modelbase</span><span class="p">(</span><span class="s2">&quot;AutoGluon_Random Forest&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;autogluon.tabular.predictor.predictor.TabularPredictor at 0x7f5644bdbfa0&gt;
+</pre></div></div>
+</div>
+</section>
+<section id="Loading-the-model">
+<h2>Loading the model<a class="headerlink" href="#Loading-the-model" title="Link to this heading">#</a></h2>
+<p>Now the <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> containing a single model is stored in a separate directory. Assume that we want to load the local trainer in a separate script for inference. In the following line, the argument <code class="docutils literal notranslate"><span class="pre">path</span></code> of <code class="docutils literal notranslate"><span class="pre">load_trainer</span></code> is the path to <code class="docutils literal notranslate"><span class="pre">trainer.pkl</span></code>, which is already printed when detaching the model or training the model bases. Here we just use the directory of the detached trainer <code class="docutils literal notranslate"><span class="pre">trainer_of_one_model</span></code>.</p>
+<p><strong>Remark</strong>: You can move the directory to any other place (or other devices if the version of the package and the environment are all consistent) and rename the folder. <code class="docutils literal notranslate"><span class="pre">tabensemb</span></code> automatically configures the path.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.trainer</span> <span class="kn">import</span> <span class="n">load_trainer</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">load_trainer</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">trainer_of_one_model</span><span class="o">.</span><span class="n">project_root</span><span class="p">,</span> <span class="s2">&quot;trainer.pkl&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">get_modelbase</span><span class="p">(</span><span class="s2">&quot;AutoGluon_Random Forest&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;autogluon.tabular.predictor.predictor.TabularPredictor at 0x7f5644bd8130&gt;
+</pre></div></div>
+</div>
+</section>
+<section id="Inference">
+<h2>Inference<a class="headerlink" href="#Inference" title="Link to this heading">#</a></h2>
+<p>Assume that we have a new <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> representing an upcoming dataset. For demonstration, we use the testing set here. The classification target is ordinal encoded by <code class="docutils literal notranslate"><span class="pre">trainer.datamodule.label_ordinal_encoder</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">trainer</span><span class="o">.</span><span class="n">test_indices</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">truth</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">trainer</span><span class="o">.</span><span class="n">test_indices</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">label_name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">truth</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([0, 0, 1, ..., 1, 0, 0])
+</pre></div></div>
+</div>
+<p>Use the functionality of the model base to do inference. The returned result should be</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">get_modelbase</span><span class="p">(</span><span class="s2">&quot;AutoGluon_Random Forest&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([[&#39;&lt;=50K&#39;],
+       [&#39;&lt;=50K&#39;],
+       [&#39;&gt;50K&#39;],
+       ...,
+       [&#39;&gt;50K&#39;],
+       [&#39;&lt;=50K&#39;],
+       [&#39;&lt;=50K&#39;]], dtype=object)
+</pre></div></div>
+</div>
+<p>You can see the F1 score on the “new” (testing) dataset is the same as that in the above leaderboard. The result should be ordinal-encoded first to calculate metrics. We provide <code class="docutils literal notranslate"><span class="pre">DataModule.label_categories_transform</span></code> to achieve this (and <code class="docutils literal notranslate"><span class="pre">DataModule.label_categories_inverse_transform</span></code> to do the inverse transform).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">auto_metric_sklearn</span></code> automatically calculates different kinds of <code class="docutils literal notranslate"><span class="pre">sklearn.metrics</span></code>, which is extremely useful for classification tasks</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.utils</span> <span class="kn">import</span> <span class="n">auto_metric_sklearn</span>
+
+<span class="n">encoded_result</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_categories_transform</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">trainer</span><span class="o">.</span><span class="n">label_name</span><span class="p">))</span><span class="o">.</span><span class="n">values</span>
+<span class="c1"># You can also use trainer.datamodule.label_ordinal_encoder.transform(result) to get the same result.</span>
+<span class="n">auto_metric_sklearn</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">encoded_result</span><span class="p">,</span> <span class="s2">&quot;f1_score&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">),</span> <span class="n">trainer</span><span class="o">.</span><span class="n">leaderboard</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">trainer</span><span class="o">.</span><span class="n">leaderboard</span><span class="p">[</span><span class="s2">&quot;Model&quot;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">,</span> <span class="s2">&quot;Testing F1_SCORE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(0.6936416184971098, array([0.69364162]))
+</pre></div></div>
+</div>
+</section>
+<section id="Inference-on-the-individual-testing-set">
+<h2>Inference on the individual testing set<a class="headerlink" href="#Inference-on-the-individual-testing-set" title="Link to this heading">#</a></h2>
+<p>When loading from UCI datasets, <code class="docutils literal notranslate"><span class="pre">UserConfig.from_uci</span></code> finds that an individual testing dataset exists, so the downloaded .zip file is not removed. We can load the archive using <code class="docutils literal notranslate"><span class="pre">zipfile</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">zipfile</span>
+
+<span class="n">zipf</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_data_path&quot;</span><span class="p">],</span> <span class="s2">&quot;Adult.zip&quot;</span><span class="p">))</span>
+<span class="n">zipf</span><span class="o">.</span><span class="n">namelist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;Index&#39;, &#39;adult.data&#39;, &#39;adult.names&#39;, &#39;adult.test&#39;, &#39;old.adult.names&#39;]
+</pre></div></div>
+</div>
+<p>Now check the content of <code class="docutils literal notranslate"><span class="pre">adult.test</span></code>. It is a .csv-like file, just like the <code class="docutils literal notranslate"><span class="pre">adult.data</span></code> file but has an additional row at the front, and an additional “.” at the end of each line.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="n">zipf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;adult.test&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+|1x3 Cross validator
+25, Private, 226802, 11th, 7, Never-married, Machine-op-inspct, Own-child, Black, Male, 0, 0, 40, United-States, &lt;=50K.
+38, Private, 89814, HS-grad, 9, Married-civ-spouse, Farming-fishing, Husband, White, Male, 0, 0, 50, United-States, &lt;=50K.
+28, Local-gov, 336951, Assoc-acdm, 12, Married-civ-spouse, Protective-serv, Husband, White, Male, 0, 0, 40, United-States, &gt;50K.
+44, Private, 160323, Some-college, 10, Married-civ-spouse, Machine-op-inspct, Husband, Black, Male, 7688, 0
+</pre></div></div>
+</div>
+<p>We provide the <code class="docutils literal notranslate"><span class="pre">str_to_dataframe</span></code> function that translates the string object to a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and replaces illegal values with <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabensemb.utils</span> <span class="kn">import</span> <span class="n">str_to_dataframe</span>
+
+<span class="n">file</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|1x3 Cross validator</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">testing_df</span> <span class="o">=</span> <span class="n">str_to_dataframe</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">trainer</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">check_nan_on</span><span class="o">=</span><span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">)</span>
+<span class="n">testing_df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/xlluo/hdd/tabular_ensemble/tabensemb/utils/utils.py:464: ParserWarning: Falling back to the &#39;python&#39; engine because the &#39;c&#39; engine does not support regex separators (separators &gt; 1 char and different from &#39;\s+&#39; are interpreted as regex); you can avoid this warning by specifying engine=&#39;python&#39;.
+  df = pd.read_csv(StringIO(s), names=names, sep=sep)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>workclass</th>
+      <th>fnlwgt</th>
+      <th>education</th>
+      <th>education-num</th>
+      <th>marital-status</th>
+      <th>occupation</th>
+      <th>relationship</th>
+      <th>race</th>
+      <th>sex</th>
+      <th>capital-gain</th>
+      <th>capital-loss</th>
+      <th>hours-per-week</th>
+      <th>native-country</th>
+      <th>income</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>25</td>
+      <td>Private</td>
+      <td>226802</td>
+      <td>11th</td>
+      <td>7</td>
+      <td>Never-married</td>
+      <td>Machine-op-inspct</td>
+      <td>Own-child</td>
+      <td>Black</td>
+      <td>Male</td>
+      <td>0</td>
+      <td>0</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>38</td>
+      <td>Private</td>
+      <td>89814</td>
+      <td>HS-grad</td>
+      <td>9</td>
+      <td>Married-civ-spouse</td>
+      <td>Farming-fishing</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>0</td>
+      <td>0</td>
+      <td>50</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>28</td>
+      <td>Local-gov</td>
+      <td>336951</td>
+      <td>Assoc-acdm</td>
+      <td>12</td>
+      <td>Married-civ-spouse</td>
+      <td>Protective-serv</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>0</td>
+      <td>0</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&gt;50K</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>44</td>
+      <td>Private</td>
+      <td>160323</td>
+      <td>Some-college</td>
+      <td>10</td>
+      <td>Married-civ-spouse</td>
+      <td>Machine-op-inspct</td>
+      <td>Husband</td>
+      <td>Black</td>
+      <td>Male</td>
+      <td>7688</td>
+      <td>0</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&gt;50K</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>18</td>
+      <td>?</td>
+      <td>103497</td>
+      <td>Some-college</td>
+      <td>10</td>
+      <td>Never-married</td>
+      <td>?</td>
+      <td>Own-child</td>
+      <td>White</td>
+      <td>Female</td>
+      <td>0</td>
+      <td>0</td>
+      <td>30</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>16276</th>
+      <td>39</td>
+      <td>Private</td>
+      <td>215419</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Divorced</td>
+      <td>Prof-specialty</td>
+      <td>Not-in-family</td>
+      <td>White</td>
+      <td>Female</td>
+      <td>0</td>
+      <td>0</td>
+      <td>36</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+    <tr>
+      <th>16277</th>
+      <td>64</td>
+      <td>?</td>
+      <td>321403</td>
+      <td>HS-grad</td>
+      <td>9</td>
+      <td>Widowed</td>
+      <td>?</td>
+      <td>Other-relative</td>
+      <td>Black</td>
+      <td>Male</td>
+      <td>0</td>
+      <td>0</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+    <tr>
+      <th>16278</th>
+      <td>38</td>
+      <td>Private</td>
+      <td>374983</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Married-civ-spouse</td>
+      <td>Prof-specialty</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>0</td>
+      <td>0</td>
+      <td>50</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+    <tr>
+      <th>16279</th>
+      <td>44</td>
+      <td>Private</td>
+      <td>83891</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Divorced</td>
+      <td>Adm-clerical</td>
+      <td>Own-child</td>
+      <td>Asian-Pac-Islander</td>
+      <td>Male</td>
+      <td>5455</td>
+      <td>0</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+    <tr>
+      <th>16280</th>
+      <td>35</td>
+      <td>Self-emp-inc</td>
+      <td>182148</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Married-civ-spouse</td>
+      <td>Exec-managerial</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>0</td>
+      <td>0</td>
+      <td>60</td>
+      <td>United-States</td>
+      <td>&gt;50K</td>
+    </tr>
+  </tbody>
+</table>
+<p>16281 rows × 15 columns</p>
+</div></div>
+</div>
+<p>The inference is similar.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">get_modelbase</span><span class="p">(</span><span class="s2">&quot;AutoGluon_Random Forest&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">testing_df</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([[&#39;&lt;=50K&#39;],
+       [&#39;&lt;=50K&#39;],
+       [&#39;&lt;=50K&#39;],
+       ...,
+       [&#39;&gt;50K&#39;],
+       [&#39;&lt;=50K&#39;],
+       [&#39;&gt;50K&#39;]], dtype=object)
+</pre></div></div>
+</div>
+<p>Both the truth and the result require to be ordinal-encoded to calculate metrics.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">encoded_truth</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_categories_transform</span><span class="p">(</span><span class="n">testing_df</span><span class="p">[</span><span class="n">trainer</span><span class="o">.</span><span class="n">label_name</span><span class="p">])</span><span class="o">.</span><span class="n">values</span>
+<span class="n">encoded_result</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">datamodule</span><span class="o">.</span><span class="n">label_categories_transform</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">trainer</span><span class="o">.</span><span class="n">label_name</span><span class="p">))</span><span class="o">.</span><span class="n">values</span>
+<span class="n">auto_metric_sklearn</span><span class="p">(</span><span class="n">encoded_truth</span><span class="p">,</span> <span class="n">encoded_result</span><span class="p">,</span> <span class="s2">&quot;f1_score&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">),</span> <span class="n">auto_metric_sklearn</span><span class="p">(</span><span class="n">encoded_truth</span><span class="p">,</span> <span class="n">encoded_result</span><span class="p">,</span> <span class="s2">&quot;roc_auc_score&quot;</span><span class="p">,</span> <span class="s2">&quot;binary&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(0.6690190543401553, 0.7731706276694975)
+</pre></div></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="new_dataset.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Dataset and configuration</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="use_data_functionalities.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Using data functionalities</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Training-models">Training models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Selecting-and-storing-a-model">Selecting and storing a model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Loading-the-model">Loading the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Inference">Inference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Inference-on-the-individual-testing-set">Inference on the individual testing set</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ANONYMOUS/tabular_ensemble/edit/main/docs/source/examples/get_started/inference.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/examples/get_started/inference.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

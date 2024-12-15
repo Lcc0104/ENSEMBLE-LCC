@@ -1,0 +1,1178 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Plotting &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/get_started/plotting';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Advanced Usage" href="../advanced_usage.html" />
+    <link rel="prev" title="Cross-validation" href="cross_validation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run_sample.html">Basics of running benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new_dataset.html">Dataset and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inference.html">Inference on an upcoming dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_data_functionalities.html">Using data functionalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bayes.html">Bayesian hyperparameter optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cross_validation.html">Cross-validation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Plotting</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../get_started.html" class="nav-link">Get Started</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Plotting</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Plotting">
+<h1>Plotting<a class="headerlink" href="#Plotting" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">tabensemb.trainer.Trainer</span></code> provides some useful plotting methods to analyse the dataset or results.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">tabensemb.trainer</span> <span class="kn">import</span> <span class="n">Trainer</span>
+<span class="kn">from</span> <span class="nn">tabensemb.model</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">tabensemb.config</span> <span class="kn">import</span> <span class="n">UserConfig</span>
+<span class="kn">import</span> <span class="nn">tabensemb</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using </span><span class="si">{}</span><span class="s2"> device&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+
+<span class="n">temp_path</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">()</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_output_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_config_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;configs&quot;</span><span class="p">)</span>
+<span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_data_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">mpg_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;mpg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cylinders&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;displacement&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;horsepower&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;weight&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acceleration&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;model_year&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;origin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;car_name&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="o">.</span><span class="n">from_uci</span><span class="p">(</span><span class="s2">&quot;Auto MPG&quot;</span><span class="p">,</span> <span class="n">column_names</span><span class="o">=</span><span class="n">mpg_columns</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">PytorchTabular</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">]),</span>
+    <span class="n">CatEmbed</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">])</span>
+<span class="p">]</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">add_modelbases</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">stderr_to_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Using cuda device
+Downloading https://archive.ics.uci.edu/static/public/9/auto+mpg.zip to /tmp/tmp7ery7st7/data/Auto MPG.zip
+cylinders is Integer and will be treated as a continuous feature.
+model_year is Integer and will be treated as a continuous feature.
+origin is Integer and will be treated as a continuous feature.
+Unknown values are detected in [&#39;horsepower&#39;]. They will be treated as np.nan.
+The project will be saved to /tmp/tmp7ery7st7/output/auto-mpg/2023-10-08-13-00-16-0_UserInputConfig
+Dataset size: 238 80 80
+Data saved to /tmp/tmp7ery7st7/output/auto-mpg/2023-10-08-13-00-16-0_UserInputConfig (data.csv and tabular_data.csv).
+
+-------------Run PytorchTabular-------------
+
+Training Category Embedding
+Global seed set to 42
+2023-10-08 13:00:17,416 - {pytorch_tabular.tabular_model:473} - INFO - Preparing the DataLoaders
+2023-10-08 13:00:17,417 - {pytorch_tabular.tabular_datamodule:290} - INFO - Setting up the datamodule for regression task
+2023-10-08 13:00:17,424 - {pytorch_tabular.tabular_model:521} - INFO - Preparing the Model: CategoryEmbeddingModel
+2023-10-08 13:00:17,434 - {pytorch_tabular.tabular_model:268} - INFO - Preparing the Trainer
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/trainer/connectors/accelerator_connector.py:589: LightningDeprecationWarning: The Trainer argument `auto_select_gpus` has been deprecated in v1.9.0 and will be removed in v2.0.0. Please use the function `pytorch_lightning.accelerators.find_usable_cuda_devices` instead.
+  rank_zero_deprecation(
+Auto select gpus: [0]
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+2023-10-08 13:00:18,152 - {pytorch_tabular.tabular_model:582} - INFO - Training Started
+You are using a CUDA device (&#39;NVIDIA GeForce RTX 3090&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name             | Type                      | Params
+---------------------------------------------------------------
+0 | _backbone        | CategoryEmbeddingBackbone | 11.4 K
+1 | _embedding_layer | Embedding1dLayer          | 14
+2 | head             | LinearHead                | 33
+3 | loss             | MSELoss                   | 0
+---------------------------------------------------------------
+11.4 K    Trainable params
+0         Non-trainable params
+11.4 K    Total params
+0.046     Total estimated model params size (MB)
+Epoch: 1/300, Train loss: 677.8015, Val loss: 582.9557, Min val loss: 582.9557, Epoch time: 0.010s.
+Epoch: 20/300, Train loss: 353.7851, Val loss: 302.0203, Min val loss: 302.0203, Epoch time: 0.007s.
+Epoch: 40/300, Train loss: 85.0776, Val loss: 62.1153, Min val loss: 62.1153, Epoch time: 0.007s.
+Epoch: 60/300, Train loss: 45.2654, Val loss: 34.2778, Min val loss: 34.2691, Epoch time: 0.007s.
+Epoch: 80/300, Train loss: 33.9537, Val loss: 26.8622, Min val loss: 26.8622, Epoch time: 0.007s.
+Epoch: 100/300, Train loss: 26.9038, Val loss: 23.2417, Min val loss: 23.2372, Epoch time: 0.007s.
+Epoch: 120/300, Train loss: 24.9622, Val loss: 20.4360, Min val loss: 20.4360, Epoch time: 0.007s.
+Epoch: 140/300, Train loss: 24.1636, Val loss: 19.4010, Min val loss: 19.4010, Epoch time: 0.007s.
+Epoch: 160/300, Train loss: 22.9200, Val loss: 18.0232, Min val loss: 17.9749, Epoch time: 0.007s.
+Epoch: 180/300, Train loss: 19.7677, Val loss: 16.9469, Min val loss: 16.9469, Epoch time: 0.007s.
+Epoch: 200/300, Train loss: 17.9390, Val loss: 16.6545, Min val loss: 16.4093, Epoch time: 0.007s.
+Epoch: 220/300, Train loss: 19.4496, Val loss: 15.4451, Min val loss: 15.1788, Epoch time: 0.007s.
+Epoch: 240/300, Train loss: 16.0483, Val loss: 14.5508, Min val loss: 14.5508, Epoch time: 0.008s.
+Epoch: 260/300, Train loss: 16.4672, Val loss: 13.8354, Min val loss: 13.8354, Epoch time: 0.007s.
+Epoch: 280/300, Train loss: 13.6031, Val loss: 12.9315, Min val loss: 12.9315, Epoch time: 0.007s.
+Epoch: 300/300, Train loss: 16.5369, Val loss: 12.3673, Min val loss: 12.3673, Epoch time: 0.007s.
+`Trainer.fit` stopped: `max_epochs=300` reached.
+2023-10-08 13:00:21,684 - {pytorch_tabular.tabular_model:584} - INFO - Training the model completed
+2023-10-08 13:00:21,684 - {pytorch_tabular.tabular_model:1258} - INFO - Loading the best model
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/pytorch_lightning/utilities/cloud_io.py:33: LightningDeprecationWarning: `pytorch_lightning.utilities.cloud_io.get_filesystem` has been deprecated in v1.8.0 and will be removed in v2.0.0. Please use `lightning_fabric.utilities.cloud_io.get_filesystem` instead.
+  rank_zero_deprecation(
+Training mse loss: 11.25175
+Validation mse loss: 12.36725
+Testing mse loss: 7.83801
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmp7ery7st7/output/auto-mpg/2023-10-08-13-00-16-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------PytorchTabular End-------------
+
+
+-------------Run CatEmbed-------------
+
+Training Category Embedding
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+You are using a CUDA device (&#39;NVIDIA GeForce RTX 3090&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name                | Type        | Params
+----------------------------------------------------
+0 | default_loss_fn     | MSELoss     | 0
+1 | default_output_norm | Identity    | 0
+2 | linear              | Sequential  | 11.4 K
+3 | embed               | Embedding1d | 14
+4 | head                | Linear      | 33
+----------------------------------------------------
+11.4 K    Trainable params
+9         Non-trainable params
+11.4 K    Total params
+0.046     Total estimated model params size (MB)
+Epoch: 1/300, Train loss: 677.8015, Val loss: 583.1656, Min val loss: 583.1656, Min ES val loss: 583.1656, Epoch time: 0.006s.
+Epoch: 20/300, Train loss: 353.7850, Val loss: 301.6606, Min val loss: 301.6606, Min ES val loss: 301.6606, Epoch time: 0.005s.
+Epoch: 40/300, Train loss: 85.0776, Val loss: 62.0647, Min val loss: 62.0647, Min ES val loss: 62.0647, Epoch time: 0.005s.
+Epoch: 60/300, Train loss: 45.2654, Val loss: 34.2774, Min val loss: 34.2689, Min ES val loss: 34.2689, Epoch time: 0.005s.
+Epoch: 80/300, Train loss: 33.9537, Val loss: 26.8621, Min val loss: 26.8621, Min ES val loss: 26.8621, Epoch time: 0.005s.
+Epoch: 100/300, Train loss: 26.9038, Val loss: 23.2417, Min val loss: 23.2372, Min ES val loss: 23.2372, Epoch time: 0.005s.
+Epoch: 120/300, Train loss: 24.9622, Val loss: 20.4360, Min val loss: 20.4360, Min ES val loss: 20.4360, Epoch time: 0.005s.
+Epoch: 140/300, Train loss: 24.1636, Val loss: 19.4010, Min val loss: 19.4010, Min ES val loss: 19.4010, Epoch time: 0.005s.
+Epoch: 160/300, Train loss: 22.9200, Val loss: 18.0232, Min val loss: 17.9749, Min ES val loss: 17.9749, Epoch time: 0.005s.
+Epoch: 180/300, Train loss: 19.7677, Val loss: 16.9469, Min val loss: 16.9469, Min ES val loss: 16.9469, Epoch time: 0.005s.
+Epoch: 200/300, Train loss: 17.9390, Val loss: 16.6545, Min val loss: 16.4093, Min ES val loss: 16.4093, Epoch time: 0.005s.
+Epoch: 220/300, Train loss: 19.4496, Val loss: 15.4451, Min val loss: 15.1788, Min ES val loss: 15.1788, Epoch time: 0.005s.
+Epoch: 240/300, Train loss: 16.0483, Val loss: 14.5508, Min val loss: 14.5508, Min ES val loss: 14.5508, Epoch time: 0.005s.
+Epoch: 260/300, Train loss: 16.4672, Val loss: 13.8354, Min val loss: 13.8354, Min ES val loss: 13.8354, Epoch time: 0.005s.
+Epoch: 280/300, Train loss: 13.6031, Val loss: 12.9315, Min val loss: 12.9315, Min ES val loss: 12.9315, Epoch time: 0.005s.
+Epoch: 300/300, Train loss: 16.5369, Val loss: 12.3673, Min val loss: 12.3673, Min ES val loss: 12.3673, Epoch time: 0.005s.
+`Trainer.fit` stopped: `max_epochs=300` reached.
+Training mse loss: 11.25176
+Validation mse loss: 12.36726
+Testing mse loss: 7.83801
+Trainer saved. To load the trainer, run trainer = load_trainer(path=&#39;/tmp/tmp7ery7st7/output/auto-mpg/2023-10-08-13-00-16-0_UserInputConfig/trainer.pkl&#39;)
+
+-------------CatEmbed End-------------
+
+</pre></div></div>
+</div>
+<p>If LaTeX is detected, <code class="docutils literal notranslate"><span class="pre">matplotlib.rc(&quot;text&quot;,</span> <span class="pre">usetex=True)</span></code> is called to use LaTeX for a better text appearance. However, if there exist <code class="docutils literal notranslate"><span class="pre">&quot;_&quot;</span></code> in feature names, LaTeX will throw errors. Here we reset defaults of <code class="docutils literal notranslate"><span class="pre">matplotlib.rcParams</span></code> to disable LaTeX.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParamsDefault</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.autolayout&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_fill_rating</span></code> will show a histogram of the filling ratio of data points. There are several data points with missing entries.</p>
+<p><strong>Remark</strong>: All methods introduced in this part pass arguments, such as <code class="docutils literal notranslate"><span class="pre">figure_kwargs</span></code>, <code class="docutils literal notranslate"><span class="pre">bar_kwargs</span></code>, <code class="docutils literal notranslate"><span class="pre">pairplot_kwargs</span></code>, etc., to corresponding functions for limited but sufficient customization. See the API docs for their meanings.</p>
+<p><strong>Remark</strong>: Colors can be globally controlled by replacing <code class="docutils literal notranslate"><span class="pre">tabensemb.utils.global_palette</span></code>. For some methods, <code class="docutils literal notranslate"><span class="pre">clr</span></code> can be given to control colors. One can also pass kwargs to arguments like <code class="docutils literal notranslate"><span class="pre">bar_kwargs</span></code> to over-ride default behaviors including colors.</p>
+<p><strong>Remark</strong>: The argument <code class="docutils literal notranslate"><span class="pre">category</span></code> is used to distinguish different data points in the plot. The argument is available for many of the methods introduced in this part.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_fill_rating</span><span class="p">(</span><span class="n">figure_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">),</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;origin&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_5_0.png" src="../../_images/examples_get_started_plotting_5_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;Fill rating&#39;, ylabel=&#39;Density&#39;&gt;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_presence_ratio</span></code> will show the filling ratio of features. There are missing entries only in the <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> feature.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_presence_ratio</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_7_0.png" src="../../_images/examples_get_started_plotting_7_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;Data presence ratio&#39;&gt;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_feature_box</span></code> will show the box plot of features.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_feature_box</span><span class="p">(</span><span class="n">imputed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figure_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_9_0.png" src="../../_images/examples_get_started_plotting_9_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;Values (Scaled)&#39;&gt;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_pairplot</span></code> will show correlations between each two features. It uses <code class="docutils literal notranslate"><span class="pre">seaborn.pairplot</span></code> to achieve this, so the plot can be customized by passing the <code class="docutils literal notranslate"><span class="pre">pairplot_kwargs</span></code> argument. See <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.pairplot.html">the documentation</a> for possible arguments.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_pairplot</span><span class="p">(</span><span class="n">pairplot_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/xlluo/anaconda3/envs/tabular_ensemble/lib/python3.10/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
+  self._figure.tight_layout(*args, **kwargs)
+/home/xlluo/hdd/tabular_ensemble/tabensemb/trainer/trainer.py:3848: UserWarning: The figure layout has changed to tight
+  plt.tight_layout()
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_11_1.png" src="../../_images/examples_get_started_plotting_11_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;seaborn.axisgrid.PairGrid at 0x7f61ac713820&gt;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_corr</span></code> will show the correlation coefficients between each two features. It uses the Pearson correlation by default.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_corr</span><span class="p">(</span><span class="n">imputed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figure_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)),</span> <span class="n">imshow_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_13_0.png" src="../../_images/examples_get_started_plotting_13_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: &gt;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_corr_with_label</span></code> focuses on the correlation between the target and each feature.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_corr_with_label</span><span class="p">(</span><span class="n">imputed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figure_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;figsize&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">)},</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;descending&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_15_0.png" src="../../_images/examples_get_started_plotting_15_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;Correlation with mpg&#39;&gt;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_pca_2d_visual</span></code> will show a scatter plot where the x and y axes are the first and second principal components from PCA, respectively.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_pca_2d_visual</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="n">trainer</span><span class="o">.</span><span class="n">cont_feature_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_17_0.png" src="../../_images/examples_get_started_plotting_17_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;1st principal component&#39;, ylabel=&#39;2nd principal component&#39;&gt;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_scatter</span></code> offers the utility to plot one feature against another. Here is an example that plots scatters between <code class="docutils literal notranslate"><span class="pre">weight</span></code> and <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> whose <code class="docutils literal notranslate"><span class="pre">model_year</span></code> is in the range <span class="math notranslate nohighlight">\([70, 74]\)</span>.</p>
+<p><strong>Remark</strong>: <code class="docutils literal notranslate"><span class="pre">select_by_value_kwargs</span></code> is the argument of <code class="docutils literal notranslate"><span class="pre">DataModule.select_by_value</span></code> which returns indices of datapoints that have specified values in the specified columns.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_scatter</span><span class="p">(</span><span class="n">x_col</span><span class="o">=</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="n">y_col</span><span class="o">=</span><span class="s2">&quot;horsepower&quot;</span><span class="p">,</span> <span class="n">scatter_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#635380&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;marker&quot;</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">},</span> <span class="n">select_by_value_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;selection&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model_year&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">74</span><span class="p">)}},</span> <span class="n">kde_color</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_19_0.png" src="../../_images/examples_get_started_plotting_19_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;weight&#39;, ylabel=&#39;horsepower&#39;&gt;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_on_one_axes</span></code> can plot multiple items (like scatters) on one <code class="docutils literal notranslate"><span class="pre">matplotlib.axes.Axes</span></code> instance. Here is an example that calls <code class="docutils literal notranslate"><span class="pre">Trainer.plot_scatter</span></code> twice to plots a group of scatters whose <code class="docutils literal notranslate"><span class="pre">model_year</span></code> is in the range <span class="math notranslate nohighlight">\([70, 74]\)</span> and the other group of scatters whose <code class="docutils literal notranslate"><span class="pre">model_year</span></code> is in the range <span class="math notranslate nohighlight">\([75, 80]\)</span>.</p>
+<p><strong>Remark</strong>: Most methods in this part have the argument <code class="docutils literal notranslate"><span class="pre">ax</span></code> which should be a <code class="docutils literal notranslate"><span class="pre">matplotlib.axes.Axes</span></code> instance. If it is given, no new figure will be created and the item will be plotted on the <code class="docutils literal notranslate"><span class="pre">ax</span></code> directly. This is how we implement <code class="docutils literal notranslate"><span class="pre">Trainer.plot_on_one_axes</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_on_one_axes</span><span class="p">(</span>
+    <span class="n">meth_name</span><span class="o">=</span><span class="s2">&quot;plot_scatter&quot;</span><span class="p">,</span>
+    <span class="n">meth_kwargs_ls</span><span class="o">=</span><span class="p">[</span>
+        <span class="nb">dict</span><span class="p">(</span><span class="n">scatter_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#635380&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;marker&quot;</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;[70, 74]&quot;</span><span class="p">},</span> <span class="n">select_by_value_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;selection&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model_year&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">74</span><span class="p">)}}),</span>
+        <span class="nb">dict</span><span class="p">(</span><span class="n">scatter_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#ACE4AA&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;marker&quot;</span><span class="p">:</span> <span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;[75, 80]&quot;</span><span class="p">},</span> <span class="n">select_by_value_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;selection&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model_year&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="mi">80</span><span class="p">)}})</span>
+    <span class="p">],</span>
+    <span class="n">meth_fix_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">x_col</span><span class="o">=</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span>
+        <span class="n">y_col</span><span class="o">=</span><span class="s2">&quot;horsepower&quot;</span><span class="p">,</span>
+        <span class="n">imputed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;horsepower&quot;</span><span class="p">,</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_21_0.png" src="../../_images/examples_get_started_plotting_21_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;weight&#39;, ylabel=&#39;horsepower&#39;&gt;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_hist_all</span></code> shows the histogram for each feature. If the argument <code class="docutils literal notranslate"><span class="pre">category</span></code> is given, histograms of each unique value of the <code class="docutils literal notranslate"><span class="pre">category</span></code> column will be plotted separately and stacked together.</p>
+<p><strong>Remark</strong>: All methods with the postfix <code class="docutils literal notranslate"><span class="pre">_all</span></code> introduced in this part utilize corresponding methods without the postfix. For example, <code class="docutils literal notranslate"><span class="pre">Trainer.plot_hist_all</span></code> calls <code class="docutils literal notranslate"><span class="pre">Trainer.plot_hist</span></code> for multiple times.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">plot_hist_all</span><span class="p">(</span><span class="n">imputed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">hist_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bins&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="n">legend_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;loc&quot;</span><span class="p">:</span> <span class="s2">&quot;upper right&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_23_0.png" src="../../_images/examples_get_started_plotting_23_0.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_kde_all</span></code> shows 1d KDE results for each feature.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">plot_kde_all</span><span class="p">(</span><span class="n">imputed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_25_0.png" src="../../_images/examples_get_started_plotting_25_0.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_kde</span></code> can also plot bi-variate gaussian kernel density.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_kde</span><span class="p">(</span><span class="n">x_col</span><span class="o">=</span><span class="s2">&quot;displacement&quot;</span><span class="p">,</span> <span class="n">y_col</span><span class="o">=</span><span class="s2">&quot;cylinders&quot;</span><span class="p">,</span> <span class="n">kdeplot_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_27_0.png" src="../../_images/examples_get_started_plotting_27_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;displacement&#39;, ylabel=&#39;cylinders&#39;&gt;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_truth_pred</span></code> will show the comparison between ground truth values and predictions.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_truth_pred</span><span class="p">(</span><span class="n">program</span><span class="o">=</span><span class="s2">&quot;PytorchTabular&quot;</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">,</span> <span class="n">log_trans</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">legend_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;x-small&quot;</span><span class="p">),</span> <span class="n">figure_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Training MSE Loss: 11.2517, R2: 0.8254
+Validation MSE Loss: 12.3672, R2: 0.7791
+Testing MSE Loss: 7.8380, R2: 0.8542
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_29_1.png" src="../../_images/examples_get_started_plotting_29_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;Ground truth&#39;, ylabel=&#39;Prediction&#39;&gt;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_loss</span></code> shows the curves of training loss and/or validation loss. It is supported for <code class="docutils literal notranslate"><span class="pre">PytorchTabular</span></code>, <code class="docutils literal notranslate"><span class="pre">WideDeep</span></code> or any <code class="docutils literal notranslate"><span class="pre">TorchModel</span></code>-based models.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_loss</span><span class="p">(</span><span class="n">program</span><span class="o">=</span><span class="s2">&quot;PytorchTabular&quot;</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">,</span> <span class="n">train_val</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">restored_epoch_mark_if_last</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_31_0.png" src="../../_images/examples_get_started_plotting_31_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;Epoch&#39;, ylabel=&#39;MSE loss&#39;&gt;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_feature_importance</span></code> calculates and plots feature importance. Two methods are supported to calculate feature importance: <code class="docutils literal notranslate"><span class="pre">permutation</span></code> and <code class="docutils literal notranslate"><span class="pre">shap</span></code>. <a class="reference external" href="https://scikit-learn.org/stable/modules/permutation_importance.html#:~:text=The%20permutation%20feature%20importance%20is,model%20depends%20on%20the%20feature.">Permutation feature importance</a> is the decrease of the metric when permuting (shuffling) the feature. <a class="reference external" href="https://github.com/shap/shap">SHAP</a> is a game theory approach.
+They might get different results.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">pytorch</span></code> based models, we use <code class="docutils literal notranslate"><span class="pre">captum</span></code> (<a class="reference external" href="https://captum.ai/docs/introduction">link</a>) and <code class="docutils literal notranslate"><span class="pre">shap.DeepExplainer</span></code> (<a class="reference external" href="https://shap-lrjball.readthedocs.io/en/latest/generated/shap.DeepExplainer.html">link</a>) for faster calculations.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_feature_importance</span><span class="p">(</span><span class="n">program</span><span class="o">=</span><span class="s2">&quot;PytorchTabular&quot;</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">,</span> <span class="n">figure_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_33_0.png" src="../../_images/examples_get_started_plotting_33_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;Permutation feature importance&#39;&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+    <span class="n">trainer</span><span class="o">.</span><span class="n">plot_feature_importance</span><span class="p">(</span><span class="n">program</span><span class="o">=</span><span class="s2">&quot;CatEmbed&quot;</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;shap&quot;</span><span class="p">,</span> <span class="n">figure_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Feature importance less than 1e-5: [&#39;Unscaled-0&#39;, &#39;Unscaled-1&#39;, &#39;Unscaled-2&#39;, &#39;Unscaled-3&#39;, &#39;Unscaled-4&#39;, &#39;Unscaled-5&#39;, &#39;Unscaled-6&#39;]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_34_1.png" src="../../_images/examples_get_started_plotting_34_1.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_partial_dependence_all</span></code> uses bootstrap sampling to resample the dataset, fits the model on the resampled dataset, and obtains sequential predictions when assigning sequential values to a feature, to see the dependency of predictions on a feature.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+    <span class="n">trainer</span><span class="o">.</span><span class="n">plot_partial_dependence_all</span><span class="p">(</span><span class="n">program</span><span class="o">=</span><span class="s2">&quot;PytorchTabular&quot;</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">,</span> <span class="n">n_bootstrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">log_trans</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">upper_lim</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">lower_lim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">CI</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Calculate PDP:  displacement
+Calculate PDP:  cylinders
+Calculate PDP:  horsepower
+Calculate PDP:  weight
+Calculate PDP:  acceleration
+Calculate PDP:  model_year
+Calculate PDP:  origin
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_36_1.png" src="../../_images/examples_get_started_plotting_36_1.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_err_hist</span></code> shows the distribution of errors. If the argument <code class="docutils literal notranslate"><span class="pre">category</span></code> is given, one can try to analyse the relationship between categories and errors.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_err_hist</span><span class="p">(</span><span class="n">program</span><span class="o">=</span><span class="s2">&quot;PytorchTabular&quot;</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="n">legend_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;origin&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_38_0.png" src="../../_images/examples_get_started_plotting_38_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;MSE&#39;, ylabel=&#39;Density&#39;&gt;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Trainer.plot_partial_err_all</span></code> shows the distribution of absolute error with respect to feature values. If the density of high error predictions is high in a certain range of a certain feature, data augmentation or additional experiments might be required.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">plot_partial_err_all</span><span class="p">(</span><span class="n">program</span><span class="o">=</span><span class="s2">&quot;PytorchTabular&quot;</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Category Embedding&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/examples_get_started_plotting_40_0.png" src="../../_images/examples_get_started_plotting_40_0.png" />
+</div>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cross_validation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Cross-validation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../advanced_usage.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Advanced Usage</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/ANONYMOUS/tabular_ensemble/edit/main/docs/source/examples/get_started/plotting.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/examples/get_started/plotting.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,913 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tabensemb.config.user_config &#8212; Tabular Ensemble 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/nbsphinx_dataframe.css?v=60cbb005" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../../_static/documentation_options.js?v=3b889da3"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/tabensemb/config/user_config';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Tabular Ensemble 0.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/get_started.html">
+                        Get Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples/advanced_usage.html">
+                        Advanced Usage
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/api.html">
+                        API References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ANONYMOUS/tabular_ensemble" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">tabensemb.config.user_config</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for tabensemb.config.user_config</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">importlib.machinery</span>
+<span class="kn">import</span> <span class="nn">types</span>
+<span class="kn">import</span> <span class="nn">tabensemb</span>
+<span class="kn">from</span> <span class="nn">tabensemb.utils</span> <span class="kn">import</span> <span class="n">pretty</span><span class="p">,</span> <span class="n">str_to_dataframe</span>
+<span class="kn">from</span> <span class="nn">.default</span> <span class="kn">import</span> <span class="n">cfg</span> <span class="k">as</span> <span class="n">default_cfg</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">ssl</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+
+<div class="viewcode-block" id="UserConfig">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.config.UserConfig.html#tabensemb.config.UserConfig">[docs]</a>
+<span class="k">class</span> <span class="nc">UserConfig</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The configuration holder for :class:`~tabensemb.data.datamodule.DataModule` and :class:`~tabensemb.trainer.Trainer`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="UserConfig.__init__">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.config.UserConfig.html#tabensemb.config.UserConfig.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path</span>
+<span class="sd">            Path to the configuration file. See :meth:`from_file`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UserConfig</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">default_cfg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_defaults</span> <span class="o">=</span> <span class="n">default_cfg</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">path</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="UserConfig.defaults">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.config.UserConfig.defaults.html#tabensemb.config.UserConfig.defaults">[docs]</a>
+    <span class="k">def</span> <span class="nf">defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The default values in ``tabensemb.config.default.py``</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            A dictionary of default values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_defaults</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="UserConfig.merge">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.config.UserConfig.merge.html#tabensemb.config.UserConfig.merge">[docs]</a>
+    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Similar to :meth:`dict.update`, but will ignore values that are None.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        d</span>
+<span class="sd">            The dictionary used to update the configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">d_cp</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">d_cp</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">d</span><span class="o">.</span><span class="fm">__delitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UserConfig</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">d</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UserConfig.parse">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.config.UserConfig.parse.html#tabensemb.config.UserConfig.parse">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Try to parse the configuration using ``argparse``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            The parsed configuration dictionary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">base_config</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="p">()</span>
+        <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--base&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">base_config</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">base_config</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+                <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;--</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="n">base_config</span><span class="p">[</span><span class="n">key</span><span class="p">]),</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">base_config</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+                <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;--</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="p">(</span>
+                        <span class="nb">type</span><span class="p">(</span><span class="n">base_config</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">base_config</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+                    <span class="p">),</span>
+                    <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">base_config</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">:</span>
+                <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">)</span>
+                <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--no-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_false&quot;</span><span class="p">)</span>
+                <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">base_config</span><span class="p">[</span><span class="n">key</span><span class="p">]})</span>
+        <span class="n">parse_res</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__dict__</span>
+        <span class="k">return</span> <span class="n">parse_res</span></div>
+
+
+<div class="viewcode-block" id="UserConfig.from_parser">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.config.UserConfig.from_parser.html#tabensemb.config.UserConfig.from_parser">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_parser</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Try to parse the configuration using ``argparse`` and merge it into defaults.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            The parsed configuration dictionary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">UserConfig</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">d</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UserConfig.from_dict">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.config.UserConfig.from_dict.html#tabensemb.config.UserConfig.from_dict">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;UserConfig&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Merge the input dictionary into defaults.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cfg</span>
+<span class="sd">            The dictionary used to update the default configuration.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        UserConfig</span>
+<span class="sd">            The combined configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tmp_cfg</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="p">()</span>
+        <span class="n">tmp_cfg</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tmp_cfg</span></div>
+
+
+<div class="viewcode-block" id="UserConfig.from_file">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.config.UserConfig.from_file.html#tabensemb.config.UserConfig.from_file">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;UserConfig&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Merge the .py or .json file into defaults. If no suffix is given, it will search the current directory and</span>
+<span class="sd">        ``tabensemb.setting[&quot;default_config_path&quot;]`` for a matched file. In a legal .py file, there should be a</span>
+<span class="sd">        dictionary named &quot;cfg&quot;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path</span>
+<span class="sd">            The path to the configuration file to update the default configuration with or without a suffix</span>
+<span class="sd">            (.py or .json).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        UserConfig</span>
+<span class="sd">            The combined configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">path</span>
+            <span class="k">if</span> <span class="s2">&quot;/&quot;</span> <span class="ow">in</span> <span class="n">path</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_config_path&quot;</span><span class="p">],</span> <span class="n">path</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">ty</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="o">.</span><span class="n">file_type</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ty</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">json_path</span> <span class="o">=</span> <span class="n">file_path</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span>
+            <span class="n">py_path</span> <span class="o">=</span> <span class="n">file_path</span> <span class="o">+</span> <span class="s2">&quot;.py&quot;</span>
+            <span class="n">is_json</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">json_path</span><span class="p">)</span>
+            <span class="n">is_py</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">py_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">is_json</span> <span class="ow">and</span> <span class="n">is_py</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Both </span><span class="si">{</span><span class="n">json_path</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">py_path</span><span class="si">}</span><span class="s2"> exist. Specify the full name of the file.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">is_json</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_py</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">file_path</span> <span class="o">=</span> <span class="n">json_path</span> <span class="k">if</span> <span class="n">is_json</span> <span class="k">else</span> <span class="n">py_path</span>
+                <span class="n">ty</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="o">.</span><span class="n">file_type</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ty</span> <span class="o">==</span> <span class="s2">&quot;json&quot;</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">cfg</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">loader</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">machinery</span><span class="o">.</span><span class="n">SourceFileLoader</span><span class="p">(</span><span class="s2">&quot;cfg&quot;</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span>
+            <span class="n">mod</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span><span class="p">(</span><span class="n">loader</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">loader</span><span class="o">.</span><span class="n">exec_module</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+            <span class="n">cfg</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">cfg</span>
+        <span class="k">return</span> <span class="n">UserConfig</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UserConfig.from_uci">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.config.UserConfig.from_uci.html#tabensemb.config.UserConfig.from_uci">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_uci</span><span class="p">(</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">datafile_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">column_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">save_zip</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+        <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="s2">&quot;UserConfig&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Search, download, and configure a dataset from https://archive.ics.uci.edu/. The dataset will be extracted and</span>
+<span class="sd">        saved into a .csv file, and a corresponding UserConfig is returned. This function supports tabular datasets for</span>
+<span class="sd">        &quot;Classification&quot; and &quot;Regression&quot;. Integer features are treated as continuous features.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name</span>
+<span class="sd">            The name of the dataset like &quot;Heart Disease&quot;, &quot;Iris&quot;, etc. The name will be searched on the website and be</span>
+<span class="sd">            configured if there is a matched dataset.</span>
+<span class="sd">        datafile_name</span>
+<span class="sd">            The name of &quot;.data&quot; file in the downloaded .zip file. If is None and there exists more than one file with</span>
+<span class="sd">            the suffix &quot;.data&quot; in a single dataset, the function will print available names.</span>
+<span class="sd">        column_names</span>
+<span class="sd">            Labels of columns in the &quot;.data&quot; file in the downloaded .zip file. If not given, names recorded on the</span>
+<span class="sd">            website will be used. However, these names can be in a wrong order, of which &quot;Auto MPG&quot; is a typical</span>
+<span class="sd">            example. So a warning will be logged, and `save_zip` will be set to True to let the user check the &quot;.name&quot;</span>
+<span class="sd">            file in the .zip file for the correct order.</span>
+<span class="sd">        save_zip</span>
+<span class="sd">            Whether the downloaded .zip file should be stored.</span>
+<span class="sd">        max_retries</span>
+<span class="sd">            The maximum number of tries of ``urllib.request.urlopen``.</span>
+<span class="sd">        timeout</span>
+<span class="sd">            Waiting time of ``urllib.request.urlopen``.</span>
+<span class="sd">        sep</span>
+<span class="sd">            The delimiter of ``pd.read_csv``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        UserConfig</span>
+<span class="sd">            The configuration of the dataset. If the dataset can not be automatically configured, None will be returned</span>
+<span class="sd">            and the reason will be printed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Extract information</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;https://archive.ics.uci.edu/datasets?skip=0&amp;take=1&amp;sort=desc&amp;orderBy=Relevance&amp;&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;search=</span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;+&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="n">ctx</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">create_default_context</span><span class="p">()</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">check_hostname</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">verify_mode</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">CERT_NONE</span>
+        <span class="n">reties</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">uh</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">ctx</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">reties</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">reties</span> <span class="o">==</span> <span class="n">max_retries</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;max_retries reached. Check whether </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2"> is accessible.&quot;</span>
+                    <span class="p">)</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">uh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">datasets</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+            <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">body</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">\[(.*?)\]</span><span class="se">\&quot;</span><span class="s2">\}&lt;/script&gt;&quot;</span><span class="p">,</span> <span class="n">html</span><span class="o">.</span><span class="n">decode</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;unicode-escape&quot;</span><span class="p">)</span>
+        <span class="p">)[</span><span class="s2">&quot;result&quot;</span><span class="p">][</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;json&quot;</span><span class="p">][</span><span class="s2">&quot;datasets&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datasets</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dataset </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> not found.&quot;</span><span class="p">)</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dataset </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> not found. Do you mean </span><span class="si">{</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">?&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Download the dataset</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">]</span>
+        <span class="n">slug</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;slug&quot;</span><span class="p">]</span>
+        <span class="n">link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://archive.ics.uci.edu/static/public/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">slug</span><span class="si">}</span><span class="s2">.zip&quot;</span>
+        <span class="n">zip_save_to</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_data_path&quot;</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.zip&quot;</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Downloading </span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">zip_save_to</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_data_path&quot;</span><span class="p">],</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">zip_save_to</span><span class="p">)</span>
+
+        <span class="c1"># Check task and tabular</span>
+        <span class="n">_saved_to_suffix</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot; The downloaded file is saved to </span><span class="si">{</span><span class="n">zip_save_to</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;Task&quot;</span><span class="p">]</span>
+        <span class="n">is_tabular</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;isTabular&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">task</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Regression&quot;</span><span class="p">,</span> <span class="s2">&quot;Classification&quot;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task </span><span class="si">{</span><span class="n">task</span><span class="si">}</span><span class="s2"> is not supported.</span><span class="si">{</span><span class="n">_saved_to_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_tabular</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The dataset </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is not tabular.</span><span class="si">{</span><span class="n">_saved_to_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Check contents</span>
+        <span class="n">zipf</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_save_to</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">zipf</span><span class="o">.</span><span class="n">namelist</span><span class="p">()</span>
+        <span class="n">datafiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.data&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.data&quot;</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datafiles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No file with suffix `.data` is found.</span><span class="si">{</span><span class="n">_saved_to_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datafiles</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="p">(</span>
+            <span class="n">datafile_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">datafile_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">datafiles</span>
+        <span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Found multiple data files </span><span class="si">{</span><span class="n">datafiles</span><span class="si">}</span><span class="s2">, but `datafile_name` is </span><span class="si">{</span><span class="n">datafile_name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">_saved_to_suffix</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">test_datafiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s2">&quot;test&quot;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_datafiles</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;There exists .test file(s) </span><span class="si">{</span><span class="n">test_datafiles</span><span class="si">}</span><span class="s2"> which should be used for final metrics. The .zip file is &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;left for the user to process.&quot;</span>
+            <span class="p">)</span>
+            <span class="n">save_zip</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">datafile_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">datafile_name</span> <span class="o">=</span> <span class="n">datafiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Extract feature information.</span>
+        <span class="n">all_features</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cont_feature_names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cat_feature_names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">label_name</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;variables&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">attr</span><span class="p">[</span><span class="s2">&quot;role&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Feature&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">attr</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Continuous&quot;</span><span class="p">:</span>
+                    <span class="n">cont_feature_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attr</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">attr</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Integer&quot;</span><span class="p">:</span>
+                    <span class="n">cont_feature_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attr</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">attr</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> is Integer and will be treated as a continuous feature.&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">elif</span> <span class="n">attr</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Categorical&quot;</span><span class="p">,</span> <span class="s2">&quot;Binary&quot;</span><span class="p">]:</span>
+                    <span class="n">cat_feature_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attr</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">attr</span><span class="p">[</span><span class="s2">&quot;role&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Target&quot;</span><span class="p">:</span>
+                <span class="n">label_name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attr</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+            <span class="n">all_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attr</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Load and save as .csv</span>
+        <span class="n">datafile</span> <span class="o">=</span> <span class="n">zipf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">datafile_name</span> <span class="o">+</span> <span class="s2">&quot;.data&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">column_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;`column_names` is not given. The order of columns will be loaded from the website. It is highly &quot;</span>
+                <span class="s2">&quot;recommended to manually set column names. The downloaded .zip is saved. Please check its .name file &quot;</span>
+                <span class="s2">&quot;for the correct order.&quot;</span>
+            <span class="p">)</span>
+            <span class="n">save_zip</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">column_names</span> <span class="o">=</span> <span class="n">all_features</span>
+        <span class="n">column_names_not_all_features</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">column_names</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_features</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">column_names_not_all_features</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Available column names are </span><span class="si">{</span><span class="n">all_features</span><span class="si">}</span><span class="s2">, but `column_names` has columns not available: &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">column_names_not_all_features</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">all_features_not_column_names</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">all_features</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">column_names</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_features_not_column_names</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Available column names are </span><span class="si">{</span><span class="n">all_features</span><span class="si">}</span><span class="s2">, but `column_names` does not have &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">all_features_not_column_names</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+            <span class="n">cont_feature_names</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cont_feature_names</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_features_not_column_names</span>
+            <span class="p">]</span>
+            <span class="n">cat_feature_names</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cat_feature_names</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_features_not_column_names</span>
+            <span class="p">]</span>
+            <span class="n">original_label_names</span> <span class="o">=</span> <span class="n">label_name</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">label_name</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">label_name</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_features_not_column_names</span>
+            <span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;No label is found. Did you miss the label names </span><span class="si">{</span><span class="n">original_label_names</span><span class="si">}</span><span class="s2"> in `column_names`?&quot;</span>
+                <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">str_to_dataframe</span><span class="p">(</span>
+                <span class="n">datafile</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span>
+                <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">,</span>
+                <span class="n">names</span><span class="o">=</span><span class="n">column_names</span><span class="p">,</span>
+                <span class="n">check_nan_on</span><span class="o">=</span><span class="n">cont_feature_names</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">_saved_to_suffix</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Save csv</span>
+        <span class="n">csv_name</span> <span class="o">=</span> <span class="n">name</span> <span class="k">if</span> <span class="n">datafile_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">datafile_name</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tabensemb</span><span class="o">.</span><span class="n">setting</span><span class="p">[</span><span class="s2">&quot;default_data_path&quot;</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">csv_name</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">),</span>
+            <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">zipf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">save_zip</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">zip_save_to</span><span class="p">)</span>
+
+        <span class="c1"># Configurations</span>
+        <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;Regression&quot;</span><span class="p">:</span>
+            <span class="n">inferred_task</span> <span class="o">=</span> <span class="s2">&quot;regression&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">label_name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">inferred_task</span> <span class="o">=</span> <span class="s2">&quot;binary&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">inferred_task</span> <span class="o">=</span> <span class="s2">&quot;multiclass&quot;</span>
+        <span class="n">feature_types</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Continuous&quot;</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">cont_feature_names</span> <span class="k">else</span> <span class="s2">&quot;Categorical&quot;</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">cont_feature_names</span> <span class="o">+</span> <span class="n">cat_feature_names</span>
+        <span class="p">}</span>
+        <span class="n">cfg</span> <span class="o">=</span> <span class="n">UserConfig</span><span class="p">()</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;database&quot;</span><span class="p">:</span> <span class="n">csv_name</span><span class="p">,</span>
+                <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="n">inferred_task</span><span class="p">,</span>
+                <span class="s2">&quot;feature_types&quot;</span><span class="p">:</span> <span class="n">feature_types</span><span class="p">,</span>
+                <span class="s2">&quot;categorical_feature_names&quot;</span><span class="p">:</span> <span class="n">cat_feature_names</span><span class="p">,</span>
+                <span class="s2">&quot;continuous_feature_names&quot;</span><span class="p">:</span> <span class="n">cont_feature_names</span><span class="p">,</span>
+                <span class="s2">&quot;label_name&quot;</span><span class="p">:</span> <span class="n">label_name</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">cfg</span></div>
+
+
+<div class="viewcode-block" id="UserConfig.to_file">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.config.UserConfig.to_file.html#tabensemb.config.UserConfig.to_file">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save the configuration to a ``.py`` or ``.json`` file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path</span>
+<span class="sd">            The path to save the configuration. If no suffix is given, ``.py`` is added as the suffix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">):</span>
+                <span class="n">path</span> <span class="o">+=</span> <span class="s2">&quot;.py&quot;</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;cfg = &quot;</span> <span class="o">+</span> <span class="n">pretty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">htchar</span><span class="o">=</span><span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">black</span>
+
+                <span class="n">s</span> <span class="o">=</span> <span class="n">black</span><span class="o">.</span><span class="n">format_str</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">black</span><span class="o">.</span><span class="n">Mode</span><span class="p">())</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UserConfig.file_type">
+<a class="viewcode-back" href="../../../api/generated/tabensemb.config.UserConfig.file_type.html#tabensemb.config.UserConfig.file_type">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">file_type</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check the suffix of the path (json, py, or None).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;json&quot;</span>
+        <span class="k">elif</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;py&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="s2">&quot;feature_types&quot;</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">UserConfig</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">cont</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;continuous_feature_names&quot;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">cont</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">val</span><span class="p">[</span><span class="n">cont</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Continuous&quot;</span>
+            <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;categorical_feature_names&quot;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">cat</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">val</span><span class="p">[</span><span class="n">cat</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Categorical&quot;</span>
+            <span class="k">return</span> <span class="n">val</span>
+        <span class="k">elif</span> <span class="n">item</span> <span class="o">==</span> <span class="s2">&quot;unique_feature_types&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s2">&quot;feature_types&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">UserConfig</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Tabular Ensemble developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.5.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
